@@ -1,0 +1,24 @@
+{
+    "token": "b7bb7a40-da71-42be-86ca-6865368129da",
+    "input": "",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "history_suggestion": [],
+    "messages": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

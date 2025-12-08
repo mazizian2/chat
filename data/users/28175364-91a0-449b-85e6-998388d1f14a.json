@@ -1,0 +1,24 @@
+{
+    "token": "28175364-91a0-449b-85e6-998388d1f14a",
+    "input": "",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "history_suggestion": [],
+    "messages": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

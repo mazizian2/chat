@@ -1,0 +1,35 @@
+{
+    "token": "38f18bca-d67c-49d4-ad34-1ec8b750c604",
+    "thread_id": "thread_Qsy4jggphBFJo6aZvXA9auIo",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>خوش آمدید! امیدوارم روز خوبی داشته باشید. ما در شبکیه به ارائه خدمات اینترنتی، میزبانی وب، ثبت دامنه و طراحی وب‌سایت می‌پردازیم. تمرکز ما بر روی قابلیت اطمینان، سرعت، امنیت و رضایت مشتریان است. اگر سوالی دارید یا به کمکی نیاز دارید، من در خدمت شما هستم! 😊</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

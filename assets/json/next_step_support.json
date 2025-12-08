@@ -1,0 +1,8 @@
+{
+    "step": 5,
+    "name": "final_operator_escalation",
+    "description": "Final escalation to the operator if the issue persists after all steps; inform the user that the problem has been forwarded to the operator for further investigation and requires patience",
+    "checked": false,
+    "next_action": "await_operator_response (end of flow)",
+    "sub_steps": []
+}

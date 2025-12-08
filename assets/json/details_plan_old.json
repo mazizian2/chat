@@ -1,0 +1,135 @@
+{
+  "description": {
+    "type": "string"
+  },
+  "price": {
+    "type": "integer",
+    "unit": "تومان",
+    "range": [480000, 15000000]
+  },
+  "regular_price": {
+    "type": "integer|null",
+    "unit": "تومان",
+    "range": [1000000, 28000000]
+  },
+  "duration": {
+    "type": "integer",
+    "unit": "روز",
+    "range": [30, 365]
+  },
+  "cpu": {
+    "type": "string|null",
+    "example": "2 Core"
+  },
+  "ram": {
+    "type": "string|null",
+    "example": "2 GB"
+  },
+  "storage": {
+    "type": "string|null",
+    "example": "25 GB SSD"
+  },
+  "traffic_internal": {
+    "type": "string|null",
+    "example": "1000 GB"
+  },
+  "traffic_international": {
+    "type": "string|null",
+    "example": "100 GB"
+  },
+  "service_type": {
+    "type": "string|null",
+    "example": "ADSL | TD-LTE | fd-LTE | رادیویی WiFi"
+  },
+  "speed": {
+    "type": "integer|null",
+    "unit": "Mbps",
+    "range": [1, 8]},
+  "download": {
+    "type": "integer|null",
+    "unit": "Mbps",
+    "range": [16, 70]
+  },
+  "upload": {
+    "type": "integer|null",
+    "unit": "Mbps",
+    "range": [2, 25]
+  },
+  "portable": {
+    "type": "string|null",
+    "values": ["دارد", "ندارد"]
+  },
+  "coverage": {
+    "type": "string",
+    "values": ["استانی", "کشوری"]
+  },
+  "modem": {
+    "type": "string|null",
+    "example": "Olax MT80 | TFI60-sl1 | ندارد"
+  },
+  "traffic": {
+    "type": "integer",
+    "unit": "GB",
+    "range": [60, 5000]
+  },
+  "ip": {
+    "type": "string|null",
+    "values": ["ندارد", "1 IP", "Multiple"]
+  },
+  "setup_cost": {
+    "type": "integer",
+    "unit": "تومان",
+    "range": [0, 200000]
+  },
+  "contract_type": {
+    "type": "string|null",
+    "example": "3 ماهه | 6 ماهه | 1 ساله"
+  },
+  "domain_included": {
+    "type": "boolean"
+  },
+  "host_included": {
+    "type": "boolean"
+  },
+  "custom_design": {
+    "type": "boolean"
+  },
+  "support_included": {
+    "type": "boolean"
+  },
+  "datacenter": {
+    "type": "string"
+
+  },
+  "unit_count": {
+    "type": "integer"
+  },
+  "power_cable": {
+    "type": "integer"
+  },
+  "network_port": {
+    "type": "integer"
+  },
+  "ilo": {
+    "type": "string",
+    "values": ["دارد", "ندارد"]},
+  "port_10g": {
+    "type": "string",
+    "values": ["دارد", "ندارد"]
+  },
+  "ip_range": {
+    "type": "integer"
+  },
+  "special_offer": {
+    "type": "boolean"},
+
+  "gift": {
+    "type": "string"},
+  "region": {
+    "type": "string",
+    "example": "کشوری | استانی"
+  },
+  "url": {
+    "type": "string"}
+
+}

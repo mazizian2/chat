@@ -1,0 +1,87 @@
+/* ===========================
+        extra large devices
+        =========================== */
+
+.margin {
+  margin-left: 8px;
+  margin-bottom: 16px;
+  margin-right: 8px;
+}
+
+.padding {
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-bottom: 16px;
+  padding-right: 16px;
+}
+
+.padding15 {
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+  padding-right: 15px;
+}
+
+.padding30 {
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  padding-right: 30px;
+}
+
+.paddingChat {
+  padding-top: 8px;
+  padding-left: 16px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+}
+
+.hide_element {
+  display: none;
+}
+
+.hide_element_mobile_device {
+  display: block;
+}
+
+/* ===========================
+        large device
+        =========================== */
+@media only screen and (max-width: 992px) {
+}
+
+/* ===========================
+        medium device
+        =========================== */
+@media only screen and (max-width: 768px) {
+}
+
+/* ===========================
+        small device
+        =========================== */
+@media only screen and (max-width: 576px) {
+  .padding {
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-bottom: 16px;
+    padding-right: 16px;
+  }
+
+  .hide_element_mobile_device {
+    display: none;
+  }
+
+  .margin {
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  .suggestions{
+    align-items: center;
+  }
+
+  .suggestions span{
+    text-align: center;
+  }
+}

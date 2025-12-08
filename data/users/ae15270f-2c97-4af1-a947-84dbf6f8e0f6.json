@@ -1,0 +1,33 @@
+{
+    "token": "ae15270f-2c97-4af1-a947-84dbf6f8e0f6",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>سلام! خوشحالم که با ما ارتباط برقرار کردید. 😊 اگر سوالی دارید یا به اطلاعات بیشتری نیاز دارید، من اینجا هستم تا کمک کنم!</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

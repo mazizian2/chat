@@ -1,0 +1,102 @@
+{
+    "token": "14a7e7c0-3243-4a21-87a2-f41acdbf3ac7",
+    "thread_id": "thread_JhrLgFFEEpFqTqM1jyCMJAxG",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "خوش آمدید! من اینجا هستم تا در هر زمینه‌ای که نیاز دارید به شما کمک کنم. آیا سوالی یا موضوعی خاصی در ذهن دارید؟ هرچیزی که نیاز داشته باشید، خوشحال می‌شوم که یاری‌تان کنم! 🌟",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

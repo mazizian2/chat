@@ -1,0 +1,51 @@
+{
+    "token": "bc99c6e1-5ec4-4629-9eb7-3f7ae482f8bb",
+    "thread_id": "thread_tiIJ7n94e3ELOl0VjQqH79Hd",
+    "input": "کولوکیشن",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "چه سرویس هایی دارید؟"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>ممنونم که به ما مراجعه کردید. برند شبکیه در زمینه فناوری اطلاعات و ارائه خدمات اینترنتی فعالیت می‌کند و ما خدمات متنوعی را به مشتریان عزیز ارائه می‌دهیم. این خدمات شامل:</p>\n<ul>\n  <li>خدمات میزبانی وب</li>\n  <li>ثبت دامنه</li>\n  <li>طراحی وب‌سایت</li>\n  <li>پشتیبانی فنی به صورت ۲۴ ساعته و ۷ روز هفته</li>\n</ul>\n<p>ما بر روی قابلیت اطمینان، سرعت، امنیت و رضایت مشتریان تمرکز داریم. اگر نیاز خاصی دارید یا سوالی دارید، خوشحال می‌شوم به شما کمک کنم! 😊</p>",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "کولوکیشن"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "extract_json_buy"
+    ],
+    "history_intent": [],
+    "next_node": "extract_json_buy"
+}

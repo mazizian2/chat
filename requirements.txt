@@ -1,0 +1,14 @@
+crewai
+pyodbc
+json5
+langgraph
+langchain-openai
+jdatetime
+langchain-text-splitters
+langchain-core
+langchain-community
+openai
+langchain-huggingface
+faiss-cpu
+jinja2
+socketio

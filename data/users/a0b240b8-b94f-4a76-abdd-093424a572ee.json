@@ -1,0 +1,30 @@
+{
+    "token": "a0b240b8-b94f-4a76-abdd-093424a572ee",
+    "thread_id": "thread_jCZDa6xeC7k9UnyhDIWAXMt2",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

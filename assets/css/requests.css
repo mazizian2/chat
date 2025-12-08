@@ -1,0 +1,42 @@
+/* ===========================
+    extra large devices
+    ============================ */
+
+#de_ab97bcce-75c7-da1f-9399-a76a62c0b406 {
+  width: 240px;
+  min-height: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 15px;
+}
+
+#de_2eb4a8be-0c5a-2491-34ec-8a36b939051d {
+  width: 16px;
+}
+
+#de_e3638b6d-321e-930b-48a6-6a3f12252875 {
+  width: 100%;
+  color: var(--Color1);
+  font-weight: 300;
+  font-size: 14px;
+}
+
+/* ===========================
+    large device
+    ============================ */
+@media only screen and (max-width: 992px) {
+}
+
+/* ===========================
+    medium device
+    ============================ */
+@media only screen and (max-width: 768px) {
+}
+
+/* ===========================
+    small device
+    ============================ */
+@media only screen and (max-width: 576px) {
+}

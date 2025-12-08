@@ -1,0 +1,39 @@
+{
+    "token": "33552eef-486e-488d-8abd-6a94b3a0343d",
+    "thread_id": "thread_egoVrpCWNp5se2bCEI8lLs4l",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>خوش آمدید! امیدوارم روز خوبی داشته باشید. من اینجا هستم تا شما را با برند شبکیه آشنا کنم. شبکیه یک شرکت فناوری اطلاعات است که خدماتی مانند ارائه اینترنت، میزبانی وب، ثبت دامنه، طراحی وب‌سایت و پشتیبانی فنی ۲۴ ساعته را ارائه می‌دهد. ما بر روی قابلیت اطمینان، سرعت، امنیت و رضایت مشتری تمرکز داریم.</p> \n<p>اگر سوالی دارید یا نیاز به اطلاعات بیشتری دارید، خوشحال می‌شوم که کمک کنم! 😊</p>"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

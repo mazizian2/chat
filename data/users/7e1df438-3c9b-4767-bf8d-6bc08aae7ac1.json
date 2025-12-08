@@ -1,0 +1,378 @@
+{
+    "token": "7e1df438-3c9b-4767-bf8d-6bc08aae7ac1",
+    "input": "دسترسی به ویندوز ندارم روی گوشی بگو چیو تست کنم",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [
+                "fd-LTE",
+                "TD-LTE"
+            ],
+            "details": []
+        },
+        "orders": [
+            "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم جیبی + سیم کارت رایگان + 3 ماهه 60 گیگ\nتوضیحات: ندارد\nقیمت: 3410000\nمدت زمان: 90 روز\nمدت زمان: 90 روز\nپیشنهاد ویژهنداردنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک60 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: دارد\ncoverage: کشوری\nmodem: Olax MT80\nnight_traffic: ندارد\ntraffic: 60\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+            "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه پانزده ماهه +444 گیگ + آی پی یکساله\nتوضیحات: ندارد\nقیمت: 2915000\nمدت زمان: 450 روز\nمدت زمان: 450 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد15 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک444 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 444\nip: دارد\nregion: کشوری"
+        ],
+        "accountInfo": {
+            "lastname": "دهدار",
+            "username": "",
+            "mobile": "",
+            "melicode": ""
+        },
+        "accounts": [
+            [
+                {
+                    "id": "4045",
+                    "pppoe_username": "989559319870",
+                    "name": "مهدی",
+                    "lastname": "دهدار  بهبهانی",
+                    "mobile": "09134226929",
+                    "melicode": "1850043914",
+                    "Traffic": "0",
+                    "service_title": "تست 7 روزه - 10 گیگ ( ویژه کاربران جدید)",
+                    "service_remain_day": "36",
+                    "date_service_start": "1719433800",
+                    "date_service_expire": "1721853000",
+                    "date": "1719474121",
+                    "date_fa": "1403-4-7 11:12",
+                    "date_service_start_fa": "1403-4-7 00:00",
+                    "date_service_expire_fa": "1403-5-4 00:00"
+                },
+                {
+                    "id": "1156",
+                    "pppoe_username": "989559149794",
+                    "name": "مهدی",
+                    "lastname": "دهدار  بهبهانی",
+                    "mobile": "09134226929",
+                    "melicode": "1850043914",
+                    "Traffic": "4323",
+                    "service_title": "جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A",
+                    "service_remain_day": "52",
+                    "date_service_start": "1618342200",
+                    "date_service_expire": "1767209400",
+                    "date": "1618392636",
+                    "date_fa": "1400-1-25 14:00",
+                    "date_service_start_fa": "1400-1-25 00:00",
+                    "date_service_expire_fa": "1404-10-10 23:00"
+                }
+            ]
+        ],
+        "selectAccount": {
+            "result": true,
+            "info": {
+                "id": "1156",
+                "pppoe_username": "989559149794",
+                "name": "مهدی",
+                "lastname": "دهدار  بهبهانی",
+                "mobile": "09134226929",
+                "melicode": "1850043914",
+                "Traffic": "4323",
+                "service_title": "جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A",
+                "service_remain_day": "52",
+                "date_service_start": "1618342200",
+                "date_service_expire": "1767209400",
+                "date_service_start_fa": "1400-1-25 00:00",
+                "date_service_expire_fa": "1404-10-10 23:00"
+            },
+            "online": {
+                "GroupName": "LTE-40",
+                "ActiveDays": "1723",
+                "IPPool": "",
+                "TrafficAddByISP": "291840",
+                "TrafficUsed": "287517",
+                "Traffic": 4323
+            }
+        },
+        "problems": [
+            "اینترنتم مشکل دارد",
+            "اینترنتم مشکل داری"
+        ],
+        "support": [
+            {
+                "status": "online",
+                "steps": [
+                    {
+                        "step": 1,
+                        "name": "vpn_check",
+                        "description": "Check VPN status as it may cause connectivity issues",
+                        "checked": true,
+                        "next_action": "IF vpn_on (user says 'on' or 'yes') THEN stay_in_current_step_and_ask_user_turn_off_vpn ELSE IF vpn_off (user says 'off' or 'no' or 'turned off') THEN go_step_2",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 2,
+                        "name": "ping_test",
+                        "description": "Perform a network connectivity test using Ping and guide the user on how to do it",
+                        "checked": false,
+                        "next_action": "IF ping_failed OR ping_unreachable OR ping_timeout OR no_ping THEN go_sub_step_1 ('name':check_config_modem )  ELSE go_step_3 (ping successful, continue)",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "check_config_modem",
+                                "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                                "checked": false,
+                                "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5"
+                            }
+                        ]
+                    },
+                    {
+                        "step": 3,
+                        "name": "check_internal_external_links",
+                        "description": "Test access to internal and external links to determine the type of issue",
+                        "checked": false,
+                        "next_action": "IF both_down (both internal and external links fail) THEN go_step_5 ELSE IF both_up (both working) THEN go_sub_step2 ELSE IF internal_ok_and_external_fail THEN go_step_5 ELSE IF external_fail THEN go_step_5 ELSE IF just_internal_ok THEN go_step_5 ELSE IF both_up_but_slow or both_up_but_late THEN go_step_5 ELSE go_step_5",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "both_down",
+                                "description": "If both are down, reset the modem or escalate to the operator",
+                                "checked": false,
+                                "next_action": "go_step_7 ( check_DNS)"
+                            },
+                            {
+                                "sub_step": 2,
+                                "name": "both_up",
+                                "description": "If both are connected , ask the user which link is problematic and escalate to the operator",
+                                "checked": false,
+                                "next_action": "go_step_5 (escalate after identifying problematic link)"
+                            },
+                            {
+                                "sub_step": 3,
+                                "name": "internal_ok_external_fail",
+                                "description": "If internal links work but external links fail, escalate to the operator",
+                                "checked": false,
+                                "next_action": "IF user_says_external_sites_down (user says 'External site not opening' or 'Only internal opens' or 'External fragment' or 'External not coming' or 'YouTube or Google not opening') THEN go_step_5 ELSE IF user_says_internal_sites_down (user says 'Internal site not opening' or 'Only external opens' or 'Internal fragment') THEN go_step_5"
+                            },
+                            {
+                                "sub_step": 4,
+                                "name": "both_up_but_slow",
+                                "description": "If both are active but slow, ask the user to check modem configuration",
+                                "checked": false,
+                                "next_action": "go_step_5 "
+                            }
+                        ]
+                    },
+                    {
+                        "step": 4,
+                        "name": "check_modem_lights_and_hardware",
+                        "description": "Check the number of lights on the modem (none, one, two, or more) to identify the hardware or signal issue level",
+                        "checked": false,
+                        "next_action": "go_to_sub_step_1 (start sub-step analysis)",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "no_lights_on",
+                                "description": "If no lights are on, check the power source or adapter",
+                                "checked": false,
+                                "condition": "no_lights_on",
+                                "next_action": "IF user_says_problem_fixed THEN end_task ELSE IF user_says_one_light_on THEN go_to_sub_step_2 ELSE IF user_says_two_or_more_lights_off THEN go_to_sub_step_3 ELSE go_step_5"
+                            },
+                            {
+                                "sub_step": 2,
+                                "name": "one_light_on",
+                                "description": "If only one light is on, check the SIM card or antenna",
+                                "checked": false,
+                                "condition": "one_light_on",
+                                "next_action": "IF problem_fixed (user says 'درست شد' or 'مشکل حل شد') THEN end_task ELSE IF user_says_two_or_more_lights_off (user says 'دو تا چراغ خاموشه' or 'چند تا خاموشه') THEN go_to_sub_step_3 ELSE IF one_light_on (user says 'یه چراغ روشنه' or 'هنوز یه چراغ روشنه') THEN go_step_5 ELSE go_step_5"
+                            },
+                            {
+                                "sub_step": 3,
+                                "name": "some_lights_off",
+                                "description": "If two or three lights are off, check the WAN or LTE connection",
+                                "checked": false,
+                                "condition": "some_lights_off",
+                                "next_action": "IF problem_fixed THEN end_task ELSE go_step_5"
+                            }
+                        ]
+                    },
+                    {
+                        "step": 5,
+                        "name": "final_operator_escalation",
+                        "description": "Final escalation to the operator if the issue persists after all steps; inform the user that the problem has been forwarded to the operator for further investigation and requires patience",
+                        "checked": false,
+                        "next_action": "await_operator_response (end of flow)",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 6,
+                        "name": "check_config_modem",
+                        "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 7,
+                        "name": "check_DNS",
+                        "description": "Write a short beginner-friendly guide to check DNS to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_DNS or ok or success_dns or good THEN go_step_5 ELSE stay_current_step_and_fixed_problems",
+                        "sub_steps": []
+                    }
+                ]
+            }
+        ],
+        "next_step_support": [
+            {
+                "step": 2,
+                "name": "ping_test",
+                "description": "Perform a network connectivity test using Ping and guide the user on how to do it",
+                "checked": false,
+                "next_action": "IF ping_failed OR ping_unreachable OR ping_timeout OR no_ping THEN go_sub_step_1 ('name':check_config_modem )  ELSE go_step_3 (ping successful, continue)",
+                "sub_steps": [
+                    {
+                        "sub_step": 1,
+                        "name": "check_config_modem",
+                        "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5"
+                    }
+                ]
+            }
+        ]
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "اینترنتم مشکل دارد"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً برای کمک به رفع مشکل اینترنت، اطلاعات حساب خود را ارائه دهید:</p>\n<ul>\n    <li>نام کاربری (باید با ۹۸۹۵۵۹ شروع شده و ۱۲ رقم باشد)</li>\n    <li>شماره موبایل (باید با ۰۹ شروع شده و ۱۱ رقم باشد)</li>\n    <li>نام خانوادگی</li>\n    <li>کد ملی (۱۰ رقم)</li>\n</ul>\n<p>لطفاً حداقل یکی از این اطلاعات را وارد نمایید. اگر داده‌ای اشتباه وارد شده است، لطفاً آن را با فرمت صحیح اصلاح کنید. 😊</p>"
+        },
+        {
+            "role": "user",
+            "content": "اینترنت lte میخوام"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>بر اساس نیازهایی که ذکر کرده‌اید، دو گزینه اینترنت LTE مناسب برای شما وجود دارد:</p>\n\n<ul>\n  <li>\n    <strong>طرح ویژه با مودم رومیزی + سیم کارت رایگان + 5 ماهه 55 گیگ (fd-LTE)</strong><br>\n    <strong>قیمت:</strong> 3,080,000 تومان<br>\n    <strong>مدت زمان:</strong> 150 روز<br>\n    <strong>ترافیک:</strong> 55 گیگابایت<br>\n    <strong>حداکثر سرعت دانلود:</strong> 50 مگابیت بر ثانیه<br>\n    <strong>حداکثر سرعت آپلود:</strong> 5 مگابیت بر ثانیه<br>\n    <p>این طرح برای کاربرانی که به اینترنت با ترافیک محدود و سرعت مناسب نیاز دارند، مناسب است. با توجه به قیمت مناسب و مدت زمان 5 ماهه، این گزینه می‌تواند برای استفاده‌های روزمره و کارهای آنلاین کافی باشد.</p>\n  </li>\n\n  <li>\n    <strong>طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم (TD-LTE)</strong><br>\n    <strong>قیمت:</strong> 5,280,000 تومان<br>\n    <strong>مدت زمان:</strong> 365 روز<br>\n    <strong>ترافیک:</strong> 500 گیگابایت<br>\n    <strong>حداکثر سرعت دانلود:</strong> 70 مگابیت بر ثانیه<br>\n    <strong>حداکثر سرعت آپلود:</strong> 10 مگابیت بر ثانیه<br>\n    <p>این طرح برای کاربرانی که به اینترنت پرسرعت و ترافیک بالا نیاز دارند، بسیار مناسب است. با 500 گیگابایت ترافیک و سرعت دانلود بالا، این گزینه برای کاربرانی که به دانلود و استریمینگ محتوا علاقه دارند، ایده‌آل است.</p>\n  </li>\n\n  <li>\n    <strong>طرح 70TD مگ - سه ماهه + نامحدود + سیم کارت + مودم (TD-LTE)</strong><br>\n    <strong>قیمت:</strong> 5,390,000 تومان<br>\n    <strong>مدت زمان:</strong> 90 روز<br>\n    <strong>ترافیک:</strong> نامحدود<br>\n    <strong>حداکثر سرعت دانلود:</strong> 70 مگابیت بر ثانیه<br>\n    <strong>حداکثر سرعت آپلود:</strong> 10 مگابیت بر ثانیه<br>\n    <p>این گزینه برای کاربرانی که به ترافیک نامحدود و سرعت بالا نیاز دارند، بسیار مناسب است. با توجه به اینکه این طرح فقط 3 ماهه است، می‌تواند برای کاربرانی که به دنبال یک گزینه موقت و با کیفیت هستند، ایده‌آل باشد.</p>\n  </li>\n</ul>\n\n<p>کدام یک از این خدمات را می‌خواهید فعال کنم؟ من همچنین می‌توانم پیشنهاد بهتری پیدا کنم اگر ویژگی‌های دقیقتری را مشخص کنید.</p>",
+            "plans": [
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 5 ماهه 55 گیگ\nتوضیحات: ندارد\nقیمت: 3080000\nمدت زمان: 150 روز\nمدت زمان: 150 روز\nپیشنهاد ویژهنداردنوع قرارداد5 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک55 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax MC50\nnight_traffic: ندارد\ntraffic: 55\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5280000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهنداردنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک500 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 500\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - سه ماهه + نامحدود + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5390000\nمدت زمان: 90 روز\nمدت زمان: 90 روز\nپیشنهاد ویژهنداردنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیکنامحدود GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: نامحدود\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه یکساله +1404گیگ\nتوضیحات: ندارد\nقیمت: 3355000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک1404 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 1404\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - شش ماهه + 100 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 3850000\nمدت زمان: 180 روز\nمدت زمان: 180 روز\nپیشنهاد ویژهنداردنوع قرارداد6 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک100 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 100\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم جیبی + سیم کارت رایگان + 6 ماهه 210گیگ\nتوضیحات: ندارد\nقیمت: 2750000\nمدت زمان: 180 روز\nمدت زمان: 180 روز\nپیشنهاد ویژهنداردنوع قرارداد6 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک210 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: دارد\ncoverage: کشوری\nmodem: Alcatel\nnight_traffic: ندارد\ntraffic: 210\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه پانزده ماهه +444 گیگ + آی پی یکساله\nتوضیحات: ندارد\nقیمت: 2915000\nمدت زمان: 450 روز\nمدت زمان: 450 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد15 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک444 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 444\nip: دارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ (UTEL)\nتوضیحات: ندارد\nقیمت: 4600000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: UTEL\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه یکساله +1404گیگ + 144 گیگ شبانه + آی پی یکساله\nتوضیحات: ندارد\nقیمت: 4202000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک1404 GBترافیک شب144حداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: 144\ntraffic: 1404\nip: دارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم جیبی + سیم کارت رایگان + 3 ماهه 60 گیگ\nتوضیحات: ندارد\nقیمت: 3410000\nمدت زمان: 90 روز\nمدت زمان: 90 روز\nپیشنهاد ویژهنداردنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک60 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: دارد\ncoverage: کشوری\nmodem: Olax MT80\nnight_traffic: ندارد\ntraffic: 60\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد"
+            ]
+        },
+        {
+            "role": "assistant",
+            "content": "<p>شما طرح ویژه با مودم جیبی + سیم کارت رایگان + 3 ماهه 60 گیگ را انتخاب کرده‌اید.</p>  \n<p>برای تکمیل سفارش، لطفاً اطلاعات زیر را ارائه دهید:</p>  \n<ul>  \n  <li>نام کامل خود را وارد کنید.</li>  \n  <li>لطفاً شماره تلفن خود را وارد کنید (شماره‌ای 11 رقمی و شروع با 09).</li>  \n</ul>"
+        },
+        {
+            "role": "user",
+            "content": "اینترنت برای فیلم دیدن چی داری"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>بر اساس نیازهایی که ذکر کرده‌اید، دو گزینه اینترنتی مناسب برای تماشای فیلم وجود دارد که می‌تواند به شما کمک کند:</p>\n\n<ul>\n  <li>\n    <strong>طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم</strong><br>\n    <strong>قیمت:</strong> 5280000 تومان<br>\n    <strong>مدت زمان:</strong> 365 روز<br>\n    <strong>ترافیک:</strong> 500 گیگ<br>\n    <strong>حداقل سرعت:</strong> 1 Mbps<br>\n    <strong>حداکثر سرعت دانلود:</strong> 70 Mbps<br>\n    <strong>حداکثر سرعت آپلود:</strong> 10 Mbps<br>\n    <p>این طرح به شما 500 گیگ ترافیک با سرعت دانلود بالا (70 Mbps) ارائه می‌دهد که برای تماشای فیلم‌های آنلاین بسیار مناسب است. همچنین، با توجه به مدت زمان یکساله، شما می‌توانید به راحتی از این سرویس استفاده کنید.</p>\n  </li>\n\n  <li>\n    <strong>طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ</strong><br>\n    <strong>قیمت:</strong> 4400000 تومان<br>\n    <strong>مدت زمان:</strong> 300 روز<br>\n    <strong>ترافیک:</strong> 300 گیگ<br>\n    <strong>حداقل سرعت:</strong> 1 Mbps<br>\n    <strong>حداکثر سرعت دانلود:</strong> 50 Mbps<br>\n    <strong>حداکثر سرعت آپلود:</strong> 5 Mbps<br>\n    <p>این طرح با 300 گیگ ترافیک و سرعت دانلود 50 Mbps نیز گزینه مناسبی برای تماشای فیلم است. اگرچه ترافیک کمتری نسبت به گزینه اول دارد، اما قیمت آن پایین‌تر است و می‌تواند برای کاربرانی که به ترافیک کمتری نیاز دارند، مناسب باشد.</p>\n  </li>\n</ul>\n\n<p>کدام یک از این خدمات را می‌خواهید فعال کنم؟ همچنین می‌توانم پیشنهاد بهتری پیدا کنم اگر ویژگی‌های دقیق‌تری را مشخص کنید.</p>",
+            "plans": [
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5280000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهنداردنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک500 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 500\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ\nتوضیحات: ندارد\nقیمت: 4400000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax AX6Pro\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ (Olax AX8Pro)\nتوضیحات: ندارد\nقیمت: 4800000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax AX8Pro\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ (HUAWEI B315)\nتوضیحات: ندارد\nقیمت: 4900000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: HUAWEI B315\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ (UTEL)\nتوضیحات: ندارد\nقیمت: 4600000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: UTEL\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 5 ماهه 55 گیگ\nتوضیحات: ندارد\nقیمت: 3080000\nمدت زمان: 150 روز\nمدت زمان: 150 روز\nپیشنهاد ویژهنداردنوع قرارداد5 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک55 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax MC50\nnight_traffic: ندارد\ntraffic: 55\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه 10 ماهه +200 گیگ + 244 گیگ شبانه\nتوضیحات: ندارد\nقیمت: 1148400\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک200 GBترافیک شب244حداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: 244\ntraffic: 200\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه 200 روز +344 گیگ + آی پی شش ماهه\nتوضیحات: ندارد\nقیمت: 2002000\nمدت زمان: 200 روز\nمدت زمان: 200 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد6 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک344 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 344\nip: دارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم جیبی + سیم کارت رایگان + 6 ماهه 210گیگ\nتوضیحات: ندارد\nقیمت: 2750000\nمدت زمان: 180 روز\nمدت زمان: 180 روز\nپیشنهاد ویژهنداردنوع قرارداد6 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک210 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: دارد\ncoverage: کشوری\nmodem: Alcatel\nnight_traffic: ندارد\ntraffic: 210\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه پانزده ماهه +444 گیگ + آی پی یکساله\nتوضیحات: ندارد\nقیمت: 2915000\nمدت زمان: 450 روز\nمدت زمان: 450 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد15 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک444 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 444\nip: دارد\nregion: کشوری"
+            ]
+        },
+        {
+            "role": "assistant",
+            "content": "<p>شما دو سرویس زیر را انتخاب کرده‌اید:</p>\n<ul>\n  <li>\n    <strong>طرح ویژه با مودم جیبی + سیم کارت رایگان + 3 ماهه 60 گیگ</strong><br>\n    <strong>قیمت:</strong> 3410000 تومان<br>\n    <strong>مدت زمان:</strong> 90 روز<br>\n    <strong>ترافیک:</strong> 60 گیگ<br>\n    <strong>حداقل سرعت:</strong> 1 Mbps<br>\n    <strong>حداکثر سرعت دانلود:</strong> 50 Mbps<br>\n    <strong>حداکثر سرعت آپلود:</strong> 5 Mbps<br>\n  </li>\n  <li>\n    <strong>جشنواره پاییزه پانزده ماهه +444 گیگ + آی پی یکساله</strong><br>\n    <strong>قیمت:</strong> 2915000 تومان<br>\n    <strong>مدت زمان:</strong> 450 روز<br>\n    <strong>ترافیک:</strong> 444 گیگ<br>\n    <strong>حداقل سرعت:</strong> 1 Mbps<br>\n    <strong>حداکثر سرعت دانلود:</strong> 50 Mbps<br>\n    <strong>حداکثر سرعت آپلود:</strong> 5 Mbps<br>\n  </li>\n</ul>\n<p>برای تکمیل سفارش، نیاز به اطلاعات زیر دارم:</p>\n<p>لطفاً نام کامل و شماره تلفن خود را ارائه دهید.</p>"
+        },
+        {
+            "role": "user",
+            "content": "اینترنتم مشکل داری"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً اطلاعات کاربری خود را برای پشتیبانی شابکیه وارد کنید:</p>\n<ul>\n  <li><strong>نام کاربری:</strong> باید با 989559 شروع شود و 12 رقم باشد.</li>\n  <li><strong>شماره موبایل:</strong> باید با 09 شروع شود و 11 رقم باشد.</li>\n  <li><strong>نام خانوادگی:</strong> لطفاً نام خانوادگی خود را وارد کنید.</li>\n  <li><strong>کد ملی:</strong> باید 10 رقم باشد.</li>\n</ul>\n<p>لطفاً حداقل یکی از اطلاعات فوق را وارد کنید تا بتوانیم به شما کمک کنیم.</p>"
+        },
+        {
+            "role": "user",
+            "content": "دهدار"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً یکی از حساب‌های زیر را که نیاز به پشتیبانی دارد انتخاب کنید:</p>\n<ul>\n    <li>\n        <p>نام: مهدی دهدار بهبهانی</p>\n        <p>نام کاربری: 989559****70</p>\n        <p>شماره موبایل: 0913****929</p>\n        <p>کد ملی: 18500*****4</p>\n        <p>عنوان سرویس: تست 7 روزه - 10 گیگ ( ویژه کاربران جدید)</p>\n        <p>حجم باقی‌مانده: 0 مگابایت</p>\n        <p>روزهای باقی‌مانده از سرویس: 36 روز</p>\n        <p>تاریخ شروع سرویس: 1403-4-7</p>\n        <p>تاریخ انقضای سرویس: 1403-5-4</p>\n    </li>\n    <li>\n        <p>نام: مهدی دهدار بهبهانی</p>\n        <p>نام کاربری: 989559****94</p>\n        <p>شماره موبایل: 0913****929</p>\n        <p>کد ملی: 18500*****4</p>\n        <p>عنوان سرویس: جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A</p>\n        <p>حجم باقی‌مانده: 4323 مگابایت</p>\n        <p>روزهای باقی‌مانده از سرویس: 52 روز</p>\n        <p>تاریخ شروع سرویس: 1400-1-25</p>\n        <p>تاریخ انقضای سرویس: 1404-10-10</p>\n    </li>\n</ul>\n<p>لطفاً شماره حساب مورد نظر خود را انتخاب کنید و به ما اطلاع دهید. 😊</p>",
+            "buttons": [
+                "شماره حساب 1",
+                "شماره حساب 2"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "شماره حساب 2"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>مهدی عزیز، به نظر می‌رسد که اینترنت شما مشکل دارد. بیایید مرحله بررسی VPN را انجام دهیم. 😊</p>\n<p>لطفاً بررسی کنید که آیا VPN شما روشن است یا خیر. این کار ممکن است باعث مشکلات اتصال شود.</p>\n<ul>\n    <li>اگر VPN روشن است، لطفاً آن را خاموش کنید و به من اطلاع دهید. 🔄</li>\n    <li>اگر VPN خاموش است، لطفاً به من بگویید تا به مرحله بعدی برویم. ✅</li>\n</ul>\n<p>منتظر پاسخ شما هستم تا بتوانیم مشکل را حل کنیم! 📶</p>"
+        },
+        {
+            "role": "user",
+            "content": "به غیر از  vpn چیو تست کنم؟"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>مهدی عزیز، حالا که VPN را بررسی کردیم، بیایید یک تست اتصال شبکه با استفاده از Ping انجام دهیم تا ببینیم آیا مشکل از اتصال شبکه است یا خیر. 😊</p>\n<p>برای انجام این کار، مراحل زیر را دنبال کنید:</p>\n<ul>\n    <li>برنامه Command Prompt (در ویندوز) یا Terminal (در مک) را باز کنید. 💻</li>\n    <li>دستور <code>ping 8.8.8.8</code> را تایپ کرده و Enter را بزنید. این دستور به شما کمک می‌کند تا بررسی کنید آیا می‌توانید به سرورهای گوگل متصل شوید یا خیر. 🌐</li>\n    <li>اگر پاسخ‌هایی با زمان (ms) دریافت کردید، به من اطلاع دهید. اگر خطا یا پیامی مبنی بر عدم دسترسی دریافت کردید، لطفاً به من بگویید. 📊</li>\n</ul>\n<p>منتظر نتیجه شما هستم تا بتوانیم به مرحله بعدی برویم! 🚀</p>"
+        },
+        {
+            "role": "user",
+            "content": "دسترسی به ویندوز ندارم روی گوشی بگو چیو تست کنم"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>بر اساس نیازهایی که ذکر کرده‌اید، دو گزینه اینترنتی مناسب برای شما وجود دارد که می‌توانند به شما کمک کنند:</p>  \n\n<ul>  \n  <li>  \n    <strong>طرح ویژه با مودم رومیزی + سیم کارت رایگان + 5 ماهه 55 گیگ (fd-LTE)</strong>  \n    <p>این طرح شامل یک مودم رومیزی و سیم کارت رایگان است و به شما 55 گیگابایت ترافیک اینترنتی در مدت 150 روز ارائه می‌دهد. سرعت دانلود حداکثر 50 مگابیت بر ثانیه و سرعت آپلود 5 مگابیت بر ثانیه دارد. این گزینه برای کاربرانی که به اینترنت با سرعت متوسط و ترافیک محدود نیاز دارند، مناسب است.</p>  \n  </li>  \n\n  <li>  \n    <strong>طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم (TD-LTE)</strong>  \n    <p>این طرح شامل یک مودم و سیم کارت است و به شما 500 گیگابایت ترافیک اینترنتی در مدت 365 روز ارائه می‌دهد. سرعت دانلود حداکثر 70 مگابیت بر ثانیه و سرعت آپلود 10 مگابیت بر ثانیه دارد. این گزینه برای کاربرانی که به ترافیک بیشتر و سرعت بالاتر نیاز دارند، بسیار مناسب است.</p>  \n  </li>  \n\n  <li>  \n    <strong>طرح 70TD مگ - سه ماهه + نامحدود + سیم کارت + مودم (TD-LTE)</strong>  \n    <p>این طرح نیز شامل یک مودم و سیم کارت است و به شما ترافیک نامحدود در مدت 90 روز ارائه می‌دهد. سرعت دانلود حداکثر 70 مگابیت بر ثانیه و سرعت آپلود 10 مگابیت بر ثانیه دارد. این گزینه برای کاربرانی که به اینترنت نامحدود و سرعت بالا نیاز دارند، بسیار مناسب است.</p>  \n  </li>  \n</ul>  \n\n<p>کدام یک از این خدمات را می‌خواهید فعال کنم؟ من همچنین می‌توانم پیشنهاد بهتری پیدا کنم اگر ویژگی‌های دقیق‌تری را مشخص کنید.</p>",
+            "plans": [
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 5 ماهه 55 گیگ\nتوضیحات: ندارد\nقیمت: 3080000\nمدت زمان: 150 روز\nمدت زمان: 150 روز\nپیشنهاد ویژهنداردنوع قرارداد5 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک55 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax MC50\nnight_traffic: ندارد\ntraffic: 55\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5280000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهنداردنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک500 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 500\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - سه ماهه + نامحدود + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5390000\nمدت زمان: 90 روز\nمدت زمان: 90 روز\nپیشنهاد ویژهنداردنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیکنامحدود GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: نامحدود\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه یکساله +1404گیگ\nتوضیحات: ندارد\nقیمت: 3355000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک1404 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 1404\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - شش ماهه + 100 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 3850000\nمدت زمان: 180 روز\nمدت زمان: 180 روز\nپیشنهاد ویژهنداردنوع قرارداد6 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک100 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 100\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم جیبی + سیم کارت رایگان + 6 ماهه 210گیگ\nتوضیحات: ندارد\nقیمت: 2750000\nمدت زمان: 180 روز\nمدت زمان: 180 روز\nپیشنهاد ویژهنداردنوع قرارداد6 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک210 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: دارد\ncoverage: کشوری\nmodem: Alcatel\nnight_traffic: ندارد\ntraffic: 210\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه پانزده ماهه +444 گیگ + آی پی یکساله\nتوضیحات: ندارد\nقیمت: 2915000\nمدت زمان: 450 روز\nمدت زمان: 450 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد15 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک444 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 444\nip: دارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ (UTEL)\nتوضیحات: ندارد\nقیمت: 4600000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: UTEL\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه یکساله +1404گیگ + 144 گیگ شبانه + آی پی یکساله\nتوضیحات: ندارد\nقیمت: 4202000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک1404 GBترافیک شب144حداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: 144\ntraffic: 1404\nip: دارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم جیبی + سیم کارت رایگان + 3 ماهه 60 گیگ\nتوضیحات: ندارد\nقیمت: 3410000\nمدت زمان: 90 روز\nمدت زمان: 90 روز\nپیشنهاد ویژهنداردنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک60 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: دارد\ncoverage: کشوری\nmodem: Olax MT80\nnight_traffic: ندارد\ntraffic: 60\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد"
+            ]
+        }
+    ],
+    "history_suggestion": [
+        {
+            "0": [
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 5 ماهه 55 گیگ\nتوضیحات: ندارد\nقیمت: 3080000\nمدت زمان: 150 روز\nمدت زمان: 150 روز\nپیشنهاد ویژهنداردنوع قرارداد5 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک55 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax MC50\nnight_traffic: ندارد\ntraffic: 55\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5280000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهنداردنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک500 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 500\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - سه ماهه + نامحدود + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5390000\nمدت زمان: 90 روز\nمدت زمان: 90 روز\nپیشنهاد ویژهنداردنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیکنامحدود GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: نامحدود\nip: ندارد\nregion: کشوری"
+            ]
+        },
+        {
+            "1": [
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5280000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهنداردنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک500 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 500\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ\nتوضیحات: ندارد\nقیمت: 4400000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax AX6Pro\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 10 ماهه 300 گیگ (Olax AX8Pro)\nتوضیحات: ندارد\nقیمت: 4800000\nمدت زمان: 300 روز\nمدت زمان: 300 روز\nپیشنهاد ویژهنداردنوع قرارداد10 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک300 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax AX8Pro\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد"
+            ]
+        },
+        {
+            "2": [
+                "دسته‌بندی: fd-LTE   \nعنوان: طرح ویژه با مودم رومیزی + سیم کارت رایگان + 5 ماهه 55 گیگ\nتوضیحات: ندارد\nقیمت: 3080000\nمدت زمان: 150 روز\nمدت زمان: 150 روز\nپیشنهاد ویژهنداردنوع قرارداد5 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک55 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: Olax MC50\nnight_traffic: ندارد\ntraffic: 55\nip: ندارد\nregion: کشوری",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - یکساله + 500 گیگ + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5280000\nمدت زمان: 365 روز\nمدت زمان: 365 روز\nپیشنهاد ویژهنداردنوع قرارداد1 سالههزینه راه اندازی :ندارد منطقهکشوری ترافیک500 GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: 500\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد",
+                "دسته‌بندی: TD-LTE    \nعنوان: طرح 70TD مگ - سه ماهه + نامحدود + سیم کارت + مودم\nتوضیحات: ندارد\nقیمت: 5390000\nمدت زمان: 90 روز\nمدت زمان: 90 روز\nپیشنهاد ویژهنداردنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیکنامحدود GBترافیک شبنداردحداقل سرعت1حداکثر آپلود70نوع سرویسTD-LTE    \nservice_type: TD-LTE    \ncategory: اینترنت    \nmin_speed: 1\nmax_download: 70\nmax_upload: 10\nportable: ندارد\ncoverage: کشوری\nmodem: TFI60-sl1\nnight_traffic: ندارد\ntraffic: نامحدود\nip: ندارد\nregion: کشوری"
+            ]
+        }
+    ],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

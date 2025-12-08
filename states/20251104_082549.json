@@ -1,0 +1,33 @@
+{
+  "token": "fce6707d-d564-4c0b-addc-010a6648ac95",
+  "input": "چه سرویس هایی داری",
+  "userInfo": {
+    "info": {
+      "name": "",
+      "phone": ""
+    },
+    "needs": {
+      "type": [],
+      "details": []
+    },
+    "orders": [],
+    "accountInfo": {},
+    "accounts": [],
+    "selectAccount": [],
+    "problems": []
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "چه سرویس هایی داری"
+    },
+    {
+      "role": "assistant",
+      "content": "<p>ما انواع مختلفی از سرویس‌ها را ارائه می‌دهیم. لطفاً یکی از موارد زیر را انتخاب کنید:</p>\n<ul>\n    <li>fd-LTE همراه اول</li>\n    <li>TD-LTE ایرانسل</li>\n    <li>ADSL</li>\n    <li>رادیویی WiFi</li>\n    <li>وب‌سایت</li>\n    <li>کولوکیشن</li>\n    <li>هاستینگ</li>\n    <li>domain</li>\n    <li>VPS</li>\n</ul>\n<p>کدام یک از این سرویس‌ها را مایل به خریداری هستید؟</p>"
+    }
+  ],
+  "history_suggestion": [],
+  "intents": [],
+  "history_intent": [],
+  "next_node": ""
+}

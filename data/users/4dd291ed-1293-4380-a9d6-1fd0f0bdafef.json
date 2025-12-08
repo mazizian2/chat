@@ -1,0 +1,35 @@
+{
+    "token": "4dd291ed-1293-4380-a9d6-1fd0f0bdafef",
+    "thread_id": "thread_YsRtHu0cwmmq2N7XTLAS3Cxj",
+    "input": "من چرا خوابم نمیبره",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "من چرا خوابم نمیبره"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>متأسفم که متوجه پیام شما نشدم. می‌توانید لطفاً بیشتر توضیح دهید که چرا فکر می‌کنید خواب‌تان نمی‌برد؟ آیا مشکلی خاص دارید یا شرایطی وجود دارد که باعث این مشکل شده است؟ با ارائه اطلاعات بیشتر، می‌توانم بهتر راهنمایی کنم.</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

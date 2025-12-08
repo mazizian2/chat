@@ -1,0 +1,32 @@
+/* ===========================
+    extra large devices
+    ============================ */
+
+#de_0bd118c1-3912-2b43-f916-426e58a154b1 {
+  font-size: 15px;
+  color: var(--Color2);
+  width: var(--variablefit);
+  height: var(--variablefit);
+  min-height: var(--variablefit);
+  line-height: var(--variablelineHeight);
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===========================
+    large device
+    ============================ */
+@media only screen and (max-width: 992px) {
+}
+
+/* ===========================
+    medium device
+    ============================ */
+@media only screen and (max-width: 768px) {
+}
+
+/* ===========================
+    small device
+    ============================ */
+@media only screen and (max-width: 576px) {
+}

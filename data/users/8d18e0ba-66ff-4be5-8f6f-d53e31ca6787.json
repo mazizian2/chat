@@ -1,0 +1,28 @@
+{
+    "token": "8d18e0ba-66ff-4be5-8f6f-d53e31ca6787",
+    "thread_id": "thread_UvPat3Ks5RWGnQv4swdBHTGs",
+    "input": "سلام چه سرویس هایی داری",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام چه سرویس هایی داری"
+        },
+        {
+            "role": "assistant",
+            "content": 

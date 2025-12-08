@@ -1,0 +1,31 @@
+{
+  "token": "fce6707d-d564-4c0b-addc-010a6648ac95",
+  "input": "کولوکیشن",
+  "userInfo": {
+    "info": {
+      "name": "",
+      "phone": ""
+    },
+    "needs": {
+      "type": [],
+      "details": []
+    },
+    "orders": [],
+    "accountInfo": {},
+    "accounts": [],
+    "selectAccount": [],
+    "problems": []
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "کولوکیشن"
+    }
+  ],
+  "history_suggestion": [],
+  "intents": [
+    "unknown"
+  ],
+  "history_intent": [],
+  "next_node": "unknown"
+}

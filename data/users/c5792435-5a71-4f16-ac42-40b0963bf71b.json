@@ -1,0 +1,39 @@
+{
+    "token": "c5792435-5a71-4f16-ac42-40b0963bf71b",
+    "thread_id": "thread_ACUtKu1XCFqZfpYSmJwZutp4",
+    "input": "به پشتیبانی LTE نیاز دارم",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [
+            "اینترنت قطع است"
+        ],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "من اینترنتم قطعه"
+        },
+        {
+            "role": "user",
+            "content": "به پشتیبانی LTE نیاز دارم"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "set_service_support"
+    ],
+    "history_intent": [],
+    "next_node": "set_service_support"
+}

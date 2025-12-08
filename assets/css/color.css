@@ -1,0 +1,39 @@
+.light {
+  --Background2: #f3f3f3;
+
+  --Accent: #ffcc00;
+
+  --BorderColor: #e2e2e2;
+
+  --Background1: #ffffff;
+
+  --Color1: #000000;
+
+  --Primary: #40c1c7;
+
+  --Color3: #a8a8a8;
+
+  --Color2: #ffffff;
+
+  --MainIcon : brightness(0);
+}
+
+.dark {
+  --Background2: #181818;
+
+  --Accent: #ffcc00;
+
+  --BorderColor: #2d2d2d;
+
+  --Background1: #323232;
+
+  --Color1: #ffffff;
+
+  --Primary: #40c1c7;
+
+  --Color3: #a8a8a8;
+
+  --Color2: #ffffff;
+  
+  --MainIcon : brightness(100);
+}

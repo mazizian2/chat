@@ -1,0 +1,12 @@
+/* ===== style ===== */
+#de_833de2f2-9743-49a5-dbe6-5d405c375dd1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media only screen and (max-width: 576px) {
+#de_833de2f2-9743-49a5-dbe6-5d405c375dd1 {
+  grid-template-columns: 1fr;
+  overflow: auto;
+}
+}

@@ -1,0 +1,33 @@
+{
+    "token": "5823ec0a-c107-418e-87a4-06a72fb0428a",
+    "thread_id": "thread_Lxi7s4GDzxsjUINdfvp989jY",
+    "input": "اینترنتم قطعه",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [
+            "اینترنتم قطعه"
+        ],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "اینترنتم قطعه"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": "question_service_support"
+}

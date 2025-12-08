@@ -1,0 +1,587 @@
+{
+    "token": "5e699a4c-dea0-47d7-8b56-f3790f969dc5",
+    "input": "خاموشه",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {
+            "lastname": "",
+            "username": "",
+            "mobile": "",
+            "melicode": "1292138734"
+        },
+        "accounts": [
+            [
+                {
+                    "id": "4947",
+                    "pppoe_username": "989412952252",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار تست فروش",
+                    "mobile": "09105802340",
+                    "melicode": "1292138734",
+                    "Traffic": "5103",
+                    "service_title": "سرویس ایرانسل تست پشتیبانی ",
+                    "service_remain_day": "1",
+                    "date_service_start": "1761769800",
+                    "date_service_expire": "1762633800",
+                    "date": "1747730921",
+                    "date_fa": "1404-2-30 12:18",
+                    "date_service_start_fa": "1404-8-8 00:00",
+                    "date_service_expire_fa": "1404-8-18 00:00"
+                },
+                {
+                    "id": "4946",
+                    "pppoe_username": "989559162391",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار تست فروش",
+                    "mobile": "09105802340",
+                    "melicode": "1292138734",
+                    "Traffic": "0",
+                    "service_title": "تست پشتیبانی (یک ماهه - 400مگ)",
+                    "service_remain_day": "1",
+                    "date_service_start": "1747686600",
+                    "date_service_expire": "1750278600",
+                    "date": "1747730904",
+                    "date_fa": "1404-2-30 12:18",
+                    "date_service_start_fa": "1404-2-30 00:00",
+                    "date_service_expire_fa": "1404-3-29 00:00"
+                },
+                {
+                    "id": "4740",
+                    "pppoe_username": "989559001357",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "0",
+                    "service_title": "",
+                    "service_remain_day": "0",
+                    "date_service_start": "1733171400",
+                    "date_service_expire": "1735763400",
+                    "date": "1741513209",
+                    "date_fa": "1403-12-19 13:10",
+                    "date_service_start_fa": "1403-9-13 00:00",
+                    "date_service_expire_fa": "1403-10-13 00:00"
+                },
+                {
+                    "id": "4659",
+                    "pppoe_username": "989559020169",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار دوربین",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "14674",
+                    "service_title": "طرح ویژه اقتصادی با مودم رومیزی + سیم کارت رایگان + 5 ماهه 100 گیگ",
+                    "service_remain_day": "129",
+                    "date_service_start": "1739737800",
+                    "date_service_expire": "1773693000",
+                    "date": "1739790361",
+                    "date_fa": "1403-11-29 14:36",
+                    "date_service_start_fa": "1403-11-29 00:00",
+                    "date_service_expire_fa": "1404-12-26 00:00"
+                },
+                {
+                    "id": "4658",
+                    "pppoe_username": "989559020171",
+                    "name": "مهرداد",
+                    "lastname": "مهوری",
+                    "mobile": "09133868843",
+                    "melicode": "1292138734",
+                    "Traffic": "224920",
+                    "service_title": " یک ساله-220گیگ(FD)",
+                    "service_remain_day": "260",
+                    "date_service_start": "1753475400",
+                    "date_service_expire": "1785011400",
+                    "date": "1739790342",
+                    "date_fa": "1403-11-29 14:35",
+                    "date_service_start_fa": "1404-5-4 00:00",
+                    "date_service_expire_fa": "1405-5-4 00:00"
+                },
+                {
+                    "id": "4529",
+                    "pppoe_username": "989559001169",
+                    "name": "تست",
+                    "lastname": "پشتیبانی کیان",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "4693",
+                    "service_title": "10 روزه - 5 گیگ",
+                    "service_remain_day": "3",
+                    "date_service_start": "1761942600",
+                    "date_service_expire": "1762806600",
+                    "date": "1737530079",
+                    "date_fa": "1403-11-3 10:44",
+                    "date_service_start_fa": "1404-8-10 00:00",
+                    "date_service_expire_fa": "1404-8-20 00:00"
+                },
+                {
+                    "id": "4528",
+                    "pppoe_username": "989559001471",
+                    "name": "تست",
+                    "lastname": "پشتیبانی",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "0",
+                    "service_title": "10 روزه - 5 گیگ",
+                    "service_remain_day": "1",
+                    "date_service_start": "1752265800",
+                    "date_service_expire": "1753129800",
+                    "date": "1737527785",
+                    "date_fa": "1403-11-3 10:06",
+                    "date_service_start_fa": "1404-4-21 00:00",
+                    "date_service_expire_fa": "1404-4-31 00:00"
+                },
+                {
+                    "id": "4203",
+                    "pppoe_username": "989559162359",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "0",
+                    "service_title": "تست پشتیبانی (یک ماهه - 400مگ)",
+                    "service_remain_day": "1",
+                    "date_service_start": "1724445000",
+                    "date_service_expire": "1727037000",
+                    "date": "1724491564",
+                    "date_fa": "1403-6-3 12:56",
+                    "date_service_start_fa": "1403-6-3 00:00",
+                    "date_service_expire_fa": "1403-7-2 00:00"
+                },
+                {
+                    "id": "3509",
+                    "pppoe_username": "989559319857",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "0",
+                    "service_title": "تست پشتیبانی (یک ماهه - 400مگ)",
+                    "service_remain_day": "1",
+                    "date_service_start": "1701721800",
+                    "date_service_expire": "1704313800",
+                    "date": "1701779778",
+                    "date_fa": "1402-9-14 16:06",
+                    "date_service_start_fa": "1402-9-14 00:00",
+                    "date_service_expire_fa": "1402-10-14 00:00"
+                },
+                {
+                    "id": "3048",
+                    "pppoe_username": "989559309304",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "1005120",
+                    "service_title": "10 روزه - 5 گیگ",
+                    "service_remain_day": "225",
+                    "date_service_start": "1746909000",
+                    "date_service_expire": "1781987400",
+                    "date": "1687857137",
+                    "date_fa": "1402-4-6 12:42",
+                    "date_service_start_fa": "1404-2-21 00:00",
+                    "date_service_expire_fa": "1405-3-31 00:00"
+                },
+                {
+                    "id": "2868",
+                    "pppoe_username": "98955919111",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "114",
+                    "service_title": "یک ماهه-200گیگ(FD) ",
+                    "service_remain_day": "1",
+                    "date_service_start": "1685305800",
+                    "date_service_expire": "1685219400",
+                    "date": "1682847955",
+                    "date_fa": "1402-2-10 13:15",
+                    "date_service_start_fa": "1402-3-8 00:00",
+                    "date_service_expire_fa": "1402-3-7 00:00"
+                },
+                {
+                    "id": "2867",
+                    "pppoe_username": "98955919",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "0",
+                    "service_title": "یک ماهه-200گیگ(FD) ",
+                    "service_remain_day": "1",
+                    "date_service_start": "1685305800",
+                    "date_service_expire": "1685219400",
+                    "date": "1682847533",
+                    "date_fa": "1402-2-10 13:08",
+                    "date_service_start_fa": "1402-3-8 00:00",
+                    "date_service_expire_fa": "1402-3-7 00:00"
+                },
+                {
+                    "id": "2848",
+                    "pppoe_username": "989559199999",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار (آب منطقه ای شهرکرد)",
+                    "mobile": "09024486358",
+                    "melicode": "1292138734",
+                    "Traffic": "-9547",
+                    "service_title": " یک ماهه-100گیگ(FD) ",
+                    "service_remain_day": "0",
+                    "date_service_start": "1683318600",
+                    "date_service_expire": "1683577800",
+                    "date": "1682513941",
+                    "date_fa": "1402-2-6 16:29",
+                    "date_service_start_fa": "1402-2-16 00:00",
+                    "date_service_expire_fa": "1402-2-19 00:00"
+                },
+                {
+                    "id": "2381",
+                    "pppoe_username": "989559173277",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09132067202",
+                    "melicode": "1292138734",
+                    "Traffic": "115038",
+                    "service_title": "10 روزه - 5 گیگ",
+                    "service_remain_day": "360",
+                    "date_service_start": "1762374600",
+                    "date_service_expire": "1762029000",
+                    "date": "1671954606",
+                    "date_fa": "1401-10-4 11:20",
+                    "date_service_start_fa": "1404-8-15 00:00",
+                    "date_service_expire_fa": "1404-8-11 00:00"
+                },
+                {
+                    "id": "1139",
+                    "pppoe_username": "989559149882",
+                    "name": "محمد بشیر",
+                    "lastname": "افشار(تست پروژه)",
+                    "mobile": "09130200441",
+                    "melicode": "1292138734",
+                    "Traffic": "10009574",
+                    "service_title": " یک ماهه-نامحدود(FD) ",
+                    "service_remain_day": "151",
+                    "date_service_start": "1730320200",
+                    "date_service_expire": "1775593800",
+                    "date": "1617683569",
+                    "date_fa": "1400-1-17 09:02",
+                    "date_service_start_fa": "1403-8-10 00:00",
+                    "date_service_expire_fa": "1405-1-19 00:00"
+                },
+                {
+                    "id": "249",
+                    "pppoe_username": "989559131812",
+                    "name": "محمدبشیر",
+                    "lastname": "افشار",
+                    "mobile": "09132067202",
+                    "melicode": "1292138734",
+                    "Traffic": "46886",
+                    "service_title": "شش ماهه-125گیگ+50گیگ شبانه(FD) ",
+                    "service_remain_day": "55",
+                    "date_service_start": "1704313800",
+                    "date_service_expire": "1767299400",
+                    "date": "1587360260",
+                    "date_fa": "1399-2-1 09:54",
+                    "date_service_start_fa": "1402-10-14 00:00",
+                    "date_service_expire_fa": "1404-10-12 00:00"
+                },
+                {
+                    "id": "207",
+                    "pppoe_username": "989559131794",
+                    "name": "محمد بشیر",
+                    "lastname": "افشار",
+                    "mobile": "09132067202",
+                    "melicode": "1292138734",
+                    "Traffic": "102604",
+                    "service_title": " جشنواره زمستانه: ثبت نامی 12ماهه -60 گیگ (ماهیانه 4گیگ ) + 12گیگ هدیه با مودم جیبی HUAWEI E5573S",
+                    "service_remain_day": "130",
+                    "date_service_start": "1668717000",
+                    "date_service_expire": "1773779400",
+                    "date": "1585583864",
+                    "date_fa": "1399-1-11 20:27",
+                    "date_service_start_fa": "1401-8-27 00:00",
+                    "date_service_expire_fa": "1404-12-27 00:00"
+                },
+                {
+                    "id": "130",
+                    "pppoe_username": "989559131655",
+                    "name": "بشیر",
+                    "lastname": "ناشناس",
+                    "mobile": "09132067202",
+                    "melicode": "1292138734",
+                    "Traffic": "0",
+                    "service_title": "سرویس تست شبانه دار از ساعت 13-14",
+                    "service_remain_day": "5653",
+                    "date_service_start": "1659036600",
+                    "date_service_expire": "2147483647",
+                    "date": "1578988497",
+                    "date_fa": "1398-10-24 11:24",
+                    "date_service_start_fa": "1401-5-7 00:00",
+                    "date_service_expire_fa": "1416-10-30 06:44"
+                },
+                {
+                    "id": "22",
+                    "pppoe_username": "989559131637",
+                    "name": "محمدبشیر ",
+                    "lastname": "افشار ",
+                    "mobile": "09132067202",
+                    "melicode": "1292138734",
+                    "Traffic": "634880",
+                    "service_title": "یک ساله-620گیگ ",
+                    "service_remain_day": "302",
+                    "date_service_start": "1576873800",
+                    "date_service_expire": "1608409800",
+                    "date": "1561548068",
+                    "date_fa": "1398-4-5 15:51",
+                    "date_service_start_fa": "1398-9-30 00:00",
+                    "date_service_expire_fa": "1399-9-30 00:00"
+                }
+            ]
+        ],
+        "selectAccount": {
+            "result": true,
+            "info": {
+                "id": "4529",
+                "pppoe_username": "989559001169",
+                "name": "تست",
+                "lastname": "پشتیبانی کیان",
+                "mobile": "09024486358",
+                "melicode": "1292138734",
+                "Traffic": "4693",
+                "service_title": "10 روزه - 5 گیگ",
+                "service_remain_day": "3",
+                "date_service_start": "1761942600",
+                "date_service_expire": "1762806600",
+                "date_service_start_fa": "1404-8-10 00:00",
+                "date_service_expire_fa": "1404-8-20 00:00"
+            },
+            "online": {
+                "GroupName": "LTE-40",
+                "ActiveDays": "10",
+                "IPPool": "85.133.160.208",
+                "TrafficAddByISP": "75564",
+                "TrafficUsed": "70927",
+                "Traffic": 4637
+            }
+        },
+        "problems": [
+            "سرویسم مشکل داره"
+        ],
+        "support": [
+            {
+                "status": "online",
+                "steps": [
+                    {
+                        "step": 1,
+                        "name": "vpn_check",
+                        "description": "Check VPN status as it may cause connectivity issues",
+                        "checked": true,
+                        "next_action": "IF vpn_on (user says 'on' or 'yes') THEN stay_in_current_step_and_ask_user_turn_off_vpn ELSE IF vpn_off (user says 'off' or 'no' or 'turned off') THEN go_step_2",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 2,
+                        "name": "ping_test",
+                        "description": "Perform a network connectivity test using Ping and guide the user on how to do it",
+                        "checked": false,
+                        "next_action": "IF ping_failed OR ping_unreachable OR ping_timeout OR no_ping THEN go_sub_step_1 ('name':check_config_modem )  ELSE go_step_3 (ping successful, continue)",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "check_config_modem",
+                                "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                                "checked": false,
+                                "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5"
+                            }
+                        ]
+                    },
+                    {
+                        "step": 3,
+                        "name": "check_internal_external_links",
+                        "description": "Test access to internal and external links to determine the type of issue",
+                        "checked": false,
+                        "next_action": "IF both_down (both internal and external links fail) THEN go_step_5 ELSE IF both_up (both working) THEN go_sub_step2 ELSE IF internal_ok_and_external_fail THEN go_step_5 ELSE IF external_fail THEN go_step_5 ELSE IF just_internal_ok THEN go_step_5 ELSE IF both_up_but_slow or both_up_but_late THEN go_step_5 ELSE go_step_5",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "both_down",
+                                "description": "If both are down, reset the modem or escalate to the operator",
+                                "checked": false,
+                                "next_action": "go_step_7 ( check_DNS)"
+                            },
+                            {
+                                "sub_step": 2,
+                                "name": "both_up",
+                                "description": "If both are connected , ask the user which link is problematic and escalate to the operator",
+                                "checked": false,
+                                "next_action": "go_step_5 (escalate after identifying problematic link)"
+                            },
+                            {
+                                "sub_step": 3,
+                                "name": "internal_ok_external_fail",
+                                "description": "If internal links work but external links fail, escalate to the operator",
+                                "checked": false,
+                                "next_action": "IF user_says_external_sites_down (user says 'External site not opening' or 'Only internal opens' or 'External fragment' or 'External not coming' or 'YouTube or Google not opening') THEN go_step_5 ELSE IF user_says_internal_sites_down (user says 'Internal site not opening' or 'Only external opens' or 'Internal fragment') THEN go_step_5"
+                            },
+                            {
+                                "sub_step": 4,
+                                "name": "both_up_but_slow",
+                                "description": "If both are active but slow, ask the user to check modem configuration",
+                                "checked": false,
+                                "next_action": "go_step_5 "
+                            }
+                        ]
+                    },
+                    {
+                        "step": 4,
+                        "name": "check_modem_lights_and_hardware",
+                        "description": "Check the number of lights on the modem (none, one, two, or more) to identify the hardware or signal issue level",
+                        "checked": false,
+                        "next_action": "go_to_sub_step_1 (start sub-step analysis)",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "no_lights_on",
+                                "description": "If no lights are on, check the power source or adapter",
+                                "checked": false,
+                                "condition": "no_lights_on",
+                                "next_action": "IF user_says_problem_fixed THEN end_task ELSE IF user_says_one_light_on THEN go_to_sub_step_2 ELSE IF user_says_two_or_more_lights_off THEN go_to_sub_step_3 ELSE go_step_5"
+                            },
+                            {
+                                "sub_step": 2,
+                                "name": "one_light_on",
+                                "description": "If only one light is on, check the SIM card or antenna",
+                                "checked": false,
+                                "condition": "one_light_on",
+                                "next_action": "IF problem_fixed (user says 'درست شد' or 'مشکل حل شد') THEN end_task ELSE IF user_says_two_or_more_lights_off (user says 'دو تا چراغ خاموشه' or 'چند تا خاموشه') THEN go_to_sub_step_3 ELSE IF one_light_on (user says 'یه چراغ روشنه' or 'هنوز یه چراغ روشنه') THEN go_step_5 ELSE go_step_5"
+                            },
+                            {
+                                "sub_step": 3,
+                                "name": "some_lights_off",
+                                "description": "If two or three lights are off, check the WAN or LTE connection",
+                                "checked": false,
+                                "condition": "some_lights_off",
+                                "next_action": "IF problem_fixed THEN end_task ELSE go_step_5"
+                            }
+                        ]
+                    },
+                    {
+                        "step": 5,
+                        "name": "final_operator_escalation",
+                        "description": "Final escalation to the operator if the issue persists after all steps; inform the user that the problem has been forwarded to the operator for further investigation and requires patience",
+                        "checked": false,
+                        "next_action": "await_operator_response (end of flow)",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 6,
+                        "name": "check_config_modem",
+                        "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 7,
+                        "name": "check_DNS",
+                        "description": "Write a short beginner-friendly guide to check DNS to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_DNS or ok or success_dns or good THEN go_step_5 ELSE stay_current_step_and_fixed_problems",
+                        "sub_steps": []
+                    }
+                ]
+            }
+        ],
+        "next_step_support": [
+            {
+                "step": 2,
+                "name": "ping_test",
+                "description": "Perform a network connectivity test using Ping and guide the user on how to do it",
+                "checked": false,
+                "next_action": "IF ping_failed OR ping_unreachable OR ping_timeout OR no_ping THEN go_sub_step_1 ('name':check_config_modem )  ELSE go_step_3 (ping successful, continue)",
+                "sub_steps": [
+                    {
+                        "sub_step": 1,
+                        "name": "check_config_modem",
+                        "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5"
+                    }
+                ]
+            }
+        ]
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام محمد بشیر افشار هستم کاربر lte"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>خوشحالم که با شما صحبت می‌کنم، محمد بشیر افشار! 😊</p> <p>شرکت شبکیه ارائه‌دهنده خدمات اینترنتی، میزبانی وب، ثبت دامنه و طراحی وب‌سایت است و به مشتریان خود ۲۴ ساعته پشتیبانی فنی ارائه می‌دهد. ما به سرعت، امنیت و رضایت مشتریان خود اهمیت می‌دهیم.</p> <p>چطور می‌توانم به شما کمک کنم؟</p>"
+        },
+        {
+            "role": "user",
+            "content": "سرویسم مشکل داره"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>برای پیگیری مشکل سرویس شما، لطفاً یکی از اطلاعات حساب خود را وارد کنید:</p>\n<ul>\n    <li><strong>نام کاربری:</strong> باید با 989559 شروع شود و شامل 12 رقم باشد.</li>\n    <li><strong>شماره موبایل:</strong> باید با 09 شروع شود و شامل 11 رقم باشد.</li>\n    <li><strong>نام خانوادگی:</strong> نام خانوادگی شما.</li>\n    <li><strong>کد ملی:</strong> شامل 10 رقم باشد.</li>\n</ul>\n<p>با تشکر از همراهی شما 🙏</p>"
+        },
+        {
+            "role": "user",
+            "content": "1292138734"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً یکی از حساب‌های زیر را برای دریافت پشتیبانی انتخاب کنید:</p>\n<ul>\n    <li>حساب ID: 4947 - نام: محمدبشیر افشار تست فروش - نام کاربری: 9894*****2252 - موبایل: 0910*****40 - ترافیک: 5103 مگابایت - سرویس: سرویس ایرانسل تست پشتیبانی - روز باقی‌مانده: 1</li>\n    <li>حساب ID: 4946 - نام: محمدبشیر افشار تست فروش - نام کاربری: 9895*****2391 - موبایل: 0910*****40 - ترافیک: 0 مگابایت - سرویس: تست پشتیبانی (یک ماهه - 400مگ) - روز باقی‌مانده: 1</li>\n    <li>حساب ID: 4740 - نام: محمدبشیر افشار - نام کاربری: 9895*****1357 - موبایل: 0902*****58 - ترافیک: 0 مگابایت - سرویس: نامشخص - روز باقی‌مانده: 0</li>\n    <li>حساب ID: 4659 - نام: محمدبشیر افشار دوربین - نام کاربری: 9895*****0169 - موبایل: 0902*****58 - ترافیک: 14674 مگابایت - سرویس: طرح ویژه اقتصادی با مودم رومیزی + سیم کارت رایگان + 5 ماهه 100 گیگ - روز باقی‌مانده: 129</li>\n    <li>حساب ID: 4658 - نام: مهرداد مهوری - نام کاربری: 9895*****0171 - موبایل: 0913*****43 - ترافیک: 224920 مگابایت - سرویس: یک ساله-220گیگ(FD) - روز باقی‌مانده: 260</li>\n    <li>حساب ID: 4529 - نام: تست پشتیبانی کیان - نام کاربری: 9895*****1169 - موبایل: 0902*****58 - ترافیک: 4693 مگابایت - سرویس: 10 روزه - 5 گیگ - روز باقی‌مانده: 3</li>\n    <li>حساب ID: 4528 - نام: تست پشتیبانی - نام کاربری: 9895*****1471 - موبایل: 0902*****58 - ترافیک: 0 مگابایت - سرویس: 10 روزه - 5 گیگ - روز باقی‌مانده: 1</li>\n    <li>حساب ID: 4203 - نام: محمدبشیر افشار - نام کاربری: 9895*****2359 - موبایل: 0902*****58 - ترافیک: 0 مگابایت - سرویس: تست پشتیبانی (یک ماهه - 400مگ) - روز باقی‌مانده: 1</li>\n    <li>حساب ID: 3509 - نام: محمدبشیر افشار - نام کاربری: 9895*****9857 - موبایل: 0902*****58 - ترافیک: 0 مگابایت - سرویس: تست پشتیبانی (یک ماهه - 400مگ) - روز باقی‌مانده: 1</li>\n    <li>حساب ID: 3048 - نام: محمدبشیر افشار - نام کاربری: 9895*****9304 - موبایل: 0902*****58 - ترافیک: 1005120 مگابایت - سرویس: 10 روزه - 5 گیگ - روز باقی‌مانده: 225</li>\n    <li>حساب ID: 2868 - نام: محمدبشیر افشار - نام کاربری: 9895*****9111 - موبایل: 0902*****58 - ترافیک: 114 مگابایت - سرویس: یک ماهه-200گیگ(FD) - روز باقی‌مانده: 1</li>\n    <li>حساب ID: 2867 - نام: محمدبشیر افشار - نام کاربری: 9895*****19 - موبایل: 0902*****58 - ترافیک: 0 مگابایت - سرویس: یک ماهه-200گیگ(FD) - روز باقی‌مانده: 1</li>\n    <li>حساب ID: 2848 - نام: محمدبشیر افشار (آب منطقه ای شهرکرد) - نام کاربری: 9895*****9999 - موبایل: 0902*****58 - ترافیک: -9547 مگابایت - سرویس: یک ماهه-100گیگ(FD) - روز باقی‌مانده: 0</li>\n    <li>حساب ID: 2381 - نام: محمدبشیر افشار - نام کاربری: 9895*****3277 - موبایل: 0913*****02 - ترافیک: 115038 مگابایت - سرویس: 10 روزه - 5 گیگ - روز باقی‌مانده: 360</li>\n    <li>حساب ID: 1139 - نام: محمد بشیر افشار(تست پروژه) - نام کاربری: 9895*****9882 - موبایل: 0913*****41 - ترافیک: 10009574 مگابایت - سرویس: یک ماهه-نامحدود(FD) - روز باقی‌مانده: 151</li>\n    <li>حساب ID: 249 - نام: محمدبشیر افشار - نام کاربری: 9895*****1812 - موبایل: 0913*****02 - ترافیک: 46886 مگابایت - سرویس: شش ماهه-125گیگ+50گیگ شبانه(FD) - روز باقی‌مانده: 55</li>\n    <li>حساب ID: 207 - نام: محمد بشیر افشار - نام کاربری: 9895*****1794 - موبایل: 0913*****02 - ترافیک: 102604 مگابایت - سرویس: جشنواره زمستانه: ثبت نامی 12ماهه -60 گیگ (ماهیانه 4گیگ ) + 12گیگ هدیه با مودم جیبی HUAWEI E5573S - روز باقی‌مانده: 130</li>\n    <li>حساب ID: 130 - نام: بشیر ناشناس - نام کاربری: 9895*****1655 - موبایل: 0913*****02 - ترافیک: 0 مگابایت - سرویس: سرویس تست شبانه دار از ساعت 13-14 - روز باقی‌مانده: 5653</li>\n    <li>حساب ID: 22 - نام: محمدبشیر افشار - نام کاربری: 9895*****1637 - موبایل: 0913*****02 - ترافیک: 634880 مگابایت - سرویس: یک ساله-620گیگ - روز باقی‌مانده: 302</li>\n</ul>\n<p>کدام حساب نیاز به پشتیبانی دارد؟ لطفاً شماره حساب ID را انتخاب کنید. 😊</p>",
+            "buttons": [
+                "شماره حساب 1",
+                "شماره حساب 2",
+                "شماره حساب 3",
+                "شماره حساب 4",
+                "شماره حساب 5",
+                "شماره حساب 6",
+                "شماره حساب 7",
+                "شماره حساب 8",
+                "شماره حساب 9",
+                "شماره حساب 10",
+                "شماره حساب 11",
+                "شماره حساب 12",
+                "شماره حساب 13",
+                "شماره حساب 14",
+                "شماره حساب 15",
+                "شماره حساب 16",
+                "شماره حساب 17",
+                "شماره حساب 18",
+                "شماره حساب 19"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "شماره حساب 8"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>دوست عزیز، به نظر می‌رسد که مشکل در اتصال LTE شما ممکن است به دلیل فعال بودن VPN باشد. بیایید مرحله بررسی VPN را انجام دهیم. 😊</p>\n<p><strong>مرحله ۱: بررسی وضعیت VPN</strong></p>\n<ul>\n    <li>لطفاً بررسی کنید که آیا VPN شما روشن است یا خیر.</li>\n    <li>اگر VPN روشن است، لطفاً آن را خاموش کنید و به من اطلاع دهید. 🔄</li>\n    <li>اگر VPN خاموش است، لطفاً به من بگویید تا به مرحله بعدی برویم. ✅</li>\n</ul>\n<p>منتظر پاسخ شما هستم تا بتوانیم به مرحله بعدی برویم. 📶</p>"
+        },
+        {
+            "role": "user",
+            "content": "خاموشه"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>دوست عزیز، حالا که وضعیت VPN را بررسی کردیم، بیایید به مرحله بعدی برویم و یک تست اتصال شبکه با استفاده از Ping انجام دهیم. 😊</p>\n<p><strong>مرحله ۲: انجام تست Ping</strong></p>\n<ul>\n    <li>لطفاً یک برنامه ترمینال یا Command Prompt را باز کنید. 💻</li>\n    <li>دستور زیر را تایپ کنید و Enter بزنید: <code>ping 8.8.8.8</code></li>\n    <li>منتظر بمانید تا نتایج نمایش داده شوند. اگر پیام‌هایی مانند \"Request timed out\" یا \"Destination unreachable\" دریافت کردید، لطفاً به من اطلاع دهید. ❌</li>\n    <li>اگر پیام‌هایی مانند \"Reply from\" دریافت کردید، به من بگویید تا به مرحله بعدی برویم. ✅</li>\n</ul>\n<p>منتظر پاسخ شما هستم تا بتوانیم به مرحله بعدی برویم. 📶</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

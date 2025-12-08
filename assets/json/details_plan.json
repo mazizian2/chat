@@ -1,0 +1,120 @@
+{
+  "price": {
+    "type": "integer",
+    "unit": "تومان",
+    "range": {"min": 480000, "max": 15000000}
+  },
+  "regular_price": {
+    "type": "integer",
+    "nullable": true,
+    "unit": "تومان",
+    "range": {"min": 1000000, "max": 28000000}
+  },
+  "duration": {
+    "type": "integer",
+    "unit": "روز",
+    "range": {"min": 30, "max": 365}
+  },
+  "cpu": {
+    "type": "string",
+    "nullable": true,
+    "example": "2 Core"
+  },
+  "ram": {
+    "type": "string",
+    "nullable": true,
+    "example": "2 GB"
+  },
+  "storage": {
+    "type": "string",
+    "nullable": true,
+    "example": "25 GB SSD"
+  },
+  "traffic": {
+    "type": "integer",
+    "unit": "GB",
+    "range": {"min": 60, "max": 5000}
+  },
+  "traffic_internal": {
+    "type": "string",
+    "nullable": true,
+    "example": "1000 GB"
+  },
+  "traffic_international": {
+    "type": "string",
+    "nullable": true,
+    "example": "100 GB"
+  },
+  "speed": {
+    "type": "integer",
+    "unit": "Mbps",
+    "nullable": true,
+    "range": {"min": 1, "max": 8}
+  },
+  "download": {
+    "type": "integer",
+    "unit": "Mbps",
+    "nullable": true,
+    "range": {"min": 16, "max": 70}
+  },
+  "upload": {
+    "type": "integer",
+    "unit": "Mbps",
+    "nullable": true,
+    "range": {"min": 2, "max": 25}
+  },
+  "ip": {
+    "type": "string",
+    "values": ["ندارد", "1 IP", "Multiple"]
+  },
+  "modem": {
+    "type": "string",
+    "nullable": true,
+    "example": "Olax MT80 | TFI60-sl1 | ندارد"
+  },
+  "portable": {
+    "type": "string",
+    "values": ["دارد", "ندارد"]
+  },
+  "coverage": {
+    "type": "string",
+    "values": ["استانی", "کشوری"]
+  },
+  "setup_cost": {
+    "type": "integer",
+    "unit": "تومان",
+    "range": {"min": 0, "max": 200000}
+  },
+  "service_type": {
+    "type": "string",
+    "nullable": true,
+    "example": "ADSL | TD-LTE | رادیویی WiFi"
+  },
+  "contract_type": {
+    "type": "string",
+    "nullable": true,
+    "example": "3 ماهه | 6 ماهه | 1 ساله"
+  },
+  "support_included": {
+    "type": "boolean",
+    "description": "پشتیبانی دارد یا خیر"
+  },
+  "special_offer": {
+    "type": "boolean",
+    "description": "دارای تخفیف یا پیشنهاد ویژه است یا خیر"
+  },
+  "region": {
+    "type": "string",
+    "example": "کشوری | استانی"
+  },
+  "ilo": {
+    "type": "string",
+    "values": ["دارد", "ندارد"],
+    "description": "مدیریت از راه دور سرور (ILO)"
+  },
+  "port_10g": {
+    "type": "string",
+    "values": ["دارد", "ندارد"],
+    "description": "پورت 10 گیگابیت شبکه"
+  }
+}

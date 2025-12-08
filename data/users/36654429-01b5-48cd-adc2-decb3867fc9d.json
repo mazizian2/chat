@@ -1,0 +1,53 @@
+{
+    "token": "36654429-01b5-48cd-adc2-decb3867fc9d",
+    "thread_id": "thread_G5emkxmuRWeqo9AO62bMai9E",
+    "input": "fd-LTE   ",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "چه سرویس هایی داری؟"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>خوش آمدید! در برند <strong>شبکیه</strong>، ما مجموعه‌ای از خدمات اینترنتی را ارائه می‌دهیم که شامل:</p>\n<ul>\n    <li>خدمات میزبانی وب (Web Hosting)</li>\n    <li>ثبت دامنه (Domain Registration)</li>\n    <li>طراحی وب‌سایت (Website Design)</li>\n    <li>پشتیبانی فنی ۲۴ ساعته (24/7 Technical Support)</li>\n</ul>\n<p>هدف ما فراهم کردن سرعت، امنیت و رضایت مشتریان است. اگر سوالی دارید یا نیاز به راهنمایی بیشتری دارید، در خدمت شما هستم!</p>",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "fd-LTE   "
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "express_need_buy",
+        "extract_json_buy"
+    ],
+    "history_intent": [],
+    "next_node": "extract_json_buy"
+}

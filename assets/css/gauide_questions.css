@@ -1,0 +1,66 @@
+/* ===========================
+    extra large devices
+    ============================ */
+
+#de_50aa638f-33fb-b942-0aa1-9df808da64a8 {
+  background: var(--Background1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  cursor: pointer;
+}
+
+#de_aead7536-d426-771b-2d7c-04b571d7f088 {
+  width: 45px;
+  min-height: 45px;
+  height: 45px;
+  background: var(--Background2);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#de_7a9c5e48-b2c1-7987-661d-c1f8d515c537 {
+  width: 22px;
+}
+
+#de_08bf6682-1f3a-a934-b5c4-0c871b7b24f8 {
+  width: 100%;
+  font-weight: bold;
+  color: var(--Color1);
+}
+
+#de_5528716d-3956-a962-6c4e-15b9f8208d4b {
+  width: 100%;
+  font-size: 12px;
+  color: var(--Color3);
+  display: block;
+  line-height: var(--variablelineHeight22);
+}
+
+/* ===========================
+    large device
+    ============================ */
+@media only screen and (max-width: 992px) {
+}
+
+/* ===========================
+    medium device
+    ============================ */
+@media only screen and (max-width: 768px) {
+}
+
+/* ===========================
+    small device
+    ============================ */
+@media only screen and (max-width: 576px) {
+}

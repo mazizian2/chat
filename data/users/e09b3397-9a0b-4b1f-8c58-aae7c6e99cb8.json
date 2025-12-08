@@ -1,0 +1,67 @@
+{
+    "token": "e09b3397-9a0b-4b1f-8c58-aae7c6e99cb8",
+    "thread_id": "thread_f24QcWoKaCPRuCbY79GUbvSO",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "greeting",
+        "greeting",
+        "greeting",
+        "greeting",
+        "greeting",
+        "greeting",
+        "greeting",
+        "greeting"
+    ],
+    "history_intent": [],
+    "next_node": "greeting"
+}

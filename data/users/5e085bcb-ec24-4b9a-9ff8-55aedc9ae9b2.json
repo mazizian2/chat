@@ -1,0 +1,88 @@
+{
+    "token": "5e085bcb-ec24-4b9a-9ff8-55aedc9ae9b2",
+    "thread_id": "thread_EvRIsADXzlI47uGCcZdIHNFL",
+    "input": "دهدار",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {
+            "lastname": "دهدار",
+            "username": "",
+            "mobile": "",
+            "melicode": ""
+        },
+        "accounts": [
+            [
+                {
+                    "id": "1156",
+                    "pppoe_username": "989559149794",
+                    "name": "مهدی",
+                    "lastname": "دهدار  بهبهانی",
+                    "mobile": "09134226929",
+                    "melicode": "1850043914",
+                    "Traffic": "3959",
+                    "service_title": "جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A",
+                    "service_remain_day": "31",
+                    "date_service_start": "1618342200",
+                    "date_service_expire": "1767209400",
+                    "date": "1618392636",
+                    "date_fa": "1400-1-25 14:00",
+                    "date_service_start_fa": "1400-1-25 00:00",
+                    "date_service_expire_fa": "1404-10-10 23:00"
+                }
+            ]
+        ],
+        "selectAccount": [],
+        "problems": [
+            "اینترنتم مشکل دارد"
+        ]
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "اینترنتم مشکل دارد"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>برای کمک به شما در حل مشکل اینترنت، لطفاً اطلاعات حساب خود را ارائه دهید. شما باید حداقل یکی از موارد زیر را پر کنید:</p>\n<ul>\n    <li><strong>نام کاربری:</strong> باید با 989559 شروع شده و 12 رقم باشد.</li>\n    <li><strong>شماره موبایل:</strong> باید با 09 شروع شده و 11 رقم باشد.</li>\n    <li><strong>نام خانوادگی:</strong> لطفاً نام خانوادگی خود را وارد کنید.</li>\n    <li><strong>کد ملی:</strong> باید 10 رقم باشد.</li>\n</ul>\n<p>لطفاً اطلاعات خود را به شکل صحیح وارد کنید تا بتوانیم به شما کمک کنیم.</p>"
+        },
+        {
+            "role": "user",
+            "content": "عزیزیان"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>برای کمک به شما، لطفاً اطلاعات حساب خود را ارائه دهید. شما باید حداقل یکی از موارد زیر را پر کنید:</p>\n<ul>\n    <li><strong>نام کاربری:</strong> باید با 989559 شروع شده و 12 رقم باشد.</li>\n    <li><strong>شماره موبایل:</strong> باید با 09 شروع شده و 11 رقم باشد.</li>\n    <li><strong>نام خانوادگی:</strong> لطفاً نام خانوادگی خود را وارد کنید.</li>\n    <li><strong>کد ملی:</strong> باید 10 رقم باشد.</li>\n</ul>\n<p>لطفاً اطلاعات خود را به شکل صحیح وارد کنید تا بتوانیم به شما کمک کنیم.</p>"
+        },
+        {
+            "role": "user",
+            "content": "عزیزیان"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>برای کمک به شما، لطفاً اطلاعات حساب خود را ارائه دهید. شما باید حداقل یکی از موارد زیر را پر کنید:</p>\n<ul>\n    <li><strong>نام کاربری:</strong> باید با 989559 شروع شده و 12 رقم باشد.</li>\n    <li><strong>شماره موبایل:</strong> باید با 09 شروع شده و 11 رقم باشد.</li>\n    <li><strong>نام خانوادگی:</strong> لطفاً نام خانوادگی خود را وارد کنید.</li>\n    <li><strong>کد ملی:</strong> باید 10 رقم باشد.</li>\n</ul>\n<p>لطفاً اطلاعات خود را به شکل صحیح وارد کنید تا بتوانیم به شما کمک کنیم.</p>"
+        },
+        {
+            "role": "user",
+            "content": "دهدار"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>شما دارای یک حساب کاربری هستید. لطفاً از بین حساب‌های زیر یکی را انتخاب کنید که به آن نیاز دارید:</p>\n<ol>\n    <li>\n        <strong>نام کاربری:</strong> 989559149794<br>\n        <strong>نام:</strong> مهدی<br>\n        <strong>نام خانوادگی:</strong> دهدار بهبهانی<br>\n        <strong>شماره موبایل:</strong> 0913****29<br>\n        <strong>کد ملی:</strong> 1850043914<br>\n        <strong>حجم ترافیک:</strong> 3959 مگابایت<br>\n        <strong>عنوان سرویس:</strong> جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A<br>\n        <strong>روزهای باقی‌مانده:</strong> 31 روز<br>\n        <strong>تاریخ شروع سرویس:</strong> 1400-1-25<br>\n        <strong>تاریخ انقضای سرویس:</strong> 1404-10-10\n    </li>\n</ol>\n<p>لطفاً شماره حساب (1) را انتخاب کنید تا بتوانیم به شما کمک کنیم. 😊</p>",
+            "buttons": [
+                "شماره حساب 1"
+            ]
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": "extract_select_account"
+}

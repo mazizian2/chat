@@ -1,0 +1,31 @@
+{
+    "token": "0452edc7-a7fd-459f-a59a-1ffccf2b8005",
+    "thread_id": "thread_NCyBP6RsvdDt1ZRynG5twrQW",
+    "input": "من یه سرویس adsl دارم اما اینترنتم وصل نمیشه",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "history_suggestion": [],
+    "messages": [
+        {
+            "role": "user",
+            "content": "من یه سرویس adsl دارم اما اینترنتم وصل نمیشه"
+        }
+    ],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

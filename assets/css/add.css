@@ -1,0 +1,53 @@
+/* ===========================
+    extra large devices
+    ============================ */
+
+#de_ddde7178-8553-eac1-4a82-299a5d4960b0 {
+  display: flex;
+  height: var(--variablefit);
+  min-height: var(--variablefit);
+  align-items: center;
+  column-gap: 8px;
+}
+
+#de_57ae14b5-4040-13fe-18d8-fd8010678876 {
+  width: 30px;
+  min-height: 30px;
+  height: 30px;
+  background: var(--Background2);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#de_4e2fbaea-0168-d80b-53fe-045d2cc66b65 {
+  width: 15px;
+}
+
+#de_c585035a-99b8-d899-2443-86ca95fc2ed2 {
+  width: 100%;
+  font-size: 13px;
+  color: var(--Color3);
+}
+
+/* ===========================
+    large device
+    ============================ */
+@media only screen and (max-width: 992px) {
+}
+
+/* ===========================
+    medium device
+    ============================ */
+@media only screen and (max-width: 768px) {
+}
+
+/* ===========================
+    small device
+    ============================ */
+@media only screen and (max-width: 576px) {
+}

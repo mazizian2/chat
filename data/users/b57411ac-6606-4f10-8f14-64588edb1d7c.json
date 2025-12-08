@@ -1,0 +1,31 @@
+{
+    "token": "b57411ac-6606-4f10-8f14-64588edb1d7c",
+    "thread_id": "thread_hdfFIR2QHBoYoLW0hPiZB9JA",
+    "input": "من یه سرویس lte دارم ولی اینترنتم قطعه",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "history_suggestion": [],
+    "messages": [
+        {
+            "role": "user",
+            "content": "من یه سرویس lte دارم ولی اینترنتم قطعه"
+        }
+    ],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

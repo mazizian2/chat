@@ -1,0 +1,28 @@
+{
+    "token": "89600ced-b3aa-4417-98b8-bdb51e3b9423",
+    "thread_id": "thread_V2q4rgEWvEw7pkgjjmhPxhKs",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": 

@@ -1,0 +1,31 @@
+{
+    "token": "f510a394-6254-4fca-a92c-f3fc3abeea8d",
+    "thread_id": "thread_kD9nTXfqVrO9PywsjouRWlS1",
+    "input": "لیایافی",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "لیایافی"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": "ask_witch_account"
+}

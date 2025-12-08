@@ -1,0 +1,96 @@
+/* ===========================
+    extra large devices
+    ============================ */
+
+#de_502d4144-23f5-da8d-571d-05f9d0e1967a {
+  width: 100%;
+  min-height: var(--variablefit);
+  height: var(--variablefit);
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#de_3550a9bf-521a-803a-a9ea-9f4942baf819 {
+  width: var(--variablefit);
+  min-height: var(--variablefit);
+  height: var(--variablefit);
+  min-width: 90px;
+  max-width: 75%;
+  background: var(--Background1);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+#de_833fb496-c2eb-dac3-ae42-51b8b0deb3ff {
+  width: var(--variablefit);
+  min-height: var(--variablefit);
+  height: var(--variablefit);
+  display: flex;
+  box-sizing: border-box;
+  column-gap: 12px;
+  align-items: center;
+}
+
+#de_33d9ffb0-9794-5501-08ff-2c3f940e7a06 {
+  width: 100%;
+  min-height: var(--variablefit);
+  height: var(--variablefit);
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  row-gap: 5px;
+}
+
+#de_13685961-90f3-3816-d5e2-663c2b1f0513 {
+  width: 100%;
+}
+
+#de_ee88da40-d241-d040-d42b-99ecb8091eb8 {
+  width: var(--variablefit);
+  direction: ltr;
+  box-sizing: content-box;
+  height: var(--variablefit);
+  min-height: var(--variablefit);
+  min-width: var(--variablefit);
+  font-size: 9px;
+  color: var(--Color3);
+}
+
+#de_bc40835f-e69c-9241-bfe1-c0510447e45f {
+  width: 40px;
+  min-height: 40px;
+  height: 40px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: linear-gradient(91deg, #40c1c7 0%, #23be92 100%);
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#de_5836d480-fd17-e63c-e4f0-d3cfe8ecc8cf {
+  width: 10px;
+}
+
+/* ===========================
+    large device
+    ============================ */
+@media only screen and (max-width: 992px) {
+}
+
+/* ===========================
+    medium device
+    ============================ */
+@media only screen and (max-width: 768px) {
+}
+
+/* ===========================
+    small device
+    ============================ */
+@media only screen and (max-width: 576px) {
+}

@@ -1,0 +1,46 @@
+{
+    "token": "1dbc0134-17e0-4708-adec-322c3ac11a36",
+    "input": "3136242726",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {
+            "lastname": "",
+            "username": "",
+            "mobile": "",
+            "melicode": "3136242726"
+        },
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام من کاربر adsl هستم وضعیت خطم را میخواستم چک کنی"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً اطلاعات حساب کاربری خود را برای بررسی وضعیت خط ADSL خود ارائه دهید. می‌توانید از موارد زیر حداقل یکی را به ما بدهید:</p>\n<ul>\n    <li><strong>نام کاربری:</strong> باید با 989559 شروع شود و شامل 12 رقم باشد.</li>\n    <li><strong>شماره موبایل:</strong> باید با 09 شروع شود و شامل 11 رقم باشد.</li>\n    <li><strong>نام خانوادگی:</strong> لطفاً نام خانوادگی خود را وارد کنید.</li>\n    <li><strong>کد ملی:</strong> شامل 10 رقم می‌باشد.</li>\n</ul>\n<p>با ارائه این اطلاعات، می‌توانیم به بهترین نحو به شما کمک کنیم. 🙏</p>"
+        },
+        {
+            "role": "user",
+            "content": "3136242726"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>متأسفانه در حال حاضر هیچ حسابی برای نمایش در دسترس نیست. لطفاً با تیم پشتیبانی تماس بگیرید تا به شما کمک کنند.</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": "extract_select_account"
+}

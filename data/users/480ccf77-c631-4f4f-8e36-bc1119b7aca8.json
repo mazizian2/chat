@@ -1,0 +1,45 @@
+{
+    "token": "480ccf77-c631-4f4f-8e36-bc1119b7aca8",
+    "thread_id": "thread_BYd2EgIwYHGM08hLbRPklc5P",
+    "input": "به پشتیبانی ADSL نیاز دارم",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [
+            "اینترنتم مشکل دارد"
+        ],
+        "service_support": "ADSL"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "اینترنتم مشکل دارد"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً مشخص کنید که آیا به پشتیبانی LTE یا ADSL نیاز دارید؟</p>\n<ul>\n    <li><button>LTE Support</button></li>\n    <li><button>ADSL Support</button></li>\n</ul>\n<p>یا می‌توانید پیامی مانند 'من به پشتیبانی LTE یا ADSL نیاز دارم' تایپ کنید.</p>",
+            "buttons": [
+                "به پشتیبانی ADSL نیاز دارم",
+                "به پشتیبانی LTE نیاز دارم"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "به پشتیبانی ADSL نیاز دارم"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": "get_info_account"
+}

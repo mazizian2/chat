@@ -1,0 +1,26 @@
+{
+    "token": "fb86dbf3-ff6a-4c88-a413-416c450a1c0d",
+    "thread_id": "thread_FL8nZmsmZwjZMVpBat04KD2i",
+    "input": "",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "history_suggestion": [],
+    "messages": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

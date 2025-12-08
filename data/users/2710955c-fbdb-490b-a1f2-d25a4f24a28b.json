@@ -1,0 +1,58 @@
+{
+    "token": "2710955c-fbdb-490b-a1f2-d25a4f24a28b",
+    "thread_id": "thread_mdOERMd4cLtS46H6JKLX7wei",
+    "input": "fd-LTE   ",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "چه سرویس هایی داری"
+        },
+        {
+            "role": "user",
+            "content": "چه سرویس هایی داری"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>سرویس‌های موجود شامل موارد زیر است:</p>\n<ul>\n  <li><strong>FD-LTE:</strong> اینترنت FD-LTE شبکیه با سرعت تا ۴۰ مگابیت بر ثانیه، بدون نیاز به خط تلفن، مناسب برای کاربران خانگی و تجاری.</li>\n  <li><strong>TD-LTE:</strong> اینترنت TD-LTE با سرعت تا ۷۰ مگابیت بر ثانیه، بدون نیاز به خط تلفن، مناسب برای کاربران خانگی و تجاری.</li>\n  <li><strong>ADSL:</strong> اینترنت ADSL شبکیه با سرعت تا ۱۶ مگابیت بر ثانیه، نیاز به خط تلفن ثابت دارد، مناسب برای کاربران خانگی و دانش‌آموزان.</li>\n  <li><strong>رادیویی WiFi:</strong> اینترنت رادیویی WiFi با بستر ارتباطی امواج رادیویی، بدون نیاز به خط تلفن، مناسب برای کاربران خانگی و تجاری.</li>\n  <li><strong>وب‌سایت:</strong> طراحی و راه‌اندازی وب‌سایت شامل ثبت دامنه، هاست و طراحی وب‌سایت.</li>\n  <li><strong>کولوکیشن:</strong> نگهداری و میزبانی سرور شخصی در دیتاسنتر حرفه‌ای.</li>\n  <li><strong>هاستینگ:</strong> فضایی آماده روی سرور برای ذخیره وب‌سایت.</li>\n  <li><strong>دامنه:</strong> ثبت دامنه و هاستینگ متصل به آن.</li>\n  <li><strong>VPS:</strong> سرور مجازی با منابع اختصاصی و دسترسی روت.</li>\n</ul>\n<p>کدام یک از این سرویس‌ها را می‌خواهید خریداری کنید؟</p>",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "fd-LTE   "
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "express_need_buy",
+        "express_need_buy",
+        "extract_json_buy"
+    ],
+    "history_intent": [],
+    "next_node": "extract_json_buy"
+}

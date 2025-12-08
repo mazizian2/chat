@@ -1,0 +1,184 @@
+#message_input {
+    border: 0;
+    width: 95%;
+    padding: 5px;
+    font-family: IRANYekanWeb;
+    font-size: 14px;
+    outline: 0;
+    background-color: var(--Background1);
+    color: var(--Color1);
+}
+
+.user_message_box {
+    height: var(--variablefit);
+    min-height: var(--variablefit);
+    margin-top: 15px;
+}
+
+.user_message {
+    width: var(--variablefit);
+    min-height: var(--variablefit);
+    box-sizing: border-box;
+    height: var(--variablefit);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: linear-gradient(90deg, #40c1c7 0%, #23be92 100%);
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    max-width: 50%;
+    min-width: 90px;
+}
+
+.user_message_text {
+    font-size: 15px;
+    color: var(--Color2);
+    width: var(--variablefit);
+    height: var(--variablefit);
+    min-height: var(--variablefit);
+    line-height: var(--variablelineHeight);
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.ai_message_box {
+    height: var(--variablefit);
+    min-height: var(--variablefit);
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 15px;
+}
+
+.ai_message {
+    width: var(--variablefit);
+    min-height: var(--variablefit);
+    max-width: 75%;
+    height: var(--variablefit);
+    background: var(--Background1);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    min-width: 90px;
+    box-sizing: border-box;
+}
+
+.ai_message_text {
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--Color1);
+    width: var(--variablefit);
+    height: var(--variablefit);
+    min-height: var(--variablefit);
+    line-height: var(--variablelineHeight);
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.ai_inline_button_box {
+    width: var(--variablefit);
+    min-height: var(--variablefit);
+    display: flex;
+    height: var(--variablefit);
+    box-sizing: border-box;
+    column-gap: 8px;
+}
+
+.ai_inline_button {
+    width: var(--variablefit);
+    min-height: 43px;
+    height: 43px;
+    background: var(--Background2);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-sizing: border-box;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai_inline_button_text {
+    width: var(--variablefit);
+    font-size: 15px;
+    color: var(--Color1);
+    height: var(--variablefit);
+    font-weight: bold;
+}
+
+.ai_loading_box {
+    height: var(--variablefit);
+    min-height: var(--variablefit);
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 15px;
+}
+
+.ai_loading {
+    width: var(--variablefit);
+    min-height: var(--variablefit);
+    max-width: 75%;
+    height: var(--variablefit);
+    background: var(--Background1);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    min-width: 90px;
+}
+
+.ai_loading_text {
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--Color1);
+    width: var(--variablefit);
+    height: var(--variablefit);
+    min-height: var(--variablefit);
+    line-height: var(--variablelineHeight);
+    min-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0;
+}
+
+.ai_loading_text .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 3px;
+    background-color: #999;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: aiDots 1.4s infinite ease-in-out;
+}
+
+.ai_loading_text .dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.ai_loading_text .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.ai_loading_text .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes aiDots {
+    0%, 80%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    40% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}

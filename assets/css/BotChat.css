@@ -1,0 +1,53 @@
+/* ===========================
+    extra large devices
+    ============================ */
+
+#de_03e6ffa2-53c1-f983-340f-9d559525e89f {
+  height: var(--variablefit);
+  min-height: var(--variablefit);
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#de_98cbc82d-9bb7-f6b2-0501-2748e6a2f7f7 {
+  width: var(--variablefit);
+  min-height: var(--variablefit);
+  max-width: 75%;
+  height: var(--variablefit);
+  background: var(--Background1);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  min-width: 90px;
+}
+
+#de_02494cc1-1f53-befa-88dc-b87a1b73a328 {
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--Color1);
+  width: var(--variablefit);
+  height: var(--variablefit);
+  min-height: var(--variablefit);
+  line-height: var(--variablelineHeight);
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===========================
+    large device
+    ============================ */
+@media only screen and (max-width: 992px) {
+}
+
+/* ===========================
+    medium device
+    ============================ */
+@media only screen and (max-width: 768px) {
+}
+
+/* ===========================
+    small device
+    ============================ */
+@media only screen and (max-width: 576px) {
+}

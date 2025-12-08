@@ -1,0 +1,33 @@
+{
+  "token": "fce6707d-d564-4c0b-addc-010a6648ac95",
+  "input": "کولوکیشن",
+  "userInfo": {
+    "info": {
+      "name": "",
+      "phone": ""
+    },
+    "needs": {
+      "type": [],
+      "details": []
+    },
+    "orders": [],
+    "accountInfo": {},
+    "accounts": [],
+    "selectAccount": [],
+    "problems": []
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "کولوکیشن"
+    },
+    {
+      "role": "assistant",
+      "content": "<p>متاسفانه پیام شما به طور کامل برای ما قابل فهم نبود. لطفاً هدف یا نیاز خود را به صورت دقیق‌تری توضیح دهید تا بتوانیم بهتر شما را راهنمایی کنیم.</p>"
+    }
+  ],
+  "history_suggestion": [],
+  "intents": [],
+  "history_intent": [],
+  "next_node": ""
+}

@@ -1,0 +1,33 @@
+{
+    "token": "9f9c4a80-29fa-40b9-860f-05d7a42c904e",
+    "thread_id": "thread_vZ9DY2wWqIedEt8XqucUvIdv",
+    "input": "lte",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "lte"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "LTE_detect"
+    ],
+    "history_intent": [],
+    "next_node": "LTE_detect"
+}

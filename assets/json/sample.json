@@ -1,0 +1,27 @@
+{
+  "input": "",
+  "userInfo": {
+    "info": {
+      "name": "",
+      "phone": ""
+    },
+    "needs": {
+      "type": [
+      ],
+      "details": [
+      ]
+    },
+    "orders": [],
+    "accountInfo": {},
+    "accounts": [],
+    "selectAccount": [],
+    "problems": [],
+    "support": [],
+    "next_step_support": {}
+  },
+  "history_suggestion": [],
+  "messages": [],
+  "intents": [],
+  "history_intent": [],
+  "next_node": ""
+}

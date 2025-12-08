@@ -1,0 +1,54 @@
+{
+    "token": "72205dde-1cbb-43bb-b754-b0a0a14aeff8",
+    "thread_id": "thread_UjZWTE94ZC79uS0J2Q9VPL6G",
+    "input": "fd-LTE   ",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "چه سرویس هایی داری"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>ما چندین نوع سرویس مختلف داریم:</p>\n<ul>\n  <li><strong>FD-LTE:</strong> اینترنت FD-LTE با سرعت تا ۴۰ مگابیت بر ثانیه، بدون نیاز به خط تلفن، مناسب برای کاربران خانگی و تجاری.</li>\n  <li><strong>TD-LTE:</strong> اینترنت TD-LTE با سرعت تا ۷۰ مگابیت بر ثانیه، بدون نیاز به خط تلفن، مناسب برای کاربران خانگی و تجاری.</li>\n  <li><strong>ADSL:</strong> اینترنت ADSL با سرعت تا ۱۶ مگابیت بر ثانیه، نیاز به خط تلفن ثابت، مناسب برای کاربران خانگی و دانش‌آموزان.</li>\n  <li><strong>رادیویی WiFi:</strong> اینترنت رادیویی WiFi با بستر ارتباط امواج رادیویی، بدون نیاز به خط تلفن، مناسب برای کاربران خانگی و تجاری.</li>\n  <li><strong>طراحی و راه‌اندازی وب‌سایت:</strong> شامل ثبت دامنه، هاست و طراحی وب‌سایت برای شرکت‌ها و کاربران شخصی.</li>\n  <li><strong>کولوکیشن:</strong> نگهداری و میزبانی سرور شخصی شما در دیتاسنتر حرفه‌ای.</li>\n  <li><strong>هاستینگ:</strong> فضایی آماده روی سرور برای ذخیره وب‌سایت، با امکانات مختلف.</li>\n  <li><strong>دامنه:</strong> ثبت دامنه و هاستینگ برای وب‌سایت‌های شخصی و شرکتی.</li>\n  <li><strong>VPS:</strong> سرور مجازی با منابع اختصاصی برای میزبانی سایت‌های پرترافیک و نرم‌افزارهای سازمانی.</li>\n</ul>\n<p>کدام یک از این سرویس‌ها مورد نظر شماست؟</p>",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "fd-LTE   "
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "greeting",
+        "express_need_buy",
+        "extract_json_buy"
+    ],
+    "history_intent": [],
+    "next_node": "extract_json_buy"
+}

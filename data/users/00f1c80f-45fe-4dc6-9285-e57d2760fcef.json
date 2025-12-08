@@ -1,0 +1,45 @@
+{
+    "token": "00f1c80f-45fe-4dc6-9285-e57d2760fcef",
+    "thread_id": "thread_muWhOwAZ1ZeLOpoGsxj2bj1T",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "خوش آمدید! امیدوارم روز خوبی داشته باشید. من اینجا هستم تا به شما درباره خدمات ما در شبکیه کمک کنم. ما در ارائه خدمات اینترنتی، میزبانی وب، ثبت دامنه، طراحی وب‌سایت و همچنین پشتیبانی فنی ۲۴ ساعته تخصص داریم. اگر سوالی دارید یا نیاز به راهنمایی بیشتری دارید، خوشحال می‌شوم که کمک کنم! 😊",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

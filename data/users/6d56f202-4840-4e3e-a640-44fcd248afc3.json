@@ -1,0 +1,265 @@
+{
+    "token": "6d56f202-4840-4e3e-a640-44fcd248afc3",
+    "thread_id": "thread_nGQLo0pFFmiNnbJ31RcEf9Kc",
+    "input": "vpn خاموشه",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {
+            "lastname": "دهدار",
+            "username": "",
+            "mobile": "",
+            "melicode": ""
+        },
+        "accounts": [
+            [
+                {
+                    "id": "1156",
+                    "pppoe_username": "989559149794",
+                    "name": "مهدی",
+                    "lastname": "دهدار  بهبهانی",
+                    "mobile": "09134226929",
+                    "melicode": "1850043914",
+                    "Traffic": "3934",
+                    "service_title": "جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A",
+                    "service_remain_day": "28",
+                    "date_service_start": "1618342200",
+                    "date_service_expire": "1767209400",
+                    "date": "1618392636",
+                    "date_fa": "1400-1-25 14:00",
+                    "date_service_start_fa": "1400-1-25 00:00",
+                    "date_service_expire_fa": "1404-10-10 23:00"
+                }
+            ]
+        ],
+        "selectAccount": {
+            "result": true,
+            "info": {
+                "id": "1156",
+                "pppoe_username": "989559149794",
+                "name": "مهدی",
+                "lastname": "دهدار  بهبهانی",
+                "mobile": "09134226929",
+                "melicode": "1850043914",
+                "Traffic": "3934",
+                "service_title": "جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A",
+                "service_remain_day": "28",
+                "date_service_start": "1618342200",
+                "date_service_expire": "1767209400",
+                "date_service_start_fa": "1400-1-25 00:00",
+                "date_service_expire_fa": "1404-10-10 23:00"
+            },
+            "online": {
+                "GroupName": "LTE-40",
+                "ActiveDays": "1723",
+                "IPPool": "",
+                "TrafficAddByISP": "291840",
+                "TrafficUsed": "287906",
+                "Traffic": 3934
+            }
+        },
+        "problems": [
+            "اینترنتم قطعه"
+        ],
+        "service_support": "LTE",
+        "support": [
+            {
+                "status": "online",
+                "steps": [
+                    {
+                        "step": 1,
+                        "name": "vpn_check",
+                        "description": "Check VPN status as it may cause connectivity issues",
+                        "checked": true,
+                        "next_action": "IF vpn_on (user says 'on' or 'yes') THEN stay_in_current_step_and_ask_user_turn_off_vpn ELSE IF vpn_off (user says 'off' or 'no' or 'turned off') THEN go_step_2",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 2,
+                        "name": "ping_test",
+                        "description": "Perform a network connectivity test using Ping and guide the user on how to do it",
+                        "checked": false,
+                        "next_action": "IF ping_failed OR ping_unreachable OR ping_timeout OR no_ping THEN go_sub_step_1 ('name':check_config_modem )  ELSE go_step_3 (ping successful, continue)",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "check_config_modem",
+                                "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                                "checked": false,
+                                "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5"
+                            }
+                        ]
+                    },
+                    {
+                        "step": 3,
+                        "name": "check_internal_external_links",
+                        "description": "Test access to internal and external links to determine the type of issue",
+                        "checked": false,
+                        "next_action": "IF both_down (both internal and external links fail) THEN go_step_5 ELSE IF both_up (both working) THEN go_sub_step2 ELSE IF internal_ok_and_external_fail THEN go_step_5 ELSE IF external_fail THEN go_step_5 ELSE IF just_internal_ok THEN go_step_5 ELSE IF both_up_but_slow or both_up_but_late THEN go_step_5 ELSE go_step_5",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "both_down",
+                                "description": "If both are down, reset the modem or escalate to the operator",
+                                "checked": false,
+                                "next_action": "go_step_7 ( check_DNS)"
+                            },
+                            {
+                                "sub_step": 2,
+                                "name": "both_up",
+                                "description": "If both are connected , ask the user which link is problematic and escalate to the operator",
+                                "checked": false,
+                                "next_action": "go_step_5 (escalate after identifying problematic link)"
+                            },
+                            {
+                                "sub_step": 3,
+                                "name": "internal_ok_external_fail",
+                                "description": "If internal links work but external links fail, escalate to the operator",
+                                "checked": false,
+                                "next_action": "IF user_says_external_sites_down (user says 'External site not opening' or 'Only internal opens' or 'External fragment' or 'External not coming' or 'YouTube or Google not opening') THEN go_step_5 ELSE IF user_says_internal_sites_down (user says 'Internal site not opening' or 'Only external opens' or 'Internal fragment') THEN go_step_5"
+                            },
+                            {
+                                "sub_step": 4,
+                                "name": "both_up_but_slow",
+                                "description": "If both are active but slow, ask the user to check modem configuration",
+                                "checked": false,
+                                "next_action": "go_step_5 "
+                            }
+                        ]
+                    },
+                    {
+                        "step": 4,
+                        "name": "check_modem_lights_and_hardware",
+                        "description": "Check the number of lights on the modem (none, one, two, or more) to identify the hardware or signal issue level",
+                        "checked": false,
+                        "next_action": "go_to_sub_step_1 (start sub-step analysis)",
+                        "sub_steps": [
+                            {
+                                "sub_step": 1,
+                                "name": "no_lights_on",
+                                "description": "If no lights are on, check the power source or adapter",
+                                "checked": false,
+                                "condition": "no_lights_on",
+                                "next_action": "IF user_says_problem_fixed THEN end_task ELSE IF user_says_one_light_on THEN go_to_sub_step_2 ELSE IF user_says_two_or_more_lights_off THEN go_to_sub_step_3 ELSE go_step_5"
+                            },
+                            {
+                                "sub_step": 2,
+                                "name": "one_light_on",
+                                "description": "If only one light is on, check the SIM card or antenna",
+                                "checked": false,
+                                "condition": "one_light_on",
+                                "next_action": "IF problem_fixed (user says 'درست شد' or 'مشکل حل شد') THEN end_task ELSE IF user_says_two_or_more_lights_off (user says 'دو تا چراغ خاموشه' or 'چند تا خاموشه') THEN go_to_sub_step_3 ELSE IF one_light_on (user says 'یه چراغ روشنه' or 'هنوز یه چراغ روشنه') THEN go_step_5 ELSE go_step_5"
+                            },
+                            {
+                                "sub_step": 3,
+                                "name": "some_lights_off",
+                                "description": "If two or three lights are off, check the WAN or LTE connection",
+                                "checked": false,
+                                "condition": "some_lights_off",
+                                "next_action": "IF problem_fixed THEN end_task ELSE go_step_5"
+                            }
+                        ]
+                    },
+                    {
+                        "step": 5,
+                        "name": "final_operator_escalation",
+                        "description": "Final escalation to the operator if the issue persists after all steps; inform the user that the problem has been forwarded to the operator for further investigation and requires patience",
+                        "checked": false,
+                        "next_action": "await_operator_response (end of flow)",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 6,
+                        "name": "check_config_modem",
+                        "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5",
+                        "sub_steps": []
+                    },
+                    {
+                        "step": 7,
+                        "name": "check_DNS",
+                        "description": "Write a short beginner-friendly guide to check DNS to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_DNS or ok or success_dns or good THEN go_step_5 ELSE stay_current_step_and_fixed_problems",
+                        "sub_steps": []
+                    }
+                ]
+            }
+        ],
+        "next_step_support": [
+            {
+                "step": 2,
+                "name": "ping_test",
+                "description": "Perform a network connectivity test using Ping and guide the user on how to do it",
+                "checked": false,
+                "next_action": "IF ping_failed OR ping_unreachable OR ping_timeout OR no_ping THEN go_sub_step_1 ('name':check_config_modem )  ELSE go_step_3 (ping successful, continue)",
+                "sub_steps": [
+                    {
+                        "sub_step": 1,
+                        "name": "check_config_modem",
+                        "description": "Write a short beginner-friendly guide to check modem config to see if it is connected or not",
+                        "checked": false,
+                        "next_action": "IF ok_config or success_config THEN go_step_4 ELSE go_step_5"
+                    }
+                ]
+            }
+        ]
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "من سرویس lte دارم و اینترنتم قطعه"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً اطلاعات زیر را برای ادامه بررسی مشکل اینترنت خود ارائه دهید:</p>\n<ul>\n    <li><strong>نام کاربری:</strong> باید با 989559 شروع شود و 12 رقم باشد.</li>\n    <li><strong>شماره موبایل:</strong> باید با 09 شروع شود و 11 رقم باشد.</li>\n    <li><strong>نام خانوادگی:</strong> باید وارد شود.</li>\n    <li><strong>کد ملی:</strong> باید 10 رقم باشد.</li>\n</ul>\n<p>لطفاً حداقل یکی از این اطلاعات را ارائه دهید.</p>"
+        },
+        {
+            "role": "user",
+            "content": "دهدار"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>شما دارای یک حساب کاربری هستید. لطفاً یکی از حساب‌های زیر را برای دریافت پشتیبانی انتخاب کنید:</p>\n<ol>\n    <li>\n        <strong>نام:</strong> مهدی<br>\n        <strong>نام خانوادگی:</strong> دهدار بهبهانی<br>\n        <strong>شماره موبایل:</strong> 0913****29<br>\n        <strong>نام کاربری:</strong> 989559****94<br>\n        <strong>کد ملی:</strong> 185004****14<br>\n        <strong>حجم ترافیک:</strong> 3934 مگابایت<br>\n        <strong>عنوان سرویس:</strong> جشنواره نوروزی: ثبت نامی 15ماهه -120 گیگ +مودم رومیزیHUAWEI R30-22A<br>\n        <strong>روزهای باقی‌مانده:</strong> 28 روز\n    </li>\n</ol>\n<p>لطفاً شماره حساب (1) را برای دریافت پشتیبانی انتخاب کنید.</p>",
+            "buttons": [
+                "شماره حساب 1"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "شماره حساب 1"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>مهدی عزیز، به نظر می‌رسد که اینترنت شما قطع شده است. بیایید مرحله بررسی VPN را انجام دهیم تا ببینیم آیا این مشکل به آن مربوط می‌شود یا خیر. 😊</p>\n<p><strong>مرحله ۱: بررسی وضعیت VPN</strong></p>\n<ul>\n    <li>لطفاً بررسی کنید که آیا VPN شما روشن است یا خیر.</li>\n    <li>اگر VPN روشن است، لطفاً آن را خاموش کنید و به من اطلاع دهید. 🔄</li>\n    <li>اگر VPN خاموش است، لطفاً به من بگویید تا به مرحله بعدی برویم. 🚀</li>\n</ul>\n<p>منتظر پاسخ شما هستم تا بتوانیم مشکل را حل کنیم! 🤗</p>"
+        },
+        {
+            "role": "user",
+            "content": "خاموشه"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً مشخص کنید که کدام مورد خاموش است؟ آیا منظور شما اینترنت است یا دستگاه دیگری؟ با ارائه اطلاعات بیشتر، می‌توانیم بهتر به شما کمک کنیم.</p>"
+        },
+        {
+            "role": "user",
+            "content": "vpn خاموشه"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>برای بررسی مشکل اتصال اینترنت LTE، بیایید یک تست شبکه با استفاده از Ping انجام دهیم. این کار به ما کمک می‌کند تا بفهمیم آیا اتصال شبکه شما به درستی کار می‌کند یا خیر. 😊</p>\n<p>مراحل زیر را دنبال کنید:</p>\n<ul>\n    <li>ابتدا برنامه Command Prompt (در ویندوز) یا Terminal (در مک) را باز کنید.</li>\n    <li>سپس دستور زیر را تایپ کنید و Enter را بزنید:</li>\n    <li><strong>ping 8.8.8.8</strong></li>\n    <li>منتظر بمانید تا نتایج نمایش داده شوند. اگر پیام‌هایی مانند \"Request timed out\" یا \"Destination host unreachable\" دیدید، به ما اطلاع دهید تا مرحله بعدی را بررسی کنیم. 🚦</li>\n    <li>اگر پیام‌هایی مانند \"Reply from\" دریافت کردید، به مرحله بعدی بروید. 📶</li>\n</ul>\n<p>لطفاً نتایج را با ما به اشتراک بگذارید تا بتوانیم به شما کمک بیشتری کنیم. 😊</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

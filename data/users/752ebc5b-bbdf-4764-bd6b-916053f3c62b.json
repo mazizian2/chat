@@ -1,0 +1,37 @@
+{
+    "token": "752ebc5b-bbdf-4764-bd6b-916053f3c62b",
+    "thread_id": "thread_O6wX92e2hL1Tyn1WeJU67asZ",
+    "input": "من یه سرویس lte دارم و اینترنتم قطع شده",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [
+            "اینترنتم قطع شده"
+        ],
+        "service_support": "LTE"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "من یه سرویس lte دارم و اینترنتم قطع شده"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً اطلاعات حساب کاربری خود را برای بررسی و رفع مشکل اینترنت ارائه دهید:</p>\n<ul>\n    <li>نام کاربری (باید با 989559 شروع شده و 12 رقم باشد)</li>\n    <li>شماره موبایل (باید با 09 شروع شده و 11 رقم باشد)</li>\n    <li>نام و نام خانوادگی</li>\n    <li>کد ملی (10 رقم)</li>\n</ul>\n<p>لطفاً حداقل یکی از اطلاعات بالا را ارائه دهید تا بتوانیم به شما کمک کنیم.</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": "extract_json_account"
+}

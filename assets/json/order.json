@@ -1,0 +1,15 @@
+{
+    "userInfo": {
+    "name": "",
+    "phone": "",
+    "email": "",
+    "address": "",
+    "company": "",
+    "notes": "",
+    "needs": {
+      "type": [],
+      "details": []
+    }
+  },
+  "orders": []
+}

@@ -1,0 +1,76 @@
+{
+    "token": "a44f74b9-20b5-405c-97a4-b8ff921e1f74",
+    "thread_id": "thread_juaTlslUriQFY5qskpbztKjp",
+    "input": "کولوکیشن",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [
+                "کولوکیشن"
+            ],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "چه سرویس هایی دارید؟"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>ما سرویس‌های زیر را ارائه می‌دهیم:</p>\n<ul>\n    <li><strong>FD-LTE:</strong> اینترنت FD-LTE شبکیه با سرعت تا ۴۰ مگابیت بر ثانیه، بدون نیاز به خط تلفن و با تجهیزات مودم و سیم‌کارت.</li>\n    <li><strong>TD-LTE:</strong> اینترنت TD-LTE با سرعت تا ۷۰ مگابیت بر ثانیه، بدون نیاز به خط تلفن و با تجهیزات مودم و سیم‌کارت.</li>\n    <li><strong>ADSL:</strong> اینترنت ADSL شبکیه با سرعت تا ۱۶ مگابیت بر ثانیه، نیاز به خط تلفن ثابت و تجهیزات مودم.</li>\n    <li><strong>رادیویی WiFi:</strong> اینترنت رادیویی WiFi با بستر ارتباط امواج رادیویی و بدون نیاز به خط تلفن.</li>\n    <li><strong>وب‌سایت:</strong> طراحی و راه‌اندازی وب‌سایت شامل ثبت دامنه، هاست و طراحی.</li>\n    <li><strong>کولوکیشن:</strong> نگهداری و میزبانی سرور شخصی شما در دیتاسنتر حرفه‌ای.</li>\n    <li><strong>هاستینگ:</strong> فضایی آماده روی سرور برای ذخیره وب‌سایت و دسترسی به آن.</li>\n    <li><strong>VPS:</strong> سرور مجازی با منابع اختصاصی مانند CPU و RAM.</li>\n</ul>\n<p>کدام یک از این سرویس‌ها را مایل به خریداری هستید؟</p>",
+            "buttons": [
+                "fd-LTE   ",
+                "TD-LTE    ",
+                "ADSL",
+                "رادیویی WiFi",
+                "وب‌سایت",
+                "کولوکیشن",
+                "هاستینگ",
+                "domain",
+                "VPS"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "کولوکیشن"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>بر اساس نیازی که ذکر کرده‌اید، متأسفانه هیچ سرویس خاصی برای \"کولوکیشن\" در دسترس نیست. اما می‌توانم دو گزینه دیگر را برای شما معرفی کنم که ممکن است به عنوان جایگزین موقت مناسب باشند:</p>\n\n<ul>\n    <li>\n        <strong>میزبانی وب رایگان (1 گیگابایت)</strong>: \n        <p>با خرید دامنه .com در این طرح، مشتری به‌صورت رایگان از میزبانی یک‌ساله وب با کنترل‌پنل دلخواه (cPanel یا SolidCP) بهره‌مند می‌شود. این گزینه برای افرادی که به دنبال راه‌اندازی وب‌سایت‌های کوچک و شخصی هستند، مناسب است.</p>\n    </li>\n\n    <li>\n        <strong>مودم Alcatel</strong>: \n        <p>این مودم می‌تواند به عنوان یک گزینه برای اتصال به اینترنت خانگی یا اداری شما باشد. اگر به دنبال بهبود اتصال اینترنت خود هستید، این مودم می‌تواند کمک‌کننده باشد.</p>\n    </li>\n</ul>\n\n<p>کدام یک از این خدمات را می‌خواهید فعال کنم؟</p>\n<p>همچنین می‌توانم پیشنهاد بهتری پیدا کنم اگر ویژگی‌های دقیق‌تری که می‌خواهید را مشخص کنید.</p>",
+            "plans": [
+                "gift: میزبانی وب رایگان (1 گیگابایت) با انتخاب نوع کنترل‌پنل ویندوز یا لینوکس\nextra_description: با خرید دامنه .com در این طرح، مشتری به‌صورت رایگان از میزبانی یک‌ساله وب با کنترل‌پنل دلخواه (cPanel یا SolidCP) بهره‌مند می‌شود. این تخفیف ویژه تنها در مدت جشنواره فعال است و پس از آن قیمت سرویس به تعرفه عادی (2,650,000 تومان) بازمی‌گردد.",
+                "modem: Alcatel\nnight_traffic: ندارد\ntraffic: 210\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد\ncontract_type: 6 ماهه\nspecial_offer: ندارد\nurl: ندارد",
+                "coverage: کشوری\nmodem: Olax MC50\nnight_traffic: ندارد\ntraffic: 55\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد\ncontract_type: 5 ماهه\nspecial_offer: ندارد\nurl: ندارد",
+                "max_upload: 25\nportable: ندارد\ncoverage: استانی\nmodem: ندارد\nnight_traffic: ندارد\ntraffic: 440\nip: ندارد\nregion: استانی\nsetup_cost: ندارد\ncontract_type: 1 ساله\nspecial_offer: ندارد\nurl: ندارد\nextra_description: در صورت خرید نقدی تجهیزات و راه اندازی، سرویس 440 گیگ یکساله upto25 رایگان ثبت می گردد",
+                "دسته‌بندی: کولوکیشن\nعنوان: کولوکیشن 1 یونیت\nتوضیحات: سرویس کولوکیشن برای سرور 1U با امکانات استاندارد دیتاسنتر شبکیه.\nقیمت: 1285000\nمدت زمان: 30 روز\nمدت زمان: 30 روز\nپیشنهاد ویژهداردنوع قراردادنداردهزینه راه اندازی :150000 منطقهندارد ترافیکندارد GBترافیک شبنداردحداقل سرعتنداردحداکثر آپلودنداردنوع سرویسندارد\nunit_count: 1\npower_cable: 1\nnetwork_port: 1\nilo: ندارد\nport_10g: ندارد\nip_range: 1\nsetup_cost: 150000\ndatacenter: ایران - شبکیه\nspecial_offer: دارد",
+                "coverage: کشوری\nmodem: Olax AX6Pro\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد\ncontract_type: 10 ماهه\nspecial_offer: ندارد\nurl: ندارد",
+                "دسته‌بندی: کولوکیشن\nعنوان: کولوکیشن 2 یونیت با ILO فعال\nتوضیحات: کولوکیشن حرفه‌ای برای سرورهای 2 یونیت با دسترسی از راه دور ILO فعال و امکانات کامل شبکه.\nقیمت: 2385000\nمدت زمان: 30 روز\nمدت زمان: 30 روز\nپیشنهاد ویژهداردنوع قراردادنداردهزینه راه اندازی :150000 منطقهندارد ترافیکندارد GBترافیک شبنداردحداقل سرعتنداردحداکثر آپلودنداردنوع سرویسندارد\nunit_count: 2\npower_cable: 2\nnetwork_port: 1\nilo: فعال\nport_10g: ندارد\nip_range: 1\nsetup_cost: 150000\ndatacenter: ایران - شبکیه\nspecial_offer: دارد",
+                "modem: ندارد\nnight_traffic: 244\ntraffic: 200\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد\ncontract_type: 10 ماهه\nspecial_offer: جشنواره پاییزه\nurl: ندارد",
+                "portable: ندارد\ncoverage: کشوری\nmodem: Olax AX8Pro\nnight_traffic: ندارد\ntraffic: 300\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد\ncontract_type: 10 ماهه\nspecial_offer: ندارد\nurl: ندارد",
+                "دسته‌بندی: fd-LTE   \nعنوان: جشنواره پاییزه 100 روزه +100 گیگ+ 144 گیگ شبانه\nتوضیحات: ندارد\nقیمت: 598400\nمدت زمان: 100 روز\nمدت زمان: 100 روز\nپیشنهاد ویژهجشنواره پاییزهنوع قرارداد3 ماهههزینه راه اندازی :ندارد منطقهکشوری ترافیک100 GBترافیک شب144حداقل سرعت1حداکثر آپلود50نوع سرویسfd-LTE   \nservice_type: fd-LTE   \ncategory: اینترنت   \nmin_speed: 1\nmax_download: 50\nmax_upload: 5\nportable: ندارد\ncoverage: کشوری\nmodem: ندارد\nnight_traffic: 144\ntraffic: 100\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد"
+            ]
+        }
+    ],
+    "history_suggestion": [
+        {
+            "0": [
+                "gift: میزبانی وب رایگان (1 گیگابایت) با انتخاب نوع کنترل‌پنل ویندوز یا لینوکس\nextra_description: با خرید دامنه .com در این طرح، مشتری به‌صورت رایگان از میزبانی یک‌ساله وب با کنترل‌پنل دلخواه (cPanel یا SolidCP) بهره‌مند می‌شود. این تخفیف ویژه تنها در مدت جشنواره فعال است و پس از آن قیمت سرویس به تعرفه عادی (2,650,000 تومان) بازمی‌گردد.",
+                "modem: Alcatel\nnight_traffic: ندارد\ntraffic: 210\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد\ncontract_type: 6 ماهه\nspecial_offer: ندارد\nurl: ندارد",
+                "coverage: کشوری\nmodem: Olax MC50\nnight_traffic: ندارد\ntraffic: 55\nip: ندارد\nregion: کشوری\nsetup_cost: ندارد\ncontract_type: 5 ماهه\nspecial_offer: ندارد\nurl: ندارد"
+            ]
+        }
+    ],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

@@ -1,0 +1,41 @@
+{
+    "token": "f8c0649e-dbca-45f6-a3dc-7d2696ec0ce5",
+    "thread_id": "thread_6Arss9YZZn2cfXzj0CRb0BtJ",
+    "input": "03135677735",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": "ADSL"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "من یه سرویس adsl دارم اما اینترنتم وصل نمیشه"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً کد 11 رقمی (شماره تلفن) خود را برای بررسی و حل مشکل اینترنت خود ارائه دهید.</p>"
+        },
+        {
+            "role": "user",
+            "content": "03135677735"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "extract_user_info_json"
+    ],
+    "history_intent": [],
+    "next_node": "ask_witch_account"
+}

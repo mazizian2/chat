@@ -1,0 +1,49 @@
+{
+    "token": "0229dbdd-744d-4c3d-806d-2920428b3b14",
+    "thread_id": "thread_U5SFMBTrGgY9ZYpmcdOe49BK",
+    "input": "به پشتیبانی LTE نیاز دارم",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [
+            "اینترنتم مشکل دارد"
+        ],
+        "service_support": "LTE"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "اینترنتم مشکل دارد"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً مشخص کنید که به چه نوع پشتیبانی نیاز دارید:</p>\n<ul>\n    <li>LTE</li>\n    <li>ADSL</li>\n</ul>\n<p>شما می‌توانید یکی از گزینه‌ها را انتخاب کنید یا بنویسید: \"من به پشتیبانی LTE یا ADSL نیاز دارم.\"</p>",
+            "buttons": [
+                "به پشتیبانی ADSL نیاز دارم",
+                "به پشتیبانی LTE نیاز دارم"
+            ]
+        },
+        {
+            "role": "user",
+            "content": "به پشتیبانی LTE نیاز دارم"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً اطلاعات حساب کاربری خود را برای پشتیبانی از LTE ارائه دهید:</p>\n<ul>\n    <li>نام کاربری (باید با 989559 شروع شده و 12 رقم باشد):</li>\n    <li>شماره موبایل (باید با 09 شروع شده و 11 رقم باشد):</li>\n    <li>نام و نام خانوادگی:</li>\n    <li>کد ملی (10 رقم):</li>\n</ul>\n<p>لطفاً حداقل یکی از این اطلاعات را ارائه دهید تا بتوانیم به شما کمک کنیم.</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": "extract_json_account"
+}

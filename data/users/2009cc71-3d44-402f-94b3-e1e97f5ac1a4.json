@@ -1,0 +1,56 @@
+{
+    "token": "2009cc71-3d44-402f-94b3-e1e97f5ac1a4",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": []
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        [
+            

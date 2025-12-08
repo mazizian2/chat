@@ -1,0 +1,41 @@
+{
+    "token": "82cd3bb6-65a1-4989-9a59-51ad0b58dcdf",
+    "thread_id": "thread_K4dCBpRKG2O8Z3MIdZc4OEZv",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>خوش آمدید! امیدوارم روز خوبی داشته باشید. من اینجا هستم تا شما را با خدمات برند <strong>شبکیه</strong> آشنا کنم. ما یک شرکت IT هستیم که به ارائه خدمات اینترنت، میزبانی وب، ثبت دامنه، طراحی وب‌سایت و پشتیبانی فنی ۲۴ ساعته می‌پردازیم. تمرکز ما بر روی اعتماد، سرعت، امنیت و رضایت مشتریان است.</p> <p>اگر سوالی دارید یا نیاز به راهنمایی دارید، در خدمت شما هستم!</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "greeting"
+    ],
+    "history_intent": [],
+    "next_node": "greeting"
+}

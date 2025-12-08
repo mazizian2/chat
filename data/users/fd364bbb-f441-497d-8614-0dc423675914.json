@@ -1,0 +1,35 @@
+{
+    "token": "fd364bbb-f441-497d-8614-0dc423675914",
+    "thread_id": "thread_66YIaVDs76Y8iaPBXXbtIyAI",
+    "input": "سلام",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [],
+        "service_support": ""
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "سلام"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>خوش آمدید! امیدوارم روز خوبی داشته باشید. من اینجا هستم تا به شما در مورد خدمات <strong>شبکیه</strong> کمک کنم. ما ارائه‌دهنده خدمات اینترنت، میزبانی وب، ثبت دامنه، طراحی وب‌سایت و پشتیبانی فنی ۲۴ ساعته هستیم. هدف ما اطمینان از رضایت و امنیت شماست.</p>\n<p>چگونه می‌توانم به شما کمک کنم؟ 😊</p>"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [],
+    "history_intent": [],
+    "next_node": ""
+}

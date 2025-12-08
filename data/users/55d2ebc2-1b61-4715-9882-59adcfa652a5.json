@@ -1,0 +1,47 @@
+{
+    "token": "55d2ebc2-1b61-4715-9882-59adcfa652a5",
+    "thread_id": "thread_TtkMZa3YnioJxn9YBfpWXxRv",
+    "input": "دهدار",
+    "userInfo": {
+        "info": {
+            "name": "",
+            "phone": ""
+        },
+        "needs": {
+            "type": [],
+            "details": []
+        },
+        "orders": [],
+        "accountInfo": {},
+        "accounts": [],
+        "selectAccount": [],
+        "problems": [
+            "اینترنت LTE قطع است"
+        ],
+        "service_support": "LTE"
+    },
+    "messages": [
+        {
+            "role": "user",
+            "content": "من یه سرویس lte دارم ولی اینترنتم قطعه"
+        },
+        {
+            "role": "user",
+            "content": "من یه سرویس lte دارم ولی اینترنتم قطعه"
+        },
+        {
+            "role": "assistant",
+            "content": "<p>لطفاً برای بررسی مشکل اینترنت خود، اطلاعات زیر را ارائه دهید:</p>\n<ul>\n    <li><strong>نام کاربری:</strong> باید با 989559 شروع شود و 12 رقم باشد.</li>\n    <li><strong>شماره موبایل:</strong> باید با 09 شروع شود و 11 رقم باشد.</li>\n    <li><strong>نام خانوادگی:</strong> </li>\n    <li><strong>کد ملی:</strong> 10 رقم باشد.</li>\n</ul>\n<p>لطفاً حداقل یکی از این اطلاعات را وارد کنید تا بتوانیم به شما کمک کنیم.</p>"
+        },
+        {
+            "role": "user",
+            "content": "دهدار"
+        }
+    ],
+    "history_suggestion": [],
+    "intents": [
+        "extract_json_account"
+    ],
+    "history_intent": [],
+    "next_node": "extract_json_account"
+}
