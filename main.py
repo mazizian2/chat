@@ -1,6 +1,4 @@
-from dotenv import load_dotenv
-
-load_dotenv()
+import asyncio
 from fastapi import FastAPI, Request
 import socketio
 from pydantic import BaseModel
@@ -28,6 +26,7 @@ import shutil
 import requests
 from dotenv import load_dotenv
 from openai import OpenAI
+load_dotenv()
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -102,8 +101,23 @@ def user_page(request: Request, user_uuid: str):
 
     # ✅ باز کردن فایل و خواندن محتوا
     with open(user_file, "r", encoding="utf-8") as f:
+        # content = (
+        #     "<p>خوش آمدید! من اینجا هستم تا در زمینه خدمات شرکت شبکیه به شما کمک کنم. "
+        #     "شبکیه یک شرکت معتبر در زمینه فناوری اطلاعات است که خدماتی مانند ارائه اینترنت، "
+        #     "میزبانی وب، ثبت دامنه، طراحی وب‌سایت و پشتیبانی فنی ۲۴ ساعته را با تمرکز بر "
+        #     "قابلیت اطمینان، سرعت و امنیت ارائه می‌دهد. اگر سوالی دارید یا به راهنمایی نیاز "
+        #     "دارید، خوشحال می‌شوم که کمک کنم! 😊</p>"
+        # )
+        content="""LTE شبکیه:
+این سرویس اینترنت پرسرعت FD-LTE بدون نیاز به خط تلفن است که با مودم جیبی یا رومیزی و سیم‌کارت ارائه می‌شود. سرعت آن تا ۴۰ مگابیت بر ثانیه است و پوشش کشوری دارد (مناطق دارای 4G، 5G و LTE). این سرویس برای کاربران خانگی و تجاری مناسب بوده و امکان استفاده از IP ثابت و انتخاب بسته‌های متنوع بر اساس نیاز مشتری فراهم است."""
         data = json.load(f)
+        data["messages"].append({
+            "role": "assistant",
+            "content": content
+        })
 
+        with open("data.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
     # ✅ استخراج قسمت messages از داده‌ها
     messages = data.get("messages", [])
 
@@ -434,7 +448,7 @@ N8N_WEBHOOK_URL = "https://n8n.shabakieh.com/webhook-test/receiveMessage"
 
 @sio.event
 async def message(sid, data):
-    print("message", data)
+    print("message issssssss>>", data)
     room = data["room"]
     msg = data["msg"]
     data = read_json_file(f"{room}.json")
@@ -442,7 +456,6 @@ async def message(sid, data):
     # message=create_message("user",msg)
     message = create_message("user", msg)
     await sio.emit(f"room_{room}", message, room=room)
-    await sio.emit(f"room_e3740a54-9912-4e70-8b73-8cb23fc3c6e4", message, room=room)
 
     # sendMessage(state)
 

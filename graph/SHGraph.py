@@ -2,9 +2,9 @@ from typing import TypedDict, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
 
 from task.SHTask import get_assistant_suggest, register_order_json_task,get_assistant_express_need_buy, \
-    get_assistant_user_info_collector, get_assistant_register_order, \
+    get_assistant_user_info_collector, get_assistant_register_order,get_assistant_answer, \
     user_info_json_task, get_assistant_unknown, create_json_need_buy_response_task, \
-    payment_task, get_assistant_intent, get_assistant_greeting, \
+    payment_task, get_assistant_intent, get_assistant_greeting,get_assistant_help, \
     get_assistant_question_service_support, get_assistant_set_service_support
 from LTE.graph.LTEGraph import handle_problem_list, handle_get_account_user, handle_json_account, \
     handle_ask_witch_account, handle_extract_select_account, handle_ask_problem, handle_LTE_detect, \
@@ -244,7 +244,7 @@ async def handle_user_info_collector(state: ChatState):
 async def handle_user_info_json(state: ChatState):
     print("handle user info json")
     user_input = state["input"]
-    task = user_info_json_task(user_input, state)
+    task = user_info_json_task( state)
     result = run_task_as_crew(task)
     response = result.raw.strip()
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
@@ -318,7 +318,7 @@ async def handle_set_service_support(state: ChatState):
 async def handle_payment(state: ChatState):
     user_input = state["input"]
     print("handle payment")
-    task = payment_task(user_input, state)
+    task = payment_task(state)
     result = run_task_as_crew(task)
     response = result.raw.strip()
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
@@ -348,6 +348,20 @@ async def handle_follow_up_buy(state: ChatState):
     if (state['intents'] != []):
         state['intents'].pop()
     state['next_node'] = get_last_intent(state)
+    save_state(state)
+    return state
+
+async def handle_help(state: ChatState):
+    print("handle help")
+    user_input = state["input"]
+    response =  get_assistant_help(state)
+    response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
+    message = create_message('assistant', response)
+    state["messages"].append(message)
+
+    if (state['intents'] != []):
+        state['intents'].pop()
+    # state['next_node'] = get_last_intent(state)
     save_state(state)
     return state
 
@@ -394,6 +408,7 @@ def build_graph():
     builder.add_node("follow_up_buy", handle_follow_up_buy)
     builder.add_node("unknown", unknown)
     builder.add_node("payment", handle_payment)
+    builder.add_node("help", get_assistant_help)
 
     # support node
     builder.add_node("support", handle_support)
@@ -440,7 +455,7 @@ def build_graph():
         "unknown": "unknown"
     }),
 
-    builder.set_entry_point("analyze_message")
+    builder.set_entry_point("help")
 
     # builder.add_edge("analyze_message", "detect_intent")
     builder.add_edge("extract_json_buy", "service_suggestion_buy")

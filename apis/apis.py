@@ -3,7 +3,7 @@ from RAG.tools import json_to_docs_internet,answer_with_ai, ask_faiss_question, 
 import json
 import pyodbc
 from typing import Any
-async  def customer_search(info:dict[str,str],
+async  def customer_search(info,
         # username: str | None = None,
         # mobile: str | None = None,
         # melicode: str | None = None,

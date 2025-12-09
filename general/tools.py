@@ -14,15 +14,27 @@ import asyncio
 from socket_instance import sio
 from general.state_manager import save_state
 
+def extract_unique_values(filename, key):
+    with open(filename, "r", encoding="utf-8") as file:
+        data = json.load(file)
+    return list(dict.fromkeys(item.get(key) for item in data if key in item))
+
+with open("assets/json/data.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+with open("assets/json/details_plan.json", "r", encoding="utf-8") as f:
+    details_plan = json.load(f)
+keys_list = [list(item["plans"][0].keys()) for item in data if item.get("plans")]
+details_data = sorted(set().union(*keys_list))
+typeService = extract_unique_values("assets/json/data.json", "category")
+
+category_description = [f"{item['category']}: {item['general_description']}" for item in data]
+
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 
 
-def extract_unique_values(filename, key):
-    with open(filename, "r", encoding="utf-8") as file:
-        data = json.load(file)
-    return list(dict.fromkeys(item.get(key) for item in data if key in item))
+
 
 
 def add_item_to_json(filename, item):
