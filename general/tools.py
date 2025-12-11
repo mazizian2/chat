@@ -14,10 +14,12 @@ import asyncio
 from socket_instance import sio
 from general.state_manager import save_state
 
+
 def extract_unique_values(filename, key):
     with open(filename, "r", encoding="utf-8") as file:
         data = json.load(file)
     return list(dict.fromkeys(item.get(key) for item in data if key in item))
+
 
 with open("assets/json/data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -32,9 +34,6 @@ category_description = [f"{item['category']}: {item['general_description']}" for
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
-
-
-
 
 
 def add_item_to_json(filename, item):
@@ -376,7 +375,9 @@ def chat_create(messages: List[Any]):
         messages=messages
     )
     return response.choices[0].message.content
-def thread_message_stream(state:dict,context_message:str,threadId:str,assistantId:str,):
+
+
+def thread_message_stream(state: dict, context_message: str, threadId: str, assistantId: str, ):
     client.beta.threads.messages.create(
         role="user",
         content=context_message,
@@ -409,8 +410,9 @@ def thread_message_stream(state:dict,context_message:str,threadId:str,assistantI
         print("\nassistant_response:", final)
     return final
 
-#create message and run
-async def thread_message(context_message:str,threadId:str,assistantId:str):
+
+# create message and run
+async def thread_message(context_message: str, threadId: str, assistantId: str):
     client.beta.threads.messages.create(
         role="user",
         content=context_message,
@@ -434,8 +436,9 @@ async def thread_message(context_message:str,threadId:str,assistantId:str):
     print("intent res>>", value)
     return value
 
+
 # create message and run stream
-def chat_stream(messages: List[Any], state=None, buttons=None, plans=None):
+async def chat_stream(messages: List[Any], state=None, buttons=None, plans=None):
     room = state["token"]
     unique_id = str(uuid.uuid4())
     stream_text = ""
@@ -458,7 +461,7 @@ def chat_stream(messages: List[Any], state=None, buttons=None, plans=None):
                     "buttons": buttons,
                     "plans": plans,
                 }
-                asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
+                await asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
 
 
             elif event.type == "content.done":

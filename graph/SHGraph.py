@@ -1,10 +1,10 @@
 from typing import TypedDict, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
 
-from task.SHTask import get_assistant_suggest, register_order_json_task,get_assistant_express_need_buy, \
-    get_assistant_user_info_collector, get_assistant_register_order,get_assistant_answer, \
+from task.SHTask import get_assistant_suggest, register_order_json_task, get_assistant_express_need_buy, \
+    get_assistant_user_info_collector, get_assistant_register_order, get_assistant_answer, \
     user_info_json_task, get_assistant_unknown, create_json_need_buy_response_task, \
-    payment_task, get_assistant_intent, get_assistant_greeting,get_assistant_help, \
+    payment_task, get_assistant_intent, get_assistant_greeting, get_assistant_help,call_model, \
     get_assistant_question_service_support, get_assistant_set_service_support
 from LTE.graph.LTEGraph import handle_problem_list, handle_get_account_user, handle_json_account, \
     handle_ask_witch_account, handle_extract_select_account, handle_ask_problem, handle_LTE_detect, \
@@ -63,7 +63,7 @@ async def analyze_message(state: ChatState) -> ChatState:
     # response=json.loads(response)
     if isinstance(response, str):
         response = json.loads(response)
-    print("response intent is",  get_last_intent(state))
+    print("response intent is", get_last_intent(state))
     state["intents"].extend(response)
     state["next_node"] = get_last_intent(state)
     save_state(state)
@@ -90,7 +90,7 @@ def detect_intent(state: ChatState):
 async def unknown(state: ChatState) -> ChatState:
     print("handle unknown")
     user_input = state["input"]
-    response =  get_assistant_unknown(state)
+    response = get_assistant_unknown(state)
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
     message = create_message('assistant', response)
     state["messages"].append(message)
@@ -109,7 +109,7 @@ async def handle_greeting(state: ChatState):
     message = create_message('assistant', response)
     state["messages"].append(message)
 
-    if(len(state['intents'])>0):
+    if (len(state['intents']) > 0):
         state['intents'].pop()
 
     state['next_node'] = get_last_intent(state)
@@ -139,7 +139,7 @@ async def handle_extract_json_buy(state: ChatState):
     # response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
     needs = parse_json5(response)
     state["userInfo"]['needs'] = needs
-    if(len(state['intents'])>0):
+    if (len(state['intents']) > 0):
         state['intents'].pop()
 
     if len(needs['type']) == 0:
@@ -158,7 +158,7 @@ async def handle_service_suggestion_buy(state: ChatState):
     sList = searchList[:3]
     index = len(state["history_suggestion"])
     state["history_suggestion"].append({index: sList})
-    response =  get_assistant_suggest(state, sList,searchList)
+    response = get_assistant_suggest(state, sList, searchList)
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
     message = create_message('assistant', response, None, searchList)
     state["messages"].append(message)
@@ -168,10 +168,11 @@ async def handle_service_suggestion_buy(state: ChatState):
     save_state(state)
     return state
 
+
 async def handle_create_answer_service_suggestion(state: ChatState):
     print("handle answer service suggestion")
 
-    response =  get_assistant_answer(state)
+    response = get_assistant_answer(state)
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
     message = create_message('assistant', response)
     state["messages"].append(message)
@@ -244,7 +245,7 @@ async def handle_user_info_collector(state: ChatState):
 async def handle_user_info_json(state: ChatState):
     print("handle user info json")
     user_input = state["input"]
-    task = user_info_json_task( state)
+    task = user_info_json_task(state)
     result = run_task_as_crew(task)
     response = result.raw.strip()
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
@@ -282,7 +283,7 @@ async def handle_user_info_json(state: ChatState):
 async def handle_question_service_support(state: ChatState):
     print("handle question service support")
 
-    response =  get_assistant_question_service_support(state)
+    response = get_assistant_question_service_support(state)
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
     buttons = ['به پشتیبانی ADSL نیاز دارم', 'به پشتیبانی LTE نیاز دارم']
     message = create_message('assistant', response, buttons)
@@ -331,7 +332,7 @@ async def handle_payment(state: ChatState):
     if len(state['intents']) != 0:
         state['intents'].pop()
 
-    state['next_node'] =get_last_intent(state)
+    state['next_node'] = get_last_intent(state)
     save_state(state)
     return state
 
@@ -351,26 +352,34 @@ async def handle_follow_up_buy(state: ChatState):
     save_state(state)
     return state
 
+#============================================= start new method =========================================
+
 async def handle_help(state: ChatState):
     print("handle help")
-    user_input = state["input"]
-    response =  get_assistant_help(state)
+
+    features = call_model(state)
+    state["user_feature"] = features
+    save_state(state)
+    response = await get_assistant_help(state)
     response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
     message = create_message('assistant', response)
     state["messages"].append(message)
 
     if (state['intents'] != []):
         state['intents'].pop()
-    # state['next_node'] = get_last_intent(state)
+    state['next_node'] = ""
     save_state(state)
+    # await handle_extract_json_buy(state)
+
     return state
+#============================================= end new method =========================================
 
 
 async def handle_support(state: ChatState):
     print("handle support")
     if (state['intents'] != []):
         state['intents'].pop()
-    lastIntent=get_last_intent(state)
+    lastIntent = get_last_intent(state)
     if (lastIntent == ""):
         userInfo = state["userInfo"]
         if (userInfo["service_support"] == ""):
@@ -408,7 +417,7 @@ def build_graph():
     builder.add_node("follow_up_buy", handle_follow_up_buy)
     builder.add_node("unknown", unknown)
     builder.add_node("payment", handle_payment)
-    builder.add_node("help", get_assistant_help)
+    builder.add_node("help", handle_help)
 
     # support node
     builder.add_node("support", handle_support)

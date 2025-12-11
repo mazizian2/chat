@@ -7,13 +7,14 @@ class IntentState(TypedDict, total=False):
 
 class ChatState(TypedDict):
     token: str
-    thread_id: str
+    # thread_id: str
     input: Optional[str]  # آخرین پیام کاربر
-    userInfo: Optional[Any]  # ایمیل کاربر
+    user_feature:Dict[str,Any]
+    # userInfo: Optional[Any]  # ایمیل کاربر
     messages: List[Dict[str, str]] # تاریخچه پیام‌ها
-    history_suggestion:List[Dict[Any, Any]]  #تاریخچه سرویس های پیشنهادی
+    # history_suggestion:List[Dict[Any, Any]]  #تاریخچه سرویس های پیشنهادی
     intents: List[str]  # وضعیت intents شناسایی شده و پارامترها
-    history_intent: List[IntentState]  # وضعیت intents شناسایی شده و پارامترها
+    # history_intent: List[IntentState]  # وضعیت intents شناسایی شده و پارامترها
     next_node: str
 
 # ---- Manager ----

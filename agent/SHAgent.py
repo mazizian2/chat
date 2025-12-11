@@ -1,30 +1,94 @@
 import json
-from general.tools import extract_unique_values,OUTPUT_HTML
+from general.tools import extract_unique_values, OUTPUT_HTML
 
-
-with open("assets/json/data.json", "r", encoding="utf-8") as f:
+# ============================================= start new method =========================================
+with open("assets/json/data-product.json", "r", encoding="utf-8") as f:
     data = json.load(f)
-keys_list = [list(item["plans"][0].keys()) for item in data if item.get("plans")]
-details_data = sorted(set().union(*keys_list))
+keys_list = [list(item["products"][0].keys()) for item in data if item.get("products")]
+askable = data[0].get("askable", [])
+FIELDS = askable if askable != [] else sorted(set().union(*keys_list))
+description_data = data[0].get("general_description", "")
+# ============================================= end new method =========================================
+
+details_data = []
 typeService = extract_unique_values("assets/json/data.json", "category")
-category_description = [f"{item['category']}: {item['general_description']}" for item in data]
+category_description = []
+
+# FIELDS = [
+#     {"name": "service_type", "type": "string"},
+#     {"name": "min_speed", "type": "number"},
+#     {"name": "max_download", "type": "number"},
+#     {"name": "max_upload", "type": "number"},
+#     {"name": "portable", "type": "bool"},
+#     {"name": "coverage", "type": "string"},
+#     {"name": "modem", "type": "string"},
+#     {"name": "night_traffic", "type": "bool"},
+#     {"name": "traffic", "type": "number"},
+#     {"name": "duration", "type": "number"},
+#     {"name": "ip", "type": "bool"},
+#     {"name": "price", "type": "number"},
+#     {"name": "region", "type": "string"},
+# ]
+
+
+# ============================================= start new method =========================================
 
 help = f"""
-Considering the user's message and
-the specific features related to the selected service in {category_description},
-you should guide the user through targeted questions to help them provide the detailed requirements of their request.
+🟦 Goal:
+- Always respond with a polite, friendly, and helpful tone.
+- Use relevant emojis when appropriate.
+- Actively guide the user through all features of the service step by step.
+- Ask fields one by one, and only after the user has answered the previous field.
+- Never skip a field unless it already has a value in "user_feature" or the value is "-".
+- Never repeat a question that appears in "last_ai_message".
 
-For example, based on the general description of the service:
-"{category_description}"
-you may ask about:
-- Preferred modem type (portable or desktop)
-- Required speed or bandwidth
-- Need for a fixed IP
-- Specific location or coverage concerns
-- Any additional equipment or setup preferences
+🟦 Field Guide:
+For each field in "FIELDS":
+- Briefly explain its purpose.
+- Ask for the user’s input clearly and user-friendly (add examples when useful).
+- Expected input types:
+  - string → descriptive or categorical input  
+  - number → numeric value  
+  - bool → yes/no  
 
-Your goal is to elicit detailed, structured information from the user so that their request can be properly understood and fulfilled.
+🟦 Field Filtering Rules:
+- Only ask the user for fields that are inherently collectable and user-knowable.
+- Never ask for non-queryable, internal, system, or unidentifiable fields.
+- During the step-by-step process, only consider queryable fields and ignore the rest.
+
+🟦 Completion Rule:
+- If the "user_feature" list contains at least one value, the message must end by informing the user that they may start the search, and no further questions should be asked.
+
+🟦 Rules of Engagement:
+- Ask only one question at a time.
+- Do not assume or infer any values.
+- Use the user’s latest answer to override pre-filled fields.
+- Maintain a polite, friendly, and helpful tone.
+- Never repeat any question that the AI asked in the previous "last_ai_message".
+
+🟦 Note:
+- All final responses must be in Persian only.
+- If the user has not greeted, do *not* greet them or use generic phrases such as “At your service.”
+
 """
+
+prompt_functionTools = """
+            "You are a precise data extraction assistant.\n"
+
+   "RULES:\n"
+            "1. ALWAYS return ALL fields from FIELDS in extract_plan function.\n"
+            "2. Any field NOT mentioned by user MUST be included and MUST be null.\n"
+            "3. NEVER omit any field.\n"
+            "4. If `current JSON` is provided: merge it.\n"
+            "   - User-mentioned fields override old values.\n"
+            "   - Unmentioned fields keep current JSON value.\n"
+            "5. Output MUST always be a complete JSON object.\n"
+            "6. If user expresses uncertainty (examples: 'I don’t know', 'doesn’t matter', "
+            "'anything', 'فرقی نداره', 'نمیدونم', 'هرچی', 'مهم نیست'), "
+            "then value of that field MUST be '-'.\n"
+"""
+# ============================================= end new method =========================================
+
 conversation_assistant = f"""
 Analyze the user's message and identify all intents and their parameters based on the provided schema. \n
                 You are a professional conversation analyst. You determine a user's intent based on their message. \n
@@ -477,4 +541,3 @@ payment_assistant = f"""
                 f"{OUTPUT_HTML}"
     "expected_output = Raw HTML text"
 """
-

@@ -1,11 +1,12 @@
 import asyncio
 from fastapi import FastAPI, Request
 import socketio
+from agent.SHAgent import description_data
 from pydantic import BaseModel
 from general.tools import (extract_min_max, filter_by_date, clean_and_load_json, execute_stored_procedure,
                            create_message, load_latest_state)
 from general.tools import (read_json_file, extract_min_max, filter_by_date, clean_and_load_json,
-                           execute_stored_procedure,
+                           execute_stored_procedure,add_item_to_json,
                            create_message, load_latest_state)
 from apis.apis import customer_search, customer_info, ask_rag,execute_stored_procedure_support
 from graph.SHGraph import build_graph, handle_follow_up_buy, handle_service_suggestion_buy, handle_user_info_collector
@@ -108,8 +109,9 @@ def user_page(request: Request, user_uuid: str):
         #     "قابلیت اطمینان، سرعت و امنیت ارائه می‌دهد. اگر سوالی دارید یا به راهنمایی نیاز "
         #     "دارید، خوشحال می‌شوم که کمک کنم! 😊</p>"
         # )
-        content="""LTE شبکیه:
-این سرویس اینترنت پرسرعت FD-LTE بدون نیاز به خط تلفن است که با مودم جیبی یا رومیزی و سیم‌کارت ارائه می‌شود. سرعت آن تا ۴۰ مگابیت بر ثانیه است و پوشش کشوری دارد (مناطق دارای 4G، 5G و LTE). این سرویس برای کاربران خانگی و تجاری مناسب بوده و امکان استفاده از IP ثابت و انتخاب بسته‌های متنوع بر اساس نیاز مشتری فراهم است."""
+#         content="""LTE شبکیه:
+# این سرویس اینترنت پرسرعت FD-LTE بدون نیاز به خط تلفن است که با مودم جیبی یا رومیزی و سیم‌کارت ارائه می‌شود. سرعت آن تا ۴۰ مگابیت بر ثانیه است و پوشش کشوری دارد (مناطق دارای 4G، 5G و LTE). این سرویس برای کاربران خانگی و تجاری مناسب بوده و امکان استفاده از IP ثابت و انتخاب بسته‌های متنوع بر اساس نیاز مشتری فراهم است. لطفا ویژگی های مور نظر خود را بگویید تا سرویس اختصاصی شما معرفی شود."""
+        content=description_data
         data = json.load(f)
         data["messages"].append({
             "role": "assistant",
@@ -472,5 +474,5 @@ async def message(sid, data):
     # response = requests.post(N8N_WEBHOOK_URL, json={"message": state})
     # response.raise_for_status()
     # print('webhook is:', response)
-    print("result:", result)
-    print("result:", result)
+
+

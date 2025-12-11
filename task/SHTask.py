@@ -1,12 +1,10 @@
 from crewai import Task
 import json
 from agent.SHAgent import payment_assistant, user_info_json_assistant, register_order_json_assistant, \
-    create_json_need_buy_assistant, set_service_support_assistant, question_service_support_assistant, help,\
+    create_json_need_buy_assistant, set_service_support_assistant, question_service_support_assistant, help, \
     unknown_assistant, user_info_collector_assistant, register_order_assistant, answer_assistant, suggest_assistant, \
-    express_need_buy_assistant, greeting_assistant, conversation_assistant
-from general.tools import  extract_unique_values, chat_create, chat_stream
-
-
+    express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, askable,prompt_functionTools
+from general.tools import extract_unique_values, chat_create, chat_stream, client
 
 with open("assets/json/data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -40,6 +38,120 @@ INTENTS = [
     "LTE_detect",
     "unknown"
 ]
+
+#============================================= start new method =========================================
+
+async def get_assistant_help(state: dict) -> str:
+    print("askable", askable)
+
+    user_message = state["input"]
+    user_feature = state.get("user_feature", {})
+    last_ai_message = None
+    for msg in reversed(state.get("messages", [])):
+        if msg.get("role") == "assistant":
+            last_ai_message = msg.get("content")
+            break
+    fields = [key for key in FIELDS if user_feature.get(key) in (None, "-", "")]
+    print("user_feature is>>", user_feature)
+    print("fields is>>", fields)
+    context_message = (
+        f"User message: {user_message}\n"
+        f"user_feature: {user_feature}\n"
+        f"last_ai_message: {last_ai_message}\n"
+        f"FIELDS is: {fields}\n"
+    )
+    messages = [
+        {
+            "role": "system",
+            "content": f"""
+    ### CONTEXT INFORMATION
+    {context_message}
+
+   ### ASSISTANT INSTRUCTIONS
+    {help}
+
+(Use all the data above for a better answer.)
+"""
+        },
+        {
+            "role": "user",
+            "content": user_message
+        }
+    ]
+    search = []
+    if user_feature and any(value is not None for value in user_feature.values()):
+        search = ["درخواست جست و جو"]
+    final_text = await chat_stream(messages, state, search)
+    return final_text
+
+
+def call_model(state=None):
+    current_json = state.get("user_feature", {})
+    user_message = state.get("input", "")
+    last_ai_message = None
+    for msg in reversed(state.get("messages", [])):
+        if msg.get("role") == "assistant":
+            last_ai_message = msg.get("content")
+            break
+    messages = [
+        {"role": "system", "content": (
+           " ### CONTEXT INFORMATION (JSON):\n"
+            f"current JSON = {current_json}\n"
+            f"FIELDS =  {', '.join(FIELDS)}\n"
+            "### MAIN ASSISTANT INSTRUCTIONS:"
+
+            f"{prompt_functionTools}"
+        )}
+    ]
+    messages.append({"role": "user", "content": user_message})
+    messages.append({
+        "role": "system",
+        "content": f"last_ai_message : {last_ai_message}"
+    })
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        tools=[
+            {
+                "type": "function",
+                "function": {
+                    "name": "extract_plan",
+                    "description": "Information Extraction",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            field: {"type": ["string", "number", "null"]} for field in FIELDS
+                        },
+                        "required": FIELDS
+                    }
+                }
+            }
+        ],
+        tool_choice="auto"
+    )
+    msg = response.choices[0].message
+
+    # ---------------------- TOOL CALL ----------------------
+    if msg.tool_calls:
+        args = json.loads(msg.tool_calls[0].function.arguments)
+
+        result = {}
+        for field in FIELDS:
+            value = args.get(field)
+            if value is None:
+                if field in current_json:
+                    value = current_json[field]
+                else:
+                    value = None
+
+            result[field] = value
+
+        print("feat>>>", result)
+        return result
+
+    return current_json
+
+#============================================= end new method =========================================
 
 
 async def get_assistant_intent(state: dict):
@@ -299,31 +411,9 @@ def get_assistant_express_need_buy(state: dict) -> str:
     ]
     final_text = chat_stream(messages, state, typeService)
     return final_text
-def get_assistant_help(state: dict) -> str:
-    user_message = state["input"]
-    context_message = (
-        f"User message: {user_message}\n"
-    )
-    messages = [
-        {
-            "role": "system",
-            "content": f"""
-    ### CONTEXT INFORMATION
-    {context_message}
-    
-   ### ASSISTANT INSTRUCTIONS
-    {help}
-    
-(Use all the data above for a better answer.)
-"""
-        },
-        {
-            "role": "user",
-            "content": user_message
-        }
-    ]
-    final_text = chat_stream(messages, state, typeService)
-    return final_text
+
+
+# FIELDS = { "service_type": "string", "min_speed": "number", "max_download": "number", "max_upload": "number", "portable": "bool", "coverage": "string", "modem": "string", "night_traffic": "bool", "traffic": "number", "duration": "number", "ip": "bool", "price": "number", "region": "string", }
 
 
 def get_assistant_question_service_support(state: dict) -> str:
