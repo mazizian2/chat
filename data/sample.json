@@ -2,6 +2,7 @@
   "token": "",
   "input": "",
   "user_feature": {},
+  "search_history": [],
   "messages": [],
   "intents": [],
   "next_node": ""

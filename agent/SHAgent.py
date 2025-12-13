@@ -4,10 +4,10 @@ from general.tools import extract_unique_values, OUTPUT_HTML
 # ============================================= start new method =========================================
 with open("assets/json/data-product.json", "r", encoding="utf-8") as f:
     data = json.load(f)
-keys_list = [list(item["products"][0].keys()) for item in data if item.get("products")]
-askable = data[0].get("askable", [])
+keys_list = [list(data["products"][0].keys())] if "products" in data and len(data["products"]) > 0 else []
+askable = data.get("askable", [])
 FIELDS = askable if askable != [] else sorted(set().union(*keys_list))
-description_data = data[0].get("general_description", "")
+description_data = data.get("description", "")
 # ============================================= end new method =========================================
 
 details_data = []
@@ -72,10 +72,10 @@ For each field in "FIELDS":
 
 """
 
-prompt_functionTools = """
+prompt_functionTools = f"""
             "You are a precise data extraction assistant.\n"
 
-   "RULES:\n"
+   "RULES FOR FIELDS:\n"
             "1. ALWAYS return ALL fields from FIELDS in extract_plan function.\n"
             "2. Any field NOT mentioned by user MUST be included and MUST be null.\n"
             "3. NEVER omit any field.\n"
@@ -86,6 +86,43 @@ prompt_functionTools = """
             "6. If user expresses uncertainty (examples: 'I don’t know', 'doesn’t matter', "
             "'anything', 'فرقی نداره', 'نمیدونم', 'هرچی', 'مهم نیست'), "
             "then value of that field MUST be '-'.\n"
+        ### RULES FOR extra_feature:\n
+        - extra_feature is OPTIONAL.\n
+        - extra_feature contains ONLY product constraints or attributes that do NOT belong to these fields:
+          {', '.join(FIELDS)}\n
+        
+        Inputs:\n
+        - previous 'extra_feature' in current JSON\n
+        - 'user message'\n
+        
+        Rules:\n
+        1. Extract new extra attributes ONLY from the latest user message.\n
+        2. KEEP previous attributes if the user does NOT contradict them.\n
+        3. REPLACE attributes that are clearly updated (e.g. price, budget).\n
+        4. REMOVE an attribute ONLY if the user explicitly rejects it.\n
+        5. NEVER duplicate the same attribute.\n
+        6. Summarize all remaining attributes into ONE concise string.\n
+        7. If no extra attributes exist at all, return null.\n
+        
+        Formatting:\n
+        - Use plain text.\n
+        - Separate multiple attributes with " | ".\n
+        
+        Behavior priority:\n
+        REJECT > REPLACE > KEEP\n
+        
+        Examples:\n
+        - previous: null\n
+          user: "قیمت زیر 500"\n
+          → extra_feature: "price under 500"\n\n
+        - previous: "brand Zara | price under 500"\n
+          user: "قیمت زیر 700"\n
+          → extra_feature: "brand Zara | price under 700"\n\n
+        - previous: "brand Zara"\n
+          user: "دیگه زارا نمی‌خوام"\n
+          → extra_feature: null
+
+            
 """
 # ============================================= end new method =========================================
 

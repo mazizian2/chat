@@ -21,7 +21,7 @@ import os
 import json
 from langchain_core.documents import Document
 from RAG.tools import json_to_docs_internet, answer_with_ai, ask_faiss_question, set_faiss_db_from_json, \
-    flatten_plans_dynamic, flatten_services_dynamic
+    flatten_plans_dynamic, flatten_services_dynamic,set_chroma_db_from_json,json_to_docs_universal,ask_chroma_question
 import uuid
 import shutil
 import requests
@@ -134,26 +134,32 @@ def user_page(request: Request, user_uuid: str):
     )
 
 
-# @app.get("/ask_rag")
-# async def ask_rag():
-#     query="شبانه,ترافیک بیش از 100 گیگ"
-#     # query از URL گرفته می‌شود
-#     faiss_results = ask_faiss_question(
-#         db_name="internet_services",
-#         query=query
-#     )
-#     # answer = answer_with_ai(faiss_results, query)
-#     page_contents =  [doc.page_content for doc in faiss_results]
-#     return page_contents
+@app.get("/ask_rag")
+async def api_ask_rag():
+    # data = read_json_file(f"{token}.json")
+    # state: ChatState = dict(data)
+    # feature=state.get("user_feature",{})
+    # query= ", ".join(f"{k}: {v}" for k, v in feature.items() if v not in (None, "", "-"))
+
+    query=" قیمت زیر 890000"
+    # query از URL گرفته می‌شود
+    faiss_results = ask_chroma_question(
+        db_name="services",
+        query=query
+    )
+    return faiss_results
+    # answer = answer_with_ai(faiss_results, query)
+    # page_contents =  [doc.page_content for doc in faiss_results]
+    # return page_contents
 
 @app.get("/set_rag")
 async def set_rag():
-    with open("lte.json", "r", encoding="utf-8") as f:
+    with open("assets/json/main.json", "r", encoding="utf-8") as f:
         json_data = json.load(f)
-    docs = json_to_docs_internet(json_data)
-    # ساخت یا افزودن داده‌ها به FAISS
-    set_faiss_db_from_json(
-        db_name="internet_services",
+    docs = json_to_docs_universal(json_data)
+    # ساخت یا افزودن داده‌ها به chroma
+    set_chroma_db_from_json(
+        db_name="services",
         docs=docs,
         mode="overwrite"  # 'append' اگر بخواهی به دیتابیس موجود اضافه شود
     )

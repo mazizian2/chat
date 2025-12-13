@@ -3,7 +3,7 @@ import json
 from agent.SHAgent import payment_assistant, user_info_json_assistant, register_order_json_assistant, \
     create_json_need_buy_assistant, set_service_support_assistant, question_service_support_assistant, help, \
     unknown_assistant, user_info_collector_assistant, register_order_assistant, answer_assistant, suggest_assistant, \
-    express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, askable,prompt_functionTools
+    express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, askable, prompt_functionTools
 from general.tools import extract_unique_values, chat_create, chat_stream, client
 
 with open("assets/json/data.json", "r", encoding="utf-8") as f:
@@ -39,11 +39,10 @@ INTENTS = [
     "unknown"
 ]
 
-#============================================= start new method =========================================
+
+# ============================================= start new method =========================================
 
 async def get_assistant_help(state: dict) -> str:
-    print("askable", askable)
-
     user_message = state["input"]
     user_feature = state.get("user_feature", {})
     last_ai_message = None
@@ -52,13 +51,13 @@ async def get_assistant_help(state: dict) -> str:
             last_ai_message = msg.get("content")
             break
     fields = [key for key in FIELDS if user_feature.get(key) in (None, "-", "")]
-    print("user_feature is>>", user_feature)
-    print("fields is>>", fields)
+    print("askable", fields)
+
     context_message = (
         f"User message: {user_message}\n"
         f"user_feature: {user_feature}\n"
         f"last_ai_message: {last_ai_message}\n"
-        f"FIELDS is: {fields}\n"
+        f"FIELDS is: {', '.join(str(x) for x in fields)}"
     )
     messages = [
         {
@@ -95,7 +94,7 @@ def call_model(state=None):
             break
     messages = [
         {"role": "system", "content": (
-           " ### CONTEXT INFORMATION (JSON):\n"
+            " ### CONTEXT INFORMATION (JSON):\n"
             f"current JSON = {current_json}\n"
             f"FIELDS =  {', '.join(FIELDS)}\n"
             "### MAIN ASSISTANT INSTRUCTIONS:"
@@ -103,7 +102,8 @@ def call_model(state=None):
             f"{prompt_functionTools}"
         )}
     ]
-    messages.append({"role": "user", "content": user_message})
+    messages.append({"role": "user", "content": f"user message :{user_message}"})
+    # messages.append({"role": "system", "content": f"extra_feature :{user_message}"})
     messages.append({
         "role": "system",
         "content": f"last_ai_message : {last_ai_message}"
@@ -121,6 +121,10 @@ def call_model(state=None):
                         "type": "object",
                         "properties": {
                             field: {"type": ["string", "number", "null"]} for field in FIELDS
+                        },
+                        "extra_feature": {
+                            "type": ["string", "null"],
+                            "description": "Other product constraints not covered by predefined 'FIELDS'"
                         },
                         "required": FIELDS
                     }
@@ -145,13 +149,15 @@ def call_model(state=None):
                     value = None
 
             result[field] = value
-
+        # extra_feature: model is source of truth
+        result["extra_feature"] = args.get("extra_feature")
         print("feat>>>", result)
         return result
 
     return current_json
 
-#============================================= end new method =========================================
+
+# ============================================= end new method =========================================
 
 
 async def get_assistant_intent(state: dict):

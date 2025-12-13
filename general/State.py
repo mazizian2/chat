@@ -11,6 +11,7 @@ class ChatState(TypedDict):
     input: Optional[str]  # آخرین پیام کاربر
     user_feature:Dict[str,Any]
     # userInfo: Optional[Any]  # ایمیل کاربر
+    search_history: List[Dict[str, str]] # تاریخچه جست و جو
     messages: List[Dict[str, str]] # تاریخچه پیام‌ها
     # history_suggestion:List[Dict[Any, Any]]  #تاریخچه سرویس های پیشنهادی
     intents: List[str]  # وضعیت intents شناسایی شده و پارامترها

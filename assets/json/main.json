@@ -1,0 +1,135 @@
+[
+  {
+    "type": "clothing",
+    "description": "- نوع محصول: پوشاک و اکسسوری\n- گروه‌بندی: مردانه، زنانه، بچگانه\n- انواع: لباس روزمره، رسمی، ورزشی، فصلی\n- سایزبندی: استاندارد، فری‌سایز، سایزبندی بین‌المللی\n- جنس: پنبه، پلی‌استر، نخ، جین، چرم و ...\n- مناسب برای: استفاده روزانه، مهمانی، ورزش، محیط کار.\nلطفاً از بین این موارد، جزئیات دلخواه خود را برای جستجوی اختصاصی ارائه دهید.",
+    "products": [
+      {
+        "id": "clth_001",
+        "title": "تیشرت نخی مردانه طرح مینیمال",
+        "gender": "مردانه",
+        "category_type": "تیشرت",
+        "size": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "color": [
+          "سفید",
+          "مشکی"
+        ],
+        "material": "پنبه ۱۰۰٪",
+        "season": "تابستان",
+        "style": "روزمره",
+        "brand": "BasicWear",
+        "price": 320000,
+        "discount": null,
+        "available": true,
+        "url": null
+      },
+      {
+        "id": "clth_002",
+        "title": "مانتو چهارخونه زنانه پاییزه",
+        "gender": "زنانه",
+        "category_type": "مانتو",
+        "size": [
+          "36",
+          "38",
+          "40",
+          "42"
+        ],
+        "color": [
+          "طوسی",
+          "مشکی"
+        ],
+        "material": "پشم و پلی‌استر",
+        "season": "پاییز",
+        "style": "روزمره / نیمه‌رسمی",
+        "brand": "ModeLine",
+        "price": 890000,
+        "discount": 10,
+        "available": true,
+        "url": null
+      },
+      {
+        "id": "clth_003",
+        "title": "شلوار جین مردانه فیت کلاسیک",
+        "gender": "مردانه",
+        "category_type": "شلوار",
+        "size": [
+          "30",
+          "32",
+          "34",
+          "36"
+        ],
+        "color": [
+          "آبی تیره",
+          "مشکی"
+        ],
+        "material": "کتان و الاستین",
+        "season": "چهار فصل",
+        "style": "روزمره / رسمی",
+        "brand": "UrbanStyle",
+        "price": 560000,
+        "discount": 5,
+        "available": true,
+        "url": null
+      },
+      {
+        "id": "clth_004",
+        "title": "پیراهن زنانه حریر مجلسی",
+        "gender": "زنانه",
+        "category_type": "پیراهن",
+        "size": [
+          "36",
+          "38",
+          "40"
+        ],
+        "color": [
+          "قرمز",
+          "سبز"
+        ],
+        "material": "حریر",
+        "season": "بهار / تابستان",
+        "style": "مجلس / مهمانی",
+        "brand": "Elegance",
+        "price": 1250000,
+        "discount": null,
+        "available": false,
+        "url": null
+      },
+      {
+        "id": "clth_005",
+        "title": "هودی مردانه گرم و نرم",
+        "gender": "مردانه",
+        "category_type": "هودی",
+        "size": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "color": [
+          "خاکستری",
+          "مشکی",
+          "آبی"
+        ],
+        "material": "پشم و پنبه",
+        "season": "زمستان",
+        "style": "روزمره / ورزشی",
+        "brand": "CozyWear",
+        "price": 480000,
+        "discount": 15,
+        "available": true,
+        "url": null
+      }
+    ],
+    "askable": [
+      "size",
+      "color",
+      "material",
+      "gender",
+      "season"
+    ]
+  }
+]
+

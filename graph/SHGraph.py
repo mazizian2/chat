@@ -19,9 +19,9 @@ import asyncio
 from socket_instance import sio
 import re
 import random
-
+from RAG.tools import ask_chroma_question
 import json
-
+import uuid
 typeService = extract_unique_values("assets/json/data.json", "category")
 INTENTS = [
     "greeting",
@@ -356,20 +356,58 @@ async def handle_follow_up_buy(state: ChatState):
 
 async def handle_help(state: ChatState):
     print("handle help")
+    if(state.get("input")=="درخواست جست و جو"):
+        chroma_results=[]
+        feature = state.get("user_feature", {})
+        search_history=state.get("search_history",[])
+        if(len(search_history)>0):
+            chroma_results=search_history
+        else:
+            query = ", ".join(f"{k}: {v}" for k, v in feature.items() if v not in (None, "", "-"))
+            print('query is>>>',query)
 
-    features = call_model(state)
-    state["user_feature"] = features
-    save_state(state)
-    response = await get_assistant_help(state)
-    response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
-    message = create_message('assistant', response)
-    state["messages"].append(message)
+            chroma_results = ask_chroma_question(
+                db_name="services",
+                query=query
+            )
+            state["search_history"]=chroma_results
+        message = create_message('assistant', "بر اساس درخواست شما محصولاتی یافت شد که عبارتند از:", None,chroma_results)
+        state["messages"].append(message)
+        unique_id = str(uuid.uuid4())
+        message_dict = {
+            "uuid": unique_id,
+            "counter": 1,
+            "role": "assistant",
+            "content": "بر اساس درخواست شما محصولاتی یافت شد که عبارتند از:",
+            "buttons": None,
+            "plans": chroma_results,
+        }
+        room=state["token"]
+        asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
+        print("chroma_results is>>", chroma_results)
 
-    if (state['intents'] != []):
-        state['intents'].pop()
-    state['next_node'] = ""
+    else:
+        features = call_model(state)
+        state["user_feature"] = features
+        save_state(state)
+        response = await get_assistant_help(state)
+        response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
+        message = create_message('assistant', response)
+        state["messages"].append(message)
+        if state["user_feature"] and any(v not in (None, "-") for v in state["user_feature"].values()):
+            query = ", ".join(f"{k}: {v}" for k, v in state["user_feature"].items() if v not in (None, "", "-"))
+            print('query is>>>',query)
+            chroma_results = ask_chroma_question(
+                db_name="services",
+                query=query
+            )
+            state["search_history"] = chroma_results
+            save_state(state)
+
+        if (state['intents'] != []):
+            state['intents'].pop()
+        state['next_node'] = ""
     save_state(state)
-    # await handle_extract_json_buy(state)
 
     return state
 #============================================= end new method =========================================

@@ -1,5 +1,5 @@
 import requests
-from RAG.tools import json_to_docs_internet,answer_with_ai, ask_faiss_question, set_faiss_db_from_json
+from RAG.tools import json_to_docs_internet,answer_with_ai, ask_faiss_question, set_faiss_db_from_json,ask_chroma_question
 import json
 import pyodbc
 from typing import Any
@@ -129,16 +129,17 @@ def execute_stored_procedure_support(procedure_name, params=None):
 
     return json_result
 
-async def ask_rag( needs: list[str],k: int = 10):
+async def ask_rag( needs: list[str],k: int = 10, max_distance: float =0.34):
     query= ', '.join(needs)
     print('query>>>',query)
     # query از URL گرفته می‌شود
-    faiss_results = ask_faiss_question(
-        db_name="internet_plans",
+    chroma_results = ask_chroma_question(
+        db_name="services",
         query=query,
-        k=k
+        k=k,
+        max_distance=max_distance
     )
     # answer = answer_with_ai(faiss_results, query)
-    print("page_contents is>>", faiss_results)
-    page_contents =  [doc.page_content for doc in faiss_results]
-    return page_contents
+    print("page_contents is>>", chroma_results)
+    # page_contents =  [doc.page_content for doc in chroma_results]
+    return chroma_results
