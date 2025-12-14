@@ -113,10 +113,16 @@ def user_page(request: Request, user_uuid: str):
 # این سرویس اینترنت پرسرعت FD-LTE بدون نیاز به خط تلفن است که با مودم جیبی یا رومیزی و سیم‌کارت ارائه می‌شود. سرعت آن تا ۴۰ مگابیت بر ثانیه است و پوشش کشوری دارد (مناطق دارای 4G، 5G و LTE). این سرویس برای کاربران خانگی و تجاری مناسب بوده و امکان استفاده از IP ثابت و انتخاب بسته‌های متنوع بر اساس نیاز مشتری فراهم است. لطفا ویژگی های مور نظر خود را بگویید تا سرویس اختصاصی شما معرفی شود."""
         content=description_data
         data = json.load(f)
-        data["messages"].append({
-            "role": "assistant",
-            "content": content
-        })
+        if(len( data["messages"])==0):
+            data["messages"].append({
+                "role": "assistant",
+                "content": content
+            })
+        else:
+            data["messages"][0]={
+                "role": "assistant",
+                "content": content
+            }
 
         with open("data.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
@@ -141,7 +147,10 @@ async def api_ask_rag():
     # feature=state.get("user_feature",{})
     # query= ", ".join(f"{k}: {v}" for k, v in feature.items() if v not in (None, "", "-"))
 
-    query=" قیمت زیر 890000"
+    # query="مانتو"
+    query={"extra_feature" :"قیمت کمتر از 500000 "}
+
+    print("query is>>>",query)
     # query از URL گرفته می‌شود
     faiss_results = ask_chroma_question(
         db_name="services",
@@ -161,7 +170,7 @@ async def set_rag():
     set_chroma_db_from_json(
         db_name="services",
         docs=docs,
-        mode="overwrite"  # 'append' اگر بخواهی به دیتابیس موجود اضافه شود
+        mode="append"  # 'append' اگر بخواهی به دیتابیس موجود اضافه شود
     )
     return {"response": docs}
 

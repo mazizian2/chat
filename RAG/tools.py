@@ -8,8 +8,9 @@ from openai import OpenAI
 from langchain_huggingface import HuggingFaceEmbeddings
 import chromadb
 from chromadb.config import Settings
-from langchain_community.embeddings import HuggingFaceEmbeddings
+
 import uuid
+
 
 def normalize_value(value):
     if isinstance(value, list):
@@ -35,46 +36,52 @@ def json_to_docs_universal(json_data: dict) -> list:
     docs = []
 
     services = json_data
-    print("sercices.>>>", services)
     for service in services:
-        service_type = service.get("type", "unknown")
-        service_desc = service.get("description", "")
+        # service_type = service.get("type", "unknown")
+        # service_desc = service.get("description", "")
 
         for plan in service.get("products", []):
 
             lines = [
-                f"نوع سرویس: {service_type}",
-                f"توضیحات: {service_desc}",
+                # f"نوع سرویس: {service_type}",
+                # f"توضیحات: {service_desc}",
                 "مشخصات:"
             ]
 
+            metadata = {}
             for key, value in plan.items():
                 readable_key = humanize_key(key)
                 readable_value = normalize_value(value)
                 lines.append(f"- {readable_key}: {readable_value}")
+                metadata[key] = f"{readable_value}"
 
-            full_text = "\n".join(lines)
-
-            splitter = RecursiveCharacterTextSplitter(
-                chunk_size=500,
-                chunk_overlap=100
+            # یک Document کامل برای هر محصول
+            docs.append(
+                Document(
+                    page_content="\n".join(lines),
+                    metadata=metadata
+                )
             )
 
-            chunks = splitter.split_text(full_text)
-
-            for chunk in chunks:
-                docs.append(
-                    Document(
-                        page_content=chunk,
-                        # metadata={
-                        #     "service_type": service_type,
-                        #     "has_price": "price" in plan,
-                        #     "available": plan.get("available", None)
-                        # }
-                    )
-                )
+            # full_text = "\n".join(lines)
+            #
+            # splitter = RecursiveCharacterTextSplitter(
+            #     chunk_size=500,
+            #     chunk_overlap=100
+            # )
+            #
+            # chunks = splitter.split_text(full_text)
+            #
+            # for chunk in chunks:
+            #     docs.append(
+            #         Document(page_content=chunk,
+            #                  # metadata={
+            #                  # }
+            #                  )
+            #     )
 
     return docs
+
 
 def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "overwrite"):
     """
@@ -88,14 +95,9 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
     embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
 
     # --- اتصال به Chroma ---
-    # client = chromadb.Client(Settings(
-    #     chroma_db_impl="duckdb+parquet",
-    #     persist_directory=save_path
-    # ))
     client = chromadb.PersistentClient(path=save_path)
 
     # بررسی اینکه collection وجود دارد یا نه
-    # existing_collections = [c['name'] for c in client.list_collections()]
     existing_collections = [c.name for c in client.list_collections()]
 
     if db_name in existing_collections:
@@ -104,10 +106,13 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
             print(f"🟢 دیتابیس '{db_name}' پیدا شد — در حال افزودن داده‌های جدید...")
             for doc in docs:
                 embedding_vector = embeddings.embed_query(doc.page_content)
+
                 collection.add(
                     ids=[doc.metadata.get("id", str(uuid.uuid4()))],
                     documents=[doc.page_content],
-                    embeddings=[embedding_vector]
+                    embeddings=[embedding_vector],
+                    metadatas=[doc.metadata]
+
                 )
             print(f"✅ داده‌های جدید به '{db_name}' اضافه شد.")
         elif mode == "overwrite":
@@ -116,10 +121,12 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
             collection = client.create_collection(db_name)
             for doc in docs:
                 embedding_vector = embeddings.embed_query(doc.page_content)
+
                 collection.add(
                     ids=[doc.metadata.get("id", str(uuid.uuid4()))],
                     documents=[doc.page_content],
-                    embeddings=[embedding_vector]
+                    embeddings=[embedding_vector],
+                    metadatas=[doc.metadata]
                 )
             print(f"✅ دیتابیس '{db_name}' با داده‌های جدید جایگزین شد.")
         else:
@@ -129,22 +136,23 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
         collection = client.create_collection(db_name)
         for doc in docs:
             embedding_vector = embeddings.embed_query(doc.page_content)
+            # embedding_vector = embeddings.embed_documents([f"passage: {doc.page_content}"])[0]
+
             collection.add(
                 ids=[doc.metadata.get("id", str(uuid.uuid4()))],
                 documents=[doc.page_content],
-                embeddings=[embedding_vector]
+                embeddings=[embedding_vector],
+                metadatas=[doc.metadata]
             )
         print(f"✅ دیتابیس جدید '{db_name}' ساخته شد.")
 
 
-def ask_chroma_question(db_name: str, query: str, k: int = 7, max_distance: float = 0.5):
-    """
-    method:
-        - "k_distance": فاصله kامین نتیجه را به عنوان threshold قرار می‌دهد
-        - "std": فاصله‌های خیلی دور را با استفاده از mean + std فیلتر می‌کند
-    """
+def ask_chroma_question(db_name: str, query: dict, k: int = 3, max_distance: float = 0.5):
+    print("query is>>",query)
     embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
-    query_vector = embeddings.embed_query(query)
+    feature = query.get("extra_feature", "")
+    query_vector = embeddings.embed_query(feature)
+    # query_vector = embeddings.embed_query(f"query: {query}")
 
     persist_directory = f"chroma_dbs/{db_name}"
     client = chromadb.PersistentClient(path=persist_directory)
@@ -153,15 +161,32 @@ def ask_chroma_question(db_name: str, query: str, k: int = 7, max_distance: floa
         raise ValueError(f"❌ دیتابیس '{db_name}' یافت نشد!")
 
     collection = client.get_collection(db_name)
-
+    where_clause = None
+    query.pop("extra_feature", None)
+    if query:
+        if len(query) == 1:
+            k_, v_ = next(iter(query.items()))
+            where_clause = {k_: v_}
+        else:
+            where_clause = {
+                "$and": [{k: v} for k, v in query.items()]
+            }
+    print("where_clause is>>>",where_clause)
     results = collection.query(
         query_embeddings=[query_vector],
-        n_results=k
+        n_results=k,
+        where=where_clause
     )
     docs = results["documents"][0]
-    for i, doc_text in enumerate(docs):
-        print(f"🔹 نتیجه {i + 1}:\n{doc_text}\n{'-' * 50}")
-    return docs
+    dis = results["distances"][0]
+    filtered_docs = []
+    print("dis>>>>", results)
+    for doc_text, dist in zip(docs, dis):
+        print(f"🔹 نتیجه :\n{doc_text}\n{dist}")
+        if dist < max_distance:
+            filtered_docs.append(doc_text)
+    # for i, doc_text in enumerate(docs):
+    return filtered_docs
     # docs = results["documents"][0]
     # distances = results["distances"][0]
     # print("results rag is>>",results)
@@ -176,9 +201,6 @@ def ask_chroma_question(db_name: str, query: str, k: int = 7, max_distance: floa
     #     print(f"🔹 نتیجه {i + 1} (distance: {dist:.3f}):\n{doc_text}\n{'-'*50}")
     #
     # return [doc for doc, _ in final_docs]
-
-
-
 
 
 def set_faiss_db_from_json(db_name: str, docs: Document, mode: str = "overwrite"):

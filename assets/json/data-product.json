@@ -122,12 +122,13 @@
       "url": null
     }
   ],
-  "askable": [
-    "size",
-    "color",
-    "material",
-    "gender",
-    "season"
-  ]
+    "askable": [
+      "category",
+      "size",
+      "color",
+      "material",
+      "gender",
+      "season"
+    ]
 }
 

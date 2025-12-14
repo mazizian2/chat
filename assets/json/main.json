@@ -124,6 +124,7 @@
       }
     ],
     "askable": [
+      "category",
       "size",
       "color",
       "material",

@@ -450,12 +450,14 @@ console.log(">>>plans>>>",data);
         const gender = data['gender'] || '—';
         const size = data['size'] || '—';
         const color = data['color'] || '—';
+        const season = data['season'] || '—';
 
         const card = $(`
             <div class="plan_card ask_ai" data-ask="${title}" data-plan-type="register">
                 <div class="plan_line title"><strong>${title}</strong></div>
                 <div class="plan_line"><strong>دسته‌بندی:</strong> ${category}</div>
                 <div class="plan_line"><strong>جنسیت:</strong> ${gender}</div>
+                <div class="plan_line"><strong>فصل:</strong> ${season}</div>
                 <div class="plan_line"><strong>سایز:</strong> ${size}</div>
                 <div class="plan_line"><strong>رنگ:</strong> ${color}</div>
                 <div class="plan_line"><strong>قیمت:</strong> ${price}</div>

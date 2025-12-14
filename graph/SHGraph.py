@@ -356,6 +356,7 @@ async def handle_follow_up_buy(state: ChatState):
 
 async def handle_help(state: ChatState):
     print("handle help")
+
     if(state.get("input")=="درخواست جست و جو"):
         chroma_results=[]
         feature = state.get("user_feature", {})
@@ -363,12 +364,14 @@ async def handle_help(state: ChatState):
         if(len(search_history)>0):
             chroma_results=search_history
         else:
-            query = ", ".join(f"{k}: {v}" for k, v in feature.items() if v not in (None, "", "-"))
-            print('query is>>>',query)
+            # query = ", ".join(f"{v}" for k, v in feature.items() if v not in (None, "", "-"))
+            # print('query is>>>',query)
+            cleaned_data = {k: v for k, v in feature.items() if v is not None and v != '-'}
+            print('query is>>>',cleaned_data)
 
             chroma_results = ask_chroma_question(
                 db_name="services",
-                query=query
+                query=cleaned_data
             )
             state["search_history"]=chroma_results
         message = create_message('assistant', "بر اساس درخواست شما محصولاتی یافت شد که عبارتند از:", None,chroma_results)
@@ -395,11 +398,16 @@ async def handle_help(state: ChatState):
         message = create_message('assistant', response)
         state["messages"].append(message)
         if state["user_feature"] and any(v not in (None, "-") for v in state["user_feature"].values()):
-            query = ", ".join(f"{k}: {v}" for k, v in state["user_feature"].items() if v not in (None, "", "-"))
-            print('query is>>>',query)
+        #     query = ", ".join(
+        #         f" {v}" for k, v in reversed(list(state["user_feature"].items()))
+        #         if v not in (None, "", "-")
+        #     )
+            cleaned_data = {k: v for k, v in state["user_feature"].items() if v is not None and v != '-'}
+
+            print('query is>>>',cleaned_data)
             chroma_results = ask_chroma_question(
                 db_name="services",
-                query=query
+                query=cleaned_data
             )
             state["search_history"] = chroma_results
             save_state(state)

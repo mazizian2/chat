@@ -86,6 +86,7 @@ async def get_assistant_help(state: dict) -> str:
 
 def call_model(state=None):
     current_json = state.get("user_feature", {})
+    extra_feature = current_json.get("extra_feature", {})
     user_message = state.get("input", "")
     last_ai_message = None
     for msg in reversed(state.get("messages", [])):
@@ -99,10 +100,62 @@ def call_model(state=None):
             f"FIELDS =  {', '.join(FIELDS)}\n"
             "### MAIN ASSISTANT INSTRUCTIONS:"
 
-            f"{prompt_functionTools}"
+            # f"{prompt_functionTools}"
+            f"""
+                "You are a precise data extraction assistant.\n"
+                
+       "RULES FOR FIELDS:\n"
+                "1. ALWAYS return ALL fields from FIELDS in extract_plan function.\n"
+                "2. Any field NOT mentioned by user MUST be included and MUST be null.\n"
+                "3. NEVER omit any field.\n"
+                "4. If `current JSON` is provided: merge it.\n"
+                "   - User-mentioned fields override old values.\n"
+                "   - Unmentioned fields keep current JSON value.\n"
+                "5. Output MUST always be a complete JSON object.\n"
+                "6. If user expresses uncertainty (examples: 'I don’t know', 'doesn’t matter', "
+                "'anything', 'فرقی نداره', 'نمیدونم', 'هرچی', 'مهم نیست'), "
+                "then value of that field MUST be '-'.\n"
+            ### RULES FOR extra_feature:\n
+            - extra_feature is OPTIONAL.\n
+            - extra_feature contains ONLY product constraints or attributes that do NOT belong to these fields:
+              {', '.join(FIELDS)}\n
+
+            Inputs:\n
+            - previous 'extra_feature' : {extra_feature}\n
+            - 'user message'\n
+
+            Rules:\n
+            1. Extract new extra attributes from the user message.\n
+            2. KEEP previous attributes if the user does NOT contradict them.\n
+            3. REPLACE attributes that are clearly updated (e.g. price, budget).\n
+            4. REMOVE an attribute ONLY if the user explicitly rejects it.\n
+            5. NEVER duplicate the same attribute.\n
+            6. Summarize all remaining attributes into ONE concise string.\n
+            7. If no extra attributes exist at all, return null.\n
+
+            Formatting:\n
+            - Use plain text.\n
+            - Separate multiple attributes with " | ".\n
+
+            Behavior priority:\n
+            REJECT > REPLACE > KEEP\n
+
+            Examples:\n
+            - previous: null\n
+              user: "قیمت زیر 500"\n
+              → extra_feature: "price under 500"\n\n
+            - previous: "brand Zara | price under 500"\n
+              user: "قیمت زیر 700"\n
+              → extra_feature: "brand Zara | price under 700"\n\n
+            - previous: "brand Zara"\n
+              user: "دیگه زارا نمی‌خوام"\n
+              → extra_feature: null
+
+
+    """
         )}
     ]
-    messages.append({"role": "user", "content": f"user message :{user_message}"})
+    messages.append({"role": "user", "content": f" user message :{user_message}"})
     # messages.append({"role": "system", "content": f"extra_feature :{user_message}"})
     messages.append({
         "role": "system",
@@ -120,14 +173,28 @@ def call_model(state=None):
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            field: {"type": ["string", "number", "null"]} for field in FIELDS
-                        },
-                        "extra_feature": {
-                            "type": ["string", "null"],
-                            "description": "Other product constraints not covered by predefined 'FIELDS'"
+                            **{
+                                field: {"type": ["string", "number", "null"]}
+                                for field in FIELDS
+                            },
+                            "extra_feature": {
+                                "type": ["string", "null"],
+                                "description": "Other product constraints not covered by predefined 'FIELDS'"
+                            }
                         },
                         "required": FIELDS
                     }
+                    # "parameters": {
+                    #     "type": "object",
+                    #     "properties": {
+                    #         field: {"type": ["string", "number", "null"]} for field in FIELDS
+                    #     },
+                    #     "extra_feature": {
+                    #         "type": ["string", "null"],
+                    #         "description": "Other product constraints not covered by predefined 'FIELDS'"
+                    #     },
+                    #     "required": FIELDS
+                    # }
                 }
             }
         ],
