@@ -2,14 +2,17 @@ import json
 from general.tools import extract_unique_values, OUTPUT_HTML
 
 # ============================================= start new method =========================================
-with open("assets/json/data-product.json", "r", encoding="utf-8") as f:
+with open("assets/json/main.json", "r", encoding="utf-8") as f:
     data = json.load(f)
+data=data[0]
 keys_list = [list(data["products"][0].keys())] if "products" in data and len(data["products"]) > 0 else []
 askable = data.get("askable", [])
 FIELDS = askable if askable != [] else sorted(set().union(*keys_list))
 description_data = data.get("description", "")
-# ============================================= end new method =========================================
+unique_categories = list({item["category_type"] for item in data["products"]})
+products=data["products"]
 
+# ============================================= end new method =========================================
 details_data = []
 typeService = extract_unique_values("assets/json/data.json", "category")
 category_description = []
@@ -71,7 +74,76 @@ For each field in "FIELDS":
 - If the user has not greeted, do *not* greet them or use generic phrases such as “At your service.”
 
 """
-
+extra_rules = f"""
+    Based on the 'user message' and the existing 'FIELDS', match the following items to produce the correct output:\n
+    | Phrase | Output |
+    Season:
+   | گرم / فصل سرد / سرما / کلفت / زمستانه / برفی / پالتو / ضخیم | فصل: زمستان |
+    | نازک / خنک / فصل گرم | فصل: تابستان |
+    | معتدل / بهاری / نه گرم نه سرد | فصل: بهار |
+    | بارانی / نم‌نم / هوای متعادل | فصل: بهار |
+    | خیلی گرم / آفتابی / داغ | فصل: تابستان |
+    | سرد / یخبندان / خیلی گرم نیست | فصل: زمستان |
+    | خنک رو به سرد / باد پاییزی / پاییزه /بارانی| فصل: پاییز |
+    | لایه‌ای / سویشرت / هوا متغیر | فصل: پاییز / بهار |
+    |همه فصل ها | فصل: چهارفصل |
+    ============================================================
+    Gender:
+   | خانم / زن / دختر | جنسیت: زنانه |
+    | آقا / مرد / پسر | جنسیت: مردانه |
+    | بچه / کودک / بچگانه | جنسیت: بچگانه |
+    | دختر بچه / دخترانه | جنسیت: بچگانه |
+    | پسر بچه / پسرانه | جنسیت: بچگانه |
+    | نوزاد / شیرخوار | جنسیت: بچگانه |
+    | نوجوان | جنسیت: بچگانه |
+    ============================================================
+    Size:
+    | خیلی کوچک / خیلی ریز | سایز: 34 |
+    | کوچک / ریز | سایز: 36 / 38 |
+    | متوسط | سایز: 40 / 42 |
+    | بزرگ | سایز: 44 / 46 |
+    | خیلی بزرگ | سایز: 48 / 50 |
+    | آزاد / فری / free | سایز: Free |
+    | لارج / large | سایز: 44 / 46 |
+    | مدیوم / medium | سایز: 40 / 42 |
+    | اسمال / small | سایز: 36 / 38 |
+    | ایکس لارج / xl | سایز: 48 |
+    | دو ایکس / xxl | سایز: 50 |
+    ============================================================
+    Category_type:
+      types just select of : {', '.join(unique_categories)},explanation: Do not add anything else. If you do not find a value or it does not match, leave it null.
+"""
+# extra_rules="""
+#     ### Qualitative-to-Numeric Mappings\n
+#     Based on the 'user message' and the existing 'FIELDS', match the following items to produce the correct output:\n
+#     | Phrase | Output |
+#     |---------|---------|
+#     | سرعت بالا / خوب | سرعت: 8 Mbps |
+#     | سرعت متوسط | سرعت: 4 Mbps |
+#     | سرعت کم | سرعت: 2 Mbps |
+#     | حجم زیاد / ترافیک زیاد | ترافیک: 1000 GB |
+#     | حجم متوسط | ترافیک: 500 GB |
+#     | حجم کم | ترافیک: 60 GB |
+#     | قیمت مناسب | قیمت: 700000 تومان |
+#     | قیمت پایین / ارزون | قیمت: زیر 1000000 تومان |
+#     | یک‌ماهه / سه‌ماهه / شش‌ماهه / یک‌ساله | مدت زمان : 30 / 90 / 180 / 365  |
+#     | سیم‌کارتی / قابل حمل | قابل حمل: دارد |
+#     | خط ثابت / بدون سیم‌کارت | قابل حمل: ندارد |
+#     | شبانه باشه/ استفاده در شب | ترافیک شبانه: دارد |
+#
+#     ============================================================
+#     ## 🧠 STEP 3 — Usage-based Feature Inference
+#     Only apply when user explicitly describes purpose.
+#
+#     | کلمه کلیدی | ویژگی‌های پیشنهادی |
+#     |-------------|--------------------|
+#     | بازی / گیم | سرعت: 8 Mbps، پینگ: پایین، ترافیک: 300 GB، IP: 1 IP |
+#     | فیلم / استریم | سرعت: 8 Mbps، ترافیک: 500 GB |
+#     | دانلود زیاد | سرعت: 8 Mbps، ترافیک: 1000 GB |
+#     | کار روزمره / وب‌گردی | سرعت: 4 Mbps، ترافیک: 150 GB |
+#     | شرکت / کسب‌وکار | سرعت: 8 Mbps، ترافیک: 1000 GB، IP: Multiple |
+#
+# """
 prompt_functionTools = f"""
             "You are a precise data extraction assistant.\n"
 

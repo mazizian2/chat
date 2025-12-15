@@ -418,18 +418,67 @@ $(document).on('click', '.internet_test', function () {
         }
     );
 });
+// function showPlans(plans, targetId) {
+//     const plansBox = $('<div class="de_element plans_box"></div>');
+//
+//     plans.forEach(planText => {
+//         const lines = planText
+//             .split('\n')
+//             .map(l => l.trim())
+//             .filter(l => l.startsWith('-')); // فقط خطوط مشخصات کامل
+//
+//         const data = {};
+//
+//         lines.forEach(line => {
+//             const cleanLine = line.replace('- ', '');
+//             const parts = cleanLine.split(':');
+//
+//             if (parts.length >= 2) {
+//                 const key = parts.shift().trim();
+//                 const value = parts.join(':').trim();
+//                 data[key] = value;
+//             }
+//         });
+//
+//         // نگاشت کلیدهای انگلیسی به فارسی
+//         const title = data['name'] || '';
+//         if (!title) return;
+//
+//         const category = data['category type'] || '—'; // اگر ندارید '—'
+//         const price = data['price'] ? data['price'] + ' تومان' : '—';
+//         const gender = data['night traffic'] || '—';
+//         const size = data['coverage'] || '—';
+//         const color = data['traffic'] || '—' + 'GB';
+//         const season = data['duration days'] || '—' +' روز';
+//
+//         const card = $(`
+//             <div class="plan_card ask_ai" data-ask="${title}" data-plan-type="register">
+//                 <div class="plan_line title"><strong>${title}</strong></div>
+//                 <div class="plan_line"><strong>ترافیک شبانه:</strong> ${gender}</div>
+//                 <div class="plan_line"><strong>زمان:</strong> ${season} روز</div>
+//                 <div class="plan_line"><strong>پوشش:</strong> ${size}</div>
+//                 <div class="plan_line"><strong>ترافیک:</strong> ${color}</div>
+//                 <div class="plan_line"><strong>قیمت:</strong> ${price}</div>
+//             </div>
+//         `);
+//
+//         plansBox.append(card);
+//     });
+//
+//     $("#" + targetId).find(".ai_message").append(plansBox);
+//     scrollToBottom();
+// }
+
 function showPlans(plans, targetId) {
     const plansBox = $('<div class="de_element plans_box"></div>');
 
     plans.forEach(planText => {
-        const lines = planText
-            .split('\n')
-            .map(l => l.trim())
-            .filter(l => l.startsWith('-'));
+        const lines = String(planText).split('\n').map(l => l.trim()).filter(l => l.startsWith('-'));
+        console.log("lines",lines)
 
         const data = {};
-
-        lines.forEach(line => {
+        if(lines.length>0){
+                  lines.forEach(line => {
             const cleanLine = line.replace('- ', '');
             const parts = cleanLine.split(':');
 
@@ -439,6 +488,9 @@ function showPlans(plans, targetId) {
                 data[key] = value;
             }
         });
+        }
+
+
 console.log(">>>plans>>>",data);
 
         // عنوان پلن

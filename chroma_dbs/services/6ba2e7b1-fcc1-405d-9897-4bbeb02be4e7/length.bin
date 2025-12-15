@@ -1,1 +1,0 @@
-invalid type: string "مشخصات:\n- id: clth_004\n- title: پیراهن زنانه حریر مجلسی\n- gender: زنانه\n- category type: پیراهن\n- size: 36, 38, 40\n- color: قرمز, سبز\n- material: حریر\n- season: بهار / تابستان\n- style: مجلس / مهمانی\n- brand: Elegance\n- price: 1250000\n- discount: —\n- available: خیر\n- url: —", expected f64

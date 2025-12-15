@@ -3,7 +3,7 @@ import json
 from agent.SHAgent import payment_assistant, user_info_json_assistant, register_order_json_assistant, \
     create_json_need_buy_assistant, set_service_support_assistant, question_service_support_assistant, help, \
     unknown_assistant, user_info_collector_assistant, register_order_assistant, answer_assistant, suggest_assistant, \
-    express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, askable, prompt_functionTools
+    express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, extra_rules
 from general.tools import extract_unique_values, chat_create, chat_stream, client
 
 with open("assets/json/data.json", "r", encoding="utf-8") as f:
@@ -88,6 +88,7 @@ def call_model(state=None):
     current_json = state.get("user_feature", {})
     extra_feature = current_json.get("extra_feature", {})
     user_message = state.get("input", "")
+    print("user_message is>>",user_message)
     last_ai_message = None
     for msg in reversed(state.get("messages", [])):
         if msg.get("role") == "assistant":
@@ -96,6 +97,7 @@ def call_model(state=None):
     messages = [
         {"role": "system", "content": (
             " ### CONTEXT INFORMATION (JSON):\n"
+            f" user message :{user_message}"
             f"current JSON = {current_json}\n"
             f"FIELDS =  {', '.join(FIELDS)}\n"
             "### MAIN ASSISTANT INSTRUCTIONS:"
@@ -117,8 +119,8 @@ def call_model(state=None):
                 "then value of that field MUST be '-'.\n"
             ### RULES FOR extra_feature:\n
             - extra_feature is OPTIONAL.\n
-            - extra_feature contains ONLY product constraints or attributes that do NOT belong to these fields:
-              {', '.join(FIELDS)}\n
+            - If user mentions any feature not in  {', '.join(FIELDS)}, always include it in extra_feature, even if previous extra_feature is null.\n
+            
 
             Inputs:\n
             - previous 'extra_feature' : {extra_feature}\n
@@ -143,20 +145,20 @@ def call_model(state=None):
             Examples:\n
             - previous: null\n
               user: "قیمت زیر 500"\n
-              → extra_feature: "price under 500"\n\n
-            - previous: "brand Zara | price under 500"\n
+              → extra_feature: "قیمت زیر 500"\n\n
+            - previous: "قیمت زیر  500 | Zara برند  "\n
               user: "قیمت زیر 700"\n
-              → extra_feature: "brand Zara | price under 700"\n\n
-            - previous: "brand Zara"\n
+            - previous: "قیمت زیر  700 | Zara برند  "\n
+            - previous: "Zara برند "\n
               user: "دیگه زارا نمی‌خوام"\n
-              → extra_feature: null
+              → extra_feature: null\n
+              {extra_rules}
 
 
     """
         )}
     ]
     messages.append({"role": "user", "content": f" user message :{user_message}"})
-    # messages.append({"role": "system", "content": f"extra_feature :{user_message}"})
     messages.append({
         "role": "system",
         "content": f"last_ai_message : {last_ai_message}"
@@ -184,24 +186,14 @@ def call_model(state=None):
                         },
                         "required": FIELDS
                     }
-                    # "parameters": {
-                    #     "type": "object",
-                    #     "properties": {
-                    #         field: {"type": ["string", "number", "null"]} for field in FIELDS
-                    #     },
-                    #     "extra_feature": {
-                    #         "type": ["string", "null"],
-                    #         "description": "Other product constraints not covered by predefined 'FIELDS'"
-                    #     },
-                    #     "required": FIELDS
-                    # }
+
                 }
             }
         ],
         tool_choice="auto"
     )
     msg = response.choices[0].message
-
+    print("result for call method>>",msg)
     # ---------------------- TOOL CALL ----------------------
     if msg.tool_calls:
         args = json.loads(msg.tool_calls[0].function.arguments)

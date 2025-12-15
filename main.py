@@ -1,7 +1,7 @@
 import asyncio
 from fastapi import FastAPI, Request
 import socketio
-from agent.SHAgent import description_data
+from agent.SHAgent import description_data,products
 from pydantic import BaseModel
 from general.tools import (extract_min_max, filter_by_date, clean_and_load_json, execute_stored_procedure,
                            create_message, load_latest_state)
@@ -116,12 +116,14 @@ def user_page(request: Request, user_uuid: str):
         if(len( data["messages"])==0):
             data["messages"].append({
                 "role": "assistant",
-                "content": content
+                "content": content,
+                "buttons":["شروع پرسش","نمایش همه محصولات"]
             })
         else:
             data["messages"][0]={
                 "role": "assistant",
-                "content": content
+                "content": content,
+                "buttons":["شروع پرسش","نمایش همه محصولات"]
             }
 
         with open("data.json", "w", encoding="utf-8") as f:
@@ -148,7 +150,7 @@ async def api_ask_rag():
     # query= ", ".join(f"{k}: {v}" for k, v in feature.items() if v not in (None, "", "-"))
 
     # query="مانتو"
-    query={"extra_feature" :"قیمت کمتر از 500000 "}
+    query={"extra_feature" :"جیبی"}
 
     print("query is>>>",query)
     # query از URL گرفته می‌شود

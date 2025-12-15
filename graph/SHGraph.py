@@ -1,6 +1,6 @@
 from typing import TypedDict, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
-
+from agent.SHAgent import products
 from task.SHTask import get_assistant_suggest, register_order_json_task, get_assistant_express_need_buy, \
     get_assistant_user_info_collector, get_assistant_register_order, get_assistant_answer, \
     user_info_json_task, get_assistant_unknown, create_json_need_buy_response_task, \
@@ -356,16 +356,13 @@ async def handle_follow_up_buy(state: ChatState):
 
 async def handle_help(state: ChatState):
     print("handle help")
-
-    if(state.get("input")=="درخواست جست و جو"):
-        chroma_results=[]
+    input=state.get("input")
+    if(input=="درخواست جست و جو"):
         feature = state.get("user_feature", {})
         search_history=state.get("search_history",[])
         if(len(search_history)>0):
             chroma_results=search_history
         else:
-            # query = ", ".join(f"{v}" for k, v in feature.items() if v not in (None, "", "-"))
-            # print('query is>>>',query)
             cleaned_data = {k: v for k, v in feature.items() if v is not None and v != '-'}
             print('query is>>>',cleaned_data)
 
@@ -374,20 +371,41 @@ async def handle_help(state: ChatState):
                 query=cleaned_data
             )
             state["search_history"]=chroma_results
-        message = create_message('assistant', "بر اساس درخواست شما محصولاتی یافت شد که عبارتند از:", None,chroma_results)
+        message = create_message('assistant', "«محصولات مشابه درخواست شما یافت شد که عبارتند از:»", None,chroma_results)
         state["messages"].append(message)
         unique_id = str(uuid.uuid4())
         message_dict = {
             "uuid": unique_id,
             "counter": 1,
             "role": "assistant",
-            "content": "بر اساس درخواست شما محصولاتی یافت شد که عبارتند از:",
+            "content": "«محصولات مشابه درخواست شما یافت شد که عبارتند از:»",
             "buttons": None,
             "plans": chroma_results,
         }
         room=state["token"]
         asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
         print("chroma_results is>>", chroma_results)
+
+    elif(input=="شروع پرسش"):
+        response = await get_assistant_help(state)
+        response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
+        message = create_message('assistant', response)
+        state["messages"].append(message)
+    elif(input=="نمایش همه محصولات"):
+        print("produstssss>>",products)
+        message = create_message('assistant', "«لیست تمامی محصولات: »", None,products)
+        state["messages"].append(message)
+        unique_id = str(uuid.uuid4())
+        message_dict = {
+            "uuid": unique_id,
+            "counter": 1,
+            "role": "assistant",
+            "content": "«لیست تمامی محصولات: »",
+            "buttons": None,
+            "plans": products,
+        }
+        room = state["token"]
+        asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
 
     else:
         features = call_model(state)
@@ -398,10 +416,6 @@ async def handle_help(state: ChatState):
         message = create_message('assistant', response)
         state["messages"].append(message)
         if state["user_feature"] and any(v not in (None, "-") for v in state["user_feature"].values()):
-        #     query = ", ".join(
-        #         f" {v}" for k, v in reversed(list(state["user_feature"].items()))
-        #         if v not in (None, "", "-")
-        #     )
             cleaned_data = {k: v for k, v in state["user_feature"].items() if v is not None and v != '-'}
 
             print('query is>>>',cleaned_data)

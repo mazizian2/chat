@@ -37,23 +37,71 @@ def json_to_docs_universal(json_data: dict) -> list:
 
     services = json_data
     for service in services:
-        # service_type = service.get("type", "unknown")
-        # service_desc = service.get("description", "")
-
+        name = service.get("name", "")
+        #
+        # for plan in service.get("products", []):
+        #
+        #     lines = [
+        #         "مشخصات:"
+        #     ]
+        #     metadata = {}
+        #     for key, value in plan.items():
+        #         readable_key = humanize_key(key)
+        #         readable_value = normalize_value(value)
+        #         lines.append(f"- {readable_key}: {readable_value}")
+        #         # if key in askable:
+        #         metadata[key] = f"{readable_value}"
         for plan in service.get("products", []):
 
+            # --- خلاصه‌ی معنایی برای embedding ---
+            summary = (
+                f"نام محصول: {plan.get('title', 'نامشخص')} | "
+                f"جنسیت: {plan.get('gender', 'نامشخص')} | "
+                f"دسته‌بندی: {plan.get('category_type', 'نامشخص')} | "
+                f"سایز: {', '.join(plan.get('size', ['نامشخص']))} | "
+                f"رنگ: {', '.join(plan.get('color', ['نامشخص']))} | "
+                f"جنس لباس: {plan.get('material', 'نامشخص')} | "
+                f"فصل: {plan.get('season', 'نامشخص')} | "
+                f"سبک: {plan.get('style', 'نامشخص')} | "
+                f"برند: {plan.get('brand', 'نامشخص')} | "
+                f"تخفیف: {'دارد' if plan.get('discount') else 'ندارد'} | "
+                f"موجودی: {'دارد' if plan.get('available') else 'ندارد'} | "
+                f"قیمت: {plan.get('price', 'نامشخص')} تومان"
+            )
+
+            # summary = ( f"""
+            #
+            #                 نام پلن: {str(plan.get('name', ''))}
+            #                 حداقل سرعت: {str(plan.get('min_speed', ''))}مگابیت،
+            #                 حداکثر سرعت: {str(plan.get('max_speed', ''))}مگابیت،
+            #                 سرعت آپلود: {str(plan.get('upload_speed', ''))}مگابیت،
+            #                 f"{'قابل حمل' if plan.get('movable') == 'دارد' else 'ثابت'}، "
+            #                 پوشش: {str(plan.get('coverage', ''))}
+            #                 f"{'مودم دارد' if plan.get('modem') == 'دارد' else 'بدون مودم'}، "
+            #                 ترافیک شبانه: {plan.get('night_traffic', '')}
+            #                 حجم ترافیک: {str(plan.get('traffic', ''))}مگابیت،
+            #                 مدت زمان: {str(plan.get('duration_days', ''))}روزه،
+            #                 IP: {str(plan.get('ip', ''))}
+            #                 قیمت: {str(plan.get('price', ''))} تومان
+            #                 """
+            # )
+
             lines = [
-                # f"نوع سرویس: {service_type}",
-                # f"توضیحات: {service_desc}",
-                "مشخصات:"
+                summary,
+                "",
+                "مشخصات کامل:"
             ]
 
             metadata = {}
+
             for key, value in plan.items():
-                readable_key = humanize_key(key)
-                readable_value = normalize_value(value)
-                lines.append(f"- {readable_key}: {readable_value}")
-                metadata[key] = f"{readable_value}"
+                lines.append(f"- {humanize_key(key)}: {normalize_value(value)}")
+
+                # --- متادیتا عددی واقعی ---
+                if isinstance(value, (int, float)):
+                    metadata[key] = value
+                else:
+                    metadata[key] = normalize_value(value)
 
             # یک Document کامل برای هر محصول
             docs.append(
@@ -62,24 +110,6 @@ def json_to_docs_universal(json_data: dict) -> list:
                     metadata=metadata
                 )
             )
-
-            # full_text = "\n".join(lines)
-            #
-            # splitter = RecursiveCharacterTextSplitter(
-            #     chunk_size=500,
-            #     chunk_overlap=100
-            # )
-            #
-            # chunks = splitter.split_text(full_text)
-            #
-            # for chunk in chunks:
-            #     docs.append(
-            #         Document(page_content=chunk,
-            #                  # metadata={
-            #                  # }
-            #                  )
-            #     )
-
     return docs
 
 
@@ -92,7 +122,8 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
     os.makedirs(save_path, exist_ok=True)
 
     # --- Embeddings ---
-    embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
+    # embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
+    embeddings = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-base")
 
     # --- اتصال به Chroma ---
     client = chromadb.PersistentClient(path=save_path)
@@ -104,9 +135,12 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
         collection = client.get_collection(db_name)
         if mode == "append":
             print(f"🟢 دیتابیس '{db_name}' پیدا شد — در حال افزودن داده‌های جدید...")
+            # for doc in docs:
+            #     embedding_vector = embeddings.embed_query(doc.page_content)
             for doc in docs:
-                embedding_vector = embeddings.embed_query(doc.page_content)
-
+                embedding_vector = embeddings.embed_query(
+                    f"passage: {doc.page_content}"
+                )
                 collection.add(
                     ids=[doc.metadata.get("id", str(uuid.uuid4()))],
                     documents=[doc.page_content],
@@ -147,12 +181,13 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
         print(f"✅ دیتابیس جدید '{db_name}' ساخته شد.")
 
 
-def ask_chroma_question(db_name: str, query: dict, k: int = 3, max_distance: float = 0.5):
-    print("query is>>",query)
-    embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
+def ask_chroma_question(db_name: str, query: dict, k: int = 10):
+    print("query is>>", query)
+    # embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
+    embeddings = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-base")
     feature = query.get("extra_feature", "")
-    query_vector = embeddings.embed_query(feature)
-    # query_vector = embeddings.embed_query(f"query: {query}")
+    # query_vector = embeddings.embed_query(feature)
+    query_vector = embeddings.embed_query(f"query: {feature}")
 
     persist_directory = f"chroma_dbs/{db_name}"
     client = chromadb.PersistentClient(path=persist_directory)
@@ -171,22 +206,24 @@ def ask_chroma_question(db_name: str, query: dict, k: int = 3, max_distance: flo
             where_clause = {
                 "$and": [{k: v} for k, v in query.items()]
             }
-    print("where_clause is>>>",where_clause)
+    print("where_clause is>>>", where_clause)
     results = collection.query(
         query_embeddings=[query_vector],
         n_results=k,
         where=where_clause
     )
     docs = results["documents"][0]
-    dis = results["distances"][0]
-    filtered_docs = []
-    print("dis>>>>", results)
-    for doc_text, dist in zip(docs, dis):
-        print(f"🔹 نتیجه :\n{doc_text}\n{dist}")
-        if dist < max_distance:
-            filtered_docs.append(doc_text)
+    distances = results["distances"][0]
+    print("distances is>>",distances)
+    if len(distances) > 0:
+        avg_dist = sum(distances) / len(distances)
+        final_docs = [doc for doc, dist in zip(docs, distances) if dist <= avg_dist]
+    else:
+        final_docs = []
+
+    return final_docs
     # for i, doc_text in enumerate(docs):
-    return filtered_docs
+
     # docs = results["documents"][0]
     # distances = results["distances"][0]
     # print("results rag is>>",results)

@@ -137,7 +137,7 @@ async def ask_rag( needs: list[str],k: int = 10, max_distance: float =0.34):
         db_name="services",
         query=query,
         k=k,
-        max_distance=max_distance
+
     )
     # answer = answer_with_ai(faiss_results, query)
     print("page_contents is>>", chroma_results)

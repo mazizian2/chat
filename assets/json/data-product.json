@@ -3,33 +3,10 @@
   "description": "- نوع محصول: پوشاک و اکسسوری\n- گروه‌بندی: مردانه، زنانه، بچگانه\n- انواع: لباس روزمره، رسمی، ورزشی، فصلی\n- سایزبندی: استاندارد، فری‌سایز، سایزبندی بین‌المللی\n- جنس: پنبه، پلی‌استر، نخ، جین، چرم و ...\n- مناسب برای: استفاده روزانه، مهمانی، ورزش، محیط کار.\nلطفاً از بین این موارد، جزئیات دلخواه خود را برای جستجوی اختصاصی ارائه دهید.",
   "products": [
     {
-      "id": "clth_001",
-      "title": "تیشرت نخی مردانه طرح مینیمال",
-      "gender": "مردانه",
-      "category_type": "تیشرت",
-      "size": [
-        "M",
-        "L",
-        "XL"
-      ],
-      "color": [
-        "سفید",
-        "مشکی"
-      ],
-      "material": "پنبه ۱۰۰٪",
-      "season": "تابستان",
-      "style": "روزمره",
-      "brand": "BasicWear",
-      "price": 320000,
-      "discount": null,
-      "available": true,
-      "url": null
-    },
-    {
-      "id": "clth_002",
-      "title": "مانتو چهارخونه زنانه پاییزه",
+      "id": "clth_006",
+      "title": "بلوز زنانه نخی ساده",
       "gender": "زنانه",
-      "category_type": "مانتو",
+      "category_type": "بلوز",
       "size": [
         "36",
         "38",
@@ -37,21 +14,295 @@
         "42"
       ],
       "color": [
-        "طوسی",
-        "مشکی"
+        "سفید",
+        "کرم",
+        "صورتی"
       ],
-      "material": "پشم و پلی‌استر",
-      "season": "پاییز",
-      "style": "روزمره / نیمه‌رسمی",
-      "brand": "ModeLine",
-      "price": 890000,
+      "material": "نخ پنبه",
+      "season": "بهار / تابستان",
+      "style": "روزمره",
+      "brand": "SoftLine",
+      "price": 290000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_008",
+      "title": "هودی زنانه کلاه‌دار اسپرت",
+      "gender": "زنانه",
+      "category_type": "هودی",
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color": [
+        "مشکی",
+        "خاکستری",
+        "صورتی"
+      ],
+      "material": "پنبه و پلی‌استر",
+      "season": "پاییز / زمستان",
+      "style": "اسپرت",
+      "brand": "CozyWear",
+      "price": 380000,
+      "discount": 5,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_018",
+      "title": "سویشرت زنانه زیپ‌دار بلند",
+      "gender": "زنانه",
+      "category_type": "سویشرت",
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color": [
+        "مشکی",
+        "خاکستری روشن",
+        "صورتی روشن"
+      ],
+      "material": "پنبه و پلی‌استر",
+      "season": "پاییز / زمستان",
+      "style": "روزمره",
+      "brand": "EverydayWear",
+      "price": 390000,
       "discount": 10,
       "available": true,
       "url": null
     },
     {
-      "id": "clth_003",
-      "title": "شلوار جین مردانه فیت کلاسیک",
+      "id": "clth_019",
+      "title": "پیراهن مردانه آستین بلند کلاسیک",
+      "gender": "مردانه",
+      "category_type": "پیراهن",
+      "size": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "color": [
+        "سفید",
+        "آبی روشن",
+        "آبی تیره"
+      ],
+      "material": "پنبه",
+      "season": "چهار فصل",
+      "style": "رسمی",
+      "brand": "FormalLine",
+      "price": 510000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_020",
+      "title": "دامن زنانه کوتاه چین‌دار",
+      "gender": "زنانه",
+      "category_type": "دامن",
+      "size": [
+        "36",
+        "38",
+        "40",
+        "42"
+      ],
+      "color": [
+        "قرمز",
+        "آبی",
+        "مشکی"
+      ],
+      "material": "کتان",
+      "season": "بهار / تابستان",
+      "style": "روزمره",
+      "brand": "ChicStyle",
+      "price": 310000,
+      "discount": 5,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_021",
+      "title": "شلوار مردانه راحتی نخی",
+      "gender": "مردانه",
+      "category_type": "شلوار",
+      "size": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "color": [
+        "خاکستری",
+        "سرمه‌ای",
+        "مشکی"
+      ],
+      "material": "نخ پنبه",
+      "season": "بهار / تابستان",
+      "style": "کژوال",
+      "brand": "ComfyMen",
+      "price": 350000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_022",
+      "title": "تاپ زنانه رکابی نخی چاپی",
+      "gender": "زنانه",
+      "category_type": "تاپ",
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "color": [
+        "سفید",
+        "زرد",
+        "صورتی"
+      ],
+      "material": "نخ پنبه",
+      "season": "بهار / تابستان",
+      "style": "ورزشی",
+      "brand": "SportyGirl",
+      "price": 150000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_023",
+      "title": "کاپشن زنانه پفی کوتاه",
+      "gender": "زنانه",
+      "category_type": "کاپشن",
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "color": [
+        "مشکی",
+        "آبی تیره",
+        "قرمز"
+      ],
+      "material": "پلی‌استر و پر",
+      "season": "زمستان",
+      "style": "اسپرت",
+      "brand": "WarmUp",
+      "price": 780000,
+      "discount": 15,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_024",
+      "title": "هودی مردانه جلو بسته با جیب",
+      "gender": "مردانه",
+      "category_type": "هودی",
+      "size": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "color": [
+        "مشکی",
+        "خاکستری",
+        "سبز تیره"
+      ],
+      "material": "پنبه و پلی‌استر",
+      "season": "پاییز / زمستان",
+      "style": "روزمره",
+      "brand": "UrbanHood",
+      "price": 420000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_025",
+      "title": "شلوار زنانه جذب جین",
+      "gender": "زنانه",
+      "category_type": "شلوار",
+      "size": [
+        "36",
+        "38",
+        "40",
+        "42"
+      ],
+      "color": [
+        "آبی روشن",
+        "آبی تیره",
+        "مشکی"
+      ],
+      "material": "جین کشی",
+      "season": "چهار فصل",
+      "style": "روزمره",
+      "brand": "DenimQueen",
+      "price": 450000,
+      "discount": 10,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_026",
+      "title": "تی‌شرت مردانه آستین کوتاه ساده",
+      "gender": "مردانه",
+      "category_type": "تی‌شرت",
+      "size": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "color": [
+        "سفید",
+        "مشکی",
+        "خاکستری"
+      ],
+      "material": "پنبه",
+      "season": "بهار / تابستان",
+      "style": "روزمره",
+      "brand": "BasicMen",
+      "price": 180000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_027",
+      "title": "کت زنانه کوتاه رسمی",
+      "gender": "زنانه",
+      "category_type": "کت",
+      "size": [
+        "36",
+        "38",
+        "40",
+        "42"
+      ],
+      "color": [
+        "مشکی",
+        "سرمه‌ای",
+        "کرم"
+      ],
+      "material": "کتان و پلی‌استر",
+      "season": "چهار فصل",
+      "style": "رسمی",
+      "brand": "OfficeChic",
+      "price": 620000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_029",
+      "title": "شلوار جین مردانه کلاسیک",
       "gender": "مردانه",
       "category_type": "شلوار",
       "size": [
@@ -61,44 +312,195 @@
         "36"
       ],
       "color": [
+        "آبی روشن",
         "آبی تیره",
         "مشکی"
       ],
-      "material": "کتان و الاستین",
+      "material": "جین",
       "season": "چهار فصل",
-      "style": "روزمره / رسمی",
-      "brand": "UrbanStyle",
-      "price": 560000,
-      "discount": 5,
+      "style": "روزمره",
+      "brand": "DenimCo",
+      "price": 520000,
+      "discount": null,
       "available": true,
       "url": null
     },
     {
-      "id": "clth_004",
-      "title": "پیراهن زنانه حریر مجلسی",
+      "id": "clth_030",
+      "title": "پیراهن زنانه مجلسی حریر",
       "gender": "زنانه",
       "category_type": "پیراهن",
       "size": [
         "36",
         "38",
-        "40"
+        "40",
+        "42"
       ],
       "color": [
         "قرمز",
-        "سبز"
+        "آبی",
+        "مشکی"
       ],
       "material": "حریر",
       "season": "بهار / تابستان",
-      "style": "مجلس / مهمانی",
+      "style": "مجلسی",
       "brand": "Elegance",
-      "price": 1250000,
-      "discount": null,
-      "available": false,
+      "price": 650000,
+      "discount": 15,
+      "available": true,
       "url": null
     },
     {
-      "id": "clth_005",
-      "title": "هودی مردانه گرم و نرم",
+      "id": "clth_031",
+      "title": "ژاکت مردانه بافتنی یقه گرد",
+      "gender": "مردانه",
+      "category_type": "ژاکت",
+      "size": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "color": [
+        "خاکستری",
+        "کرم",
+        "سرمه‌ای"
+      ],
+      "material": "پشم",
+      "season": "پاییز / زمستان",
+      "style": "کژوال",
+      "brand": "WoolLine",
+      "price": 480000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_032",
+      "title": "تاپ زنانه نخی اسپرت",
+      "gender": "زنانه",
+      "category_type": "تاپ",
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "color": [
+        "سفید",
+        "مشکی",
+        "نارنجی"
+      ],
+      "material": "نخ پنبه",
+      "season": "بهار / تابستان",
+      "style": "ورزشی",
+      "brand": "ActiveFit",
+      "price": 180000,
+      "discount": 10,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_033",
+      "title": "کاپشن مردانه ضد آب",
+      "gender": "مردانه",
+      "category_type": "کاپشن",
+      "size": [
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "color": [
+        "مشکی",
+        "خاکستری",
+        "سبز تیره"
+      ],
+      "material": "پلی‌استر",
+      "season": "پاییز / زمستان",
+      "style": "اسپرت",
+      "brand": "RainGuard",
+      "price": 720000,
+      "discount": 20,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_034",
+      "title": "شلوار زنانه کتان راسته",
+      "gender": "زنانه",
+      "category_type": "شلوار",
+      "size": [
+        "36",
+        "38",
+        "40",
+        "42"
+      ],
+      "color": [
+        "کرم",
+        "سبز زیتونی",
+        "سرمه‌ای"
+      ],
+      "material": "کتان",
+      "season": "بهار / تابستان",
+      "style": "روزمره",
+      "brand": "UrbanStyle",
+      "price": 400000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_035",
+      "title": "تی‌شرت مردانه چاپی",
+      "gender": "مردانه",
+      "category_type": "تی‌شرت",
+      "size": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "color": [
+        "سفید",
+        "مشکی",
+        "قرمز"
+      ],
+      "material": "پنبه",
+      "season": "بهار / تابستان",
+      "style": "کژوال",
+      "brand": "PrintMan",
+      "price": 220000,
+      "discount": 5,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_036",
+      "title": "کفش ورزشی زنانه راحتی",
+      "gender": "زنانه",
+      "category_type": "کفش",
+      "size": [
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ],
+      "color": [
+        "سفید",
+        "صورتی",
+        "مشکی"
+      ],
+      "material": "جیر و فوم",
+      "season": "چهار فصل",
+      "style": "ورزشی",
+      "brand": "RunFast",
+      "price": 580000,
+      "discount": 10,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_037",
+      "title": "هودی مردانه با زیپ کامل",
       "gender": "مردانه",
       "category_type": "هودی",
       "size": [
@@ -112,23 +514,230 @@
         "مشکی",
         "آبی"
       ],
-      "material": "پشم و پنبه",
-      "season": "زمستان",
+      "material": "پنبه و پلی‌استر",
+      "season": "پاییز / زمستان",
+      "style": "اسپرت",
+      "brand": "CozyMen",
+      "price": 420000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_047",
+      "title": "پیراهن مردانه آستین بلند رسمی",
+      "gender": "مردانه",
+      "category_type": "پیراهن",
+      "size": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "color": [
+        "سفید",
+        "آبی روشن"
+      ],
+      "material": "پنبه",
+      "season": "چهار فصل",
+      "style": "رسمی",
+      "brand": "OfficeWear",
+      "price": 610000,
+      "discount": 10,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_048",
+      "title": "دامن زنانه پلیسه",
+      "gender": "زنانه",
+      "category_type": "دامن",
+      "size": [
+        "36",
+        "38",
+        "40"
+      ],
+      "color": [
+        "مشکی",
+        "زیتونی"
+      ],
+      "material": "پلی‌استر",
+      "season": "بهار / پاییز",
+      "style": "نیمه‌رسمی",
+      "brand": "ChicStyle",
+      "price": 540000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_049",
+      "title": "سویشرت مردانه زیپ‌دار",
+      "gender": "مردانه",
+      "category_type": "سویشرت",
+      "size": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "color": [
+        "طوسی",
+        "سرمه‌ای"
+      ],
+      "material": "پنبه و پلی‌استر",
+      "season": "پاییز / زمستان",
       "style": "روزمره / ورزشی",
-      "brand": "CozyWear",
-      "price": 480000,
-      "discount": 15,
+      "brand": "ActiveWear",
+      "price": 520000,
+      "discount": 5,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_050",
+      "title": "شومیز زنانه طرح‌دار",
+      "gender": "زنانه",
+      "category_type": "شومیز",
+      "size": [
+        "36",
+        "38",
+        "40",
+        "42"
+      ],
+      "color": [
+        "آبی",
+        "سفید"
+      ],
+      "material": "ویسکوز",
+      "season": "بهار",
+      "style": "روزمره",
+      "brand": "DailyLook",
+      "price": 430000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_051",
+      "title": "کت تک مردانه رسمی",
+      "gender": "مردانه",
+      "category_type": "کت",
+      "size": [
+        "48",
+        "50",
+        "52",
+        "54"
+      ],
+      "color": [
+        "مشکی",
+        "سرمه‌ای"
+      ],
+      "material": "پشم",
+      "season": "چهار فصل",
+      "style": "رسمی",
+      "brand": "FormalPro",
+      "price": 2450000,
+      "discount": 20,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_052",
+      "title": "تونیک زنانه بلند",
+      "gender": "زنانه",
+      "category_type": "تونیک",
+      "size": [
+        "38",
+        "40",
+        "42",
+        "44"
+      ],
+      "color": [
+        "طوسی",
+        "بنفش"
+      ],
+      "material": "نخ",
+      "season": "چهار فصل",
+      "style": "روزمره",
+      "brand": "ComfortFit",
+      "price": 470000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_053",
+      "title": "تاپ زنانه تابستانی",
+      "gender": "زنانه",
+      "category_type": "تاپ",
+      "size": [
+        "S",
+        "M",
+        "L"
+      ],
+      "color": [
+        "زرد",
+        "سفید"
+      ],
+      "material": "پنبه",
+      "season": "تابستان",
+      "style": "روزمره",
+      "brand": "Sunny",
+      "price": 210000,
+      "discount": null,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_054",
+      "title": "پولوشرت مردانه",
+      "gender": "مردانه",
+      "category_type": "پولوشرت",
+      "size": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "color": [
+        "سبز",
+        "سرمه‌ای"
+      ],
+      "material": "پنبه",
+      "season": "بهار / تابستان",
+      "style": "روزمره",
+      "brand": "CasualMan",
+      "price": 390000,
+      "discount": 5,
+      "available": true,
+      "url": null
+    },
+    {
+      "id": "clth_055",
+      "title": "شلوار پارچه‌ای زنانه",
+      "gender": "زنانه",
+      "category_type": "شلوار",
+      "size": [
+        "36",
+        "38",
+        "40",
+        "42"
+      ],
+      "color": [
+        "مشکی",
+        "کرم"
+      ],
+      "material": "پلی‌استر",
+      "season": "چهار فصل",
+      "style": "رسمی / اداری",
+      "brand": "OfficeLady",
+      "price": 650000,
+      "discount": null,
       "available": true,
       "url": null
     }
   ],
-    "askable": [
-      "category",
-      "size",
-      "color",
-      "material",
-      "gender",
-      "season"
-    ]
+  "askable": [
+    "category_type",
+    "gender"
+  ]
 }
-
