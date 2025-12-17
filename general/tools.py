@@ -12,8 +12,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import asyncio
 from socket_instance import sio
-from general.state_manager import save_state
-
+from general.constants import FIELDS
 
 def extract_unique_values(filename, key):
     with open(filename, "r", encoding="utf-8") as file:
@@ -319,54 +318,6 @@ def create_message(role: str, message: str, buttons: Optional[Any] = None, plans
     return message_dict
 
 
-def create_message_stream(role: str, message: str, buttons: Optional[Any] = None, plans: Optional[Any] = None) -> Dict[
-    str, Any]:
-    message_dict = {
-        "role": role,
-        "content": message
-    }
-    if buttons is not None:
-        message_dict["buttons"] = buttons
-    if plans is not None:
-        message_dict["plans"] = plans
-    return message_dict
-
-
-# create message and run stream
-def thread_message_stream(state: dict, context_message: str, threadId: str, assistantId: str, ):
-    client.beta.threads.messages.create(
-        role="user",
-        content=context_message,
-        thread_id=threadId,
-    )
-    steam_text = ""
-    final = ""
-    counter = 1
-    unique_id = str(uuid.uuid4())
-
-    with client.beta.threads.runs.stream(
-            thread_id=threadId, assistant_id=assistantId
-    ) as stream:
-        for delta in stream.text_deltas:
-            print(delta, end="", flush=True)  # چاپ زنده
-            steam_text = delta
-            final += steam_text
-            counter += 1
-            id = counter
-            message_dict = {
-                "uuid": unique_id,
-                "counter": id,
-                "role": "assistant",
-                "content": steam_text
-            }
-            room = state["token"]
-            asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
-
-        final += stream.until_done() or ""
-        print("\nassistant_response:", final)
-    return final
-
-
 # create message and run
 def chat_create(messages: List[Any]):
     response = client.chat.completions.create(
@@ -376,71 +327,30 @@ def chat_create(messages: List[Any]):
     )
     return response.choices[0].message.content
 
+def missing_fields(features: dict) -> list:
+    return  [key for key in FIELDS if features.get(key) in (None, "-", "")]
 
-def thread_message_stream(state: dict, context_message: str, threadId: str, assistantId: str, ):
-    client.beta.threads.messages.create(
-        role="user",
-        content=context_message,
-        thread_id=threadId,
-    )
-    steam_text = ""
-    final = ""
-    counter = 1
-    unique_id = str(uuid.uuid4())
-
-    with client.beta.threads.runs.stream(
-            thread_id=threadId, assistant_id=assistantId
-    ) as stream:
-        for delta in stream.text_deltas:
-            print(delta, end="", flush=True)  # چاپ زنده
-            steam_text = delta
-            final += steam_text
-            counter += 1
-            id = counter
-            message_dict = {
-                "uuid": unique_id,
-                "counter": id,
-                "role": "assistant",
-                "content": steam_text
-            }
-            room = state["token"]
-            asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
-
-        final += stream.until_done() or ""
-        print("\nassistant_response:", final)
-    return final
-
-
-# create message and run
-async def thread_message(context_message: str, threadId: str, assistantId: str):
-    client.beta.threads.messages.create(
-        role="user",
-        content=context_message,
-        thread_id=threadId,
-    )
-    run = client.beta.threads.runs.create(
-        assistant_id=assistantId,
-        thread_id=threadId,
-    )
-    while run.status in ("queued", "in_progress"):
-        await asyncio.sleep(1)
-        run = client.beta.threads.runs.retrieve(thread_id=threadId, run_id=run.id)
-    messages_page = client.beta.threads.messages.list(
-        order="desc",
-        limit=1,
-        thread_id=threadId,
-    )
-    messages = messages_page.data  # → این یک list است
-    last_msg = messages[0]  # چون limit=1
-    value = last_msg.content[0].text.value
-    print("intent res>>", value)
-    return value
+def emit_message(state, counter, content, plans=None, buttons=None):
+    message = create_message("assistant", content, buttons, plans)
+    state["messages"].append(message)
+    message_dict = {
+        "uuid": str(uuid.uuid4()),
+        "counter": counter,
+        "role": "assistant",
+        "content": content,
+        "buttons": buttons,
+        "plans": plans,
+    }
+    room = state["token"]
+    asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room)
+                        )
 
 
 # create message and run stream
 async def chat_stream(messages: List[Any], state=None, buttons=None, plans=None):
     room = state["token"]
     unique_id = str(uuid.uuid4())
+    print("unique_id chat stream>>", unique_id)
     stream_text = ""
     final_text = ""
     counter = 1
@@ -466,12 +376,6 @@ async def chat_stream(messages: List[Any], state=None, buttons=None, plans=None)
 
             elif event.type == "content.done":
                 final_text = event.content
-                # items={
-                #     "uuid": unique_id,
-                #     "buttons":buttons,
-                # }
-                # asyncio.create_task(sio.emit(f"room_{room}", items, room=room))
-
     return final_text
 
 

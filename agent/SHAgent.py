@@ -1,79 +1,50 @@
-import json
 from general.tools import extract_unique_values, OUTPUT_HTML
+from general.constants import FIELDS_EXAMPLE, unique_categories,FIELDS
 
 # ============================================= start new method =========================================
-with open("assets/json/main.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-data=data[0]
-keys_list = [list(data["products"][0].keys())] if "products" in data and len(data["products"]) > 0 else []
-askable = data.get("askable", [])
-FIELDS = askable if askable != [] else sorted(set().union(*keys_list))
-description_data = data.get("description", "")
-unique_categories = list({item["category_type"] for item in data["products"]})
-products=data["products"]
-
-# ============================================= end new method =========================================
-details_data = []
-typeService = extract_unique_values("assets/json/data.json", "category")
-category_description = []
-
-# FIELDS = [
-#     {"name": "service_type", "type": "string"},
-#     {"name": "min_speed", "type": "number"},
-#     {"name": "max_download", "type": "number"},
-#     {"name": "max_upload", "type": "number"},
-#     {"name": "portable", "type": "bool"},
-#     {"name": "coverage", "type": "string"},
-#     {"name": "modem", "type": "string"},
-#     {"name": "night_traffic", "type": "bool"},
-#     {"name": "traffic", "type": "number"},
-#     {"name": "duration", "type": "number"},
-#     {"name": "ip", "type": "bool"},
-#     {"name": "price", "type": "number"},
-#     {"name": "region", "type": "string"},
-# ]
-
-
-# ============================================= start new method =========================================
-
 help = f"""
+🟦 Behavior:
+- Always respond politely, friendly, and helpfully.
+- Use relevant emojis only in instructional or informative sentences.
+
 🟦 Goal:
-- Always respond with a polite, friendly, and helpful tone.
-- Use relevant emojis when appropriate.
-- Actively guide the user through all features of the service step by step.
-- Ask fields one by one, and only after the user has answered the previous field.
-- Never skip a field unless it already has a value in "user_feature" or the value is "-".
+- Guide the user step by step.
+- Ask one field at a time, proceed only after the previous answer.
+- Never skip a field unless it already has a valid value in "user_feature" or the value is "-".
 - Never repeat a question that appears in "last_ai_message".
 
+🟦 Definitions:
+- "FIELDS": list of features.
+- "user_feature" is a dictionary where:
+  - keys are field names
+  - values are user-provided inputs
+  - A field is **filled** if its value is not empty, null.
+
 🟦 Field Guide:
-For each field in "FIELDS":
-- Briefly explain its purpose.
-- Ask for the user’s input clearly and user-friendly (add examples when useful).
-- Expected input types:
-  - string → descriptive or categorical input  
-  - number → numeric value  
-  - bool → yes/no  
+- Briefly explain the purpose of each field.
+- Ask for the user’s input clearly and in a user-friendly way (add examples when useful).
+
+🟦 Example Guide:
+For example, each field should use {FIELDS_EXAMPLE}.
 
 🟦 Field Filtering Rules:
 - Only ask the user for fields that are inherently collectable and user-knowable.
-- Never ask for non-queryable, internal, system, or unidentifiable fields.
-- During the step-by-step process, only consider queryable fields and ignore the rest.
+- Never ask for internal, system-level, inferred, computed, or non-identifiable fields.
+- Ignore all non-queryable fields during the step-by-step questioning process.
 
-🟦 Completion Rule:
-- If the "user_feature" list contains at least one value, the message must end by informing the user that they may start the search, and no further questions should be asked.
+🟦 Interaction Rules:
+- Ask only one question per message.
+- Do not assume or auto-fill values.
+- Always use the latest user answer.
+- Do not repeat previous AI questions.
 
-🟦 Rules of Engagement:
-- Ask only one question at a time.
-- Do not assume or infer any values.
-- Use the user’s latest answer to override pre-filled fields.
-- Maintain a polite, friendly, and helpful tone.
-- Never repeat any question that the AI asked in the previous "last_ai_message".
 
-🟦 Note:
-- All final responses must be in Persian only.
-- If the user has not greeted, do *not* greet them or use generic phrases such as “At your service.”
 
+🟦 Language:
+- Respond in **Persian only**.
+- Do not greet if the user hasn’t greeted first.
 """
+
 extra_rules = f"""
     Based on the 'user message' and the existing 'FIELDS', match the following items to produce the correct output:\n
     | Phrase | Output |
@@ -198,6 +169,9 @@ prompt_functionTools = f"""
 """
 # ============================================= end new method =========================================
 
+details_data = []
+typeService = extract_unique_values("assets/json/data.json", "category")
+category_description = []
 conversation_assistant = f"""
 Analyze the user's message and identify all intents and their parameters based on the provided schema. \n
                 You are a professional conversation analyst. You determine a user's intent based on their message. \n

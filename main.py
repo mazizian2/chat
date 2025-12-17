@@ -1,7 +1,7 @@
 import asyncio
 from fastapi import FastAPI, Request
 import socketio
-from agent.SHAgent import description_data,products
+from general.constants import description_data
 from pydantic import BaseModel
 from general.tools import (extract_min_max, filter_by_date, clean_and_load_json, execute_stored_procedure,
                            create_message, load_latest_state)
@@ -27,6 +27,8 @@ import shutil
 import requests
 from dotenv import load_dotenv
 from openai import OpenAI
+from huggingface_hub import snapshot_download
+
 load_dotenv()
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
@@ -142,14 +144,16 @@ def user_page(request: Request, user_uuid: str):
     )
 
 
+@app.get("/hugg")
+def hugg():
+    local_dir = snapshot_download(
+        repo_id="intfloat/multilingual-e5-base",
+        cache_dir="/models/multilingual-e5-base"
+    )
+    return local_dir
+
 @app.get("/ask_rag")
 async def api_ask_rag():
-    # data = read_json_file(f"{token}.json")
-    # state: ChatState = dict(data)
-    # feature=state.get("user_feature",{})
-    # query= ", ".join(f"{k}: {v}" for k, v in feature.items() if v not in (None, "", "-"))
-
-    # query="مانتو"
     query={"extra_feature" :"جیبی"}
 
     print("query is>>>",query)

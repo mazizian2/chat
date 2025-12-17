@@ -4,7 +4,7 @@ from agent.SHAgent import payment_assistant, user_info_json_assistant, register_
     create_json_need_buy_assistant, set_service_support_assistant, question_service_support_assistant, help, \
     unknown_assistant, user_info_collector_assistant, register_order_assistant, answer_assistant, suggest_assistant, \
     express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, extra_rules
-from general.tools import extract_unique_values, chat_create, chat_stream, client
+from general.tools import extract_unique_values, chat_create, chat_stream, client,missing_fields
 
 with open("assets/json/data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -50,8 +50,8 @@ async def get_assistant_help(state: dict) -> str:
         if msg.get("role") == "assistant":
             last_ai_message = msg.get("content")
             break
-    fields = [key for key in FIELDS if user_feature.get(key) in (None, "-", "")]
-    print("askable", fields)
+    fields =missing_fields(user_feature)
+    print("askable", {', '.join(str(x) for x in fields)})
 
     context_message = (
         f"User message: {user_message}\n"
@@ -68,6 +68,13 @@ async def get_assistant_help(state: dict) -> str:
 
    ### ASSISTANT INSTRUCTIONS
     {help}
+    🟦 Completion:
+- When 'FIELDS' ({fields}) is empty:
+  - Do NOT ask any further questions.
+  - First, summarize the selected features from "user_feature", for example:
+    "ویژگی‌های انتخاب‌شده شما: ...."
+  - Then, inform the user: 
+    "می‌توانید جستجو را شروع کنید و یا دیگر ویژگی‌های مورد نیاز خود را بیان کنید."
 
 (Use all the data above for a better answer.)
 """
@@ -117,10 +124,14 @@ def call_model(state=None):
                 "6. If user expresses uncertainty (examples: 'I don’t know', 'doesn’t matter', "
                 "'anything', 'فرقی نداره', 'نمیدونم', 'هرچی', 'مهم نیست'), "
                 "then value of that field MUST be '-'.\n"
-            ### RULES FOR extra_feature:\n
-            - extra_feature is OPTIONAL.\n
-            - If user mentions any feature not in  {', '.join(FIELDS)}, always include it in extra_feature, even if previous extra_feature is null.\n
-            
+            "\nRULES FOR extra_feature:\n"
+                "- extra_feature is OPTIONAL.\n"
+                "- Any attribute NOT in {', '.join(FIELDS)} must go in extra_feature.\n"
+                "- KEEP previous attributes unless user explicitly rejects them.\n"
+                "- REPLACE attributes if clearly updated.\n"
+                "- Never duplicate attributes.\n"
+                "- Combine all remaining attributes into ONE concise string, separated by ' | '.\n"
+                "- If no extra attributes exist, return null.\n"
 
             Inputs:\n
             - previous 'extra_feature' : {extra_feature}\n
@@ -208,7 +219,6 @@ def call_model(state=None):
                     value = None
 
             result[field] = value
-        # extra_feature: model is source of truth
         result["extra_feature"] = args.get("extra_feature")
         print("feat>>>", result)
         return result

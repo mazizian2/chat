@@ -10,6 +10,7 @@ class ChatState(TypedDict):
     # thread_id: str
     input: Optional[str]  # آخرین پیام کاربر
     user_feature:Dict[str,Any]
+    status_search:str
     # userInfo: Optional[Any]  # ایمیل کاربر
     search_history: List[Dict[str, str]] # تاریخچه جست و جو
     messages: List[Dict[str, str]] # تاریخچه پیام‌ها

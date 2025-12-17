@@ -6,7 +6,7 @@ from LTE.task.LTETask import create_problem_list_task, get_assistant_account_use
 import asyncio
 from socket_instance import sio
 from general.State import ChatState
-from general.tools import run_task_as_crew, create_message, parse_json5, add_item_to_support_json, add_item_to_json,get_last_intent,thread_message
+from general.tools import run_task_as_crew, create_message, parse_json5, add_item_to_support_json, add_item_to_json,get_last_intent
 from apis.apis import customer_search, customer_info
 from apis.apis import execute_stored_procedure_support
 

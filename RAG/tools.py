@@ -8,7 +8,7 @@ from openai import OpenAI
 from langchain_huggingface import HuggingFaceEmbeddings
 import chromadb
 from chromadb.config import Settings
-
+from general.state_manager import save_state
 import uuid
 
 
@@ -180,15 +180,16 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
             )
         print(f"✅ دیتابیس جدید '{db_name}' ساخته شد.")
 
-
-def ask_chroma_question(db_name: str, query: dict, k: int = 10):
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "multilingual-e5-base")
+def ask_chroma_question(db_name: str, query: dict,state=None, k: int = 10,)->dict:
     print("query is>>", query)
+    state['status_search']=0
+    save_state(state)
     # embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
-    embeddings = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-base")
+    embeddings = HuggingFaceEmbeddings(model_name=r"C:\models\multilingual-e5-base\models--intfloat--multilingual-e5-base\snapshots\835193815a3936a24a0ee7dc9e3d48c1fbb19c55",model_kwargs={"local_files_only": True})
     feature = query.get("extra_feature", "")
-    # query_vector = embeddings.embed_query(feature)
     query_vector = embeddings.embed_query(f"query: {feature}")
-
     persist_directory = f"chroma_dbs/{db_name}"
     client = chromadb.PersistentClient(path=persist_directory)
 
@@ -206,7 +207,7 @@ def ask_chroma_question(db_name: str, query: dict, k: int = 10):
             where_clause = {
                 "$and": [{k: v} for k, v in query.items()]
             }
-    print("where_clause is>>>", where_clause)
+
     results = collection.query(
         query_embeddings=[query_vector],
         n_results=k,
@@ -214,13 +215,29 @@ def ask_chroma_question(db_name: str, query: dict, k: int = 10):
     )
     docs = results["documents"][0]
     distances = results["distances"][0]
-    print("distances is>>",distances)
-    if len(distances) > 0:
-        avg_dist = sum(distances) / len(distances)
-        final_docs = [doc for doc, dist in zip(docs, distances) if dist <= avg_dist]
+    if(len(docs)>0):
+      avg_dist = sum(distances) / len(distances)
+      res=[doc for doc, dist in zip(docs, distances) if dist <= avg_dist]
+      final_docs = {"result":res,"status":"main"}
     else:
-        final_docs = []
-
+        if query:
+            if len(query) == 1:
+                k_, v_ = next(iter(query.items()))
+                where_clause = {k_: v_}
+            else:
+                where_clause = {
+                    "$or": [{k: v} for k, v in query.items()]
+                }
+        print("where_clause is>>>", where_clause)
+        results = collection.query(
+            query_embeddings=[query_vector],
+            n_results=4,
+            where=where_clause
+        )
+        final_docs = {"result": results["documents"][0], "status": "alternative"}
+    print("final_docs is>>>",final_docs['status'])
+    state['status_search'] = 1
+    save_state(state)
     return final_docs
     # for i, doc_text in enumerate(docs):
 

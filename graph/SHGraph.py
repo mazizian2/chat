@@ -1,10 +1,10 @@
 from typing import TypedDict, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
-from agent.SHAgent import products
+from general.constants import products
 from task.SHTask import get_assistant_suggest, register_order_json_task, get_assistant_express_need_buy, \
     get_assistant_user_info_collector, get_assistant_register_order, get_assistant_answer, \
     user_info_json_task, get_assistant_unknown, create_json_need_buy_response_task, \
-    payment_task, get_assistant_intent, get_assistant_greeting, get_assistant_help,call_model, \
+    payment_task, get_assistant_intent, get_assistant_greeting, get_assistant_help, call_model, \
     get_assistant_question_service_support, get_assistant_set_service_support
 from LTE.graph.LTEGraph import handle_problem_list, handle_get_account_user, handle_json_account, \
     handle_ask_witch_account, handle_extract_select_account, handle_ask_problem, handle_LTE_detect, \
@@ -12,7 +12,7 @@ from LTE.graph.LTEGraph import handle_problem_list, handle_get_account_user, han
 
 from general.state_manager import save_state, load_latest_state
 from general.State import ChatState, ChatStateManager
-from general.tools import run_async_task_as_crew, run_task_as_crew, create_message, parse_json5, getIntent, \
+from general.tools import emit_message, run_task_as_crew, create_message, parse_json5, missing_fields, \
     extract_unique_values, get_last_intent, add_item_to_json
 from apis.apis import ask_rag
 import asyncio
@@ -21,7 +21,8 @@ import re
 import random
 from RAG.tools import ask_chroma_question
 import json
-import uuid
+import time
+
 typeService = extract_unique_values("assets/json/data.json", "category")
 INTENTS = [
     "greeting",
@@ -46,6 +47,113 @@ INTENTS = [
     "unknown"
 ]
 
+# ============================================= start new method =========================================
+def clean_features(features: dict) -> dict:
+    return {k: v for k, v in features.items() if v not in (None, "-", "")}
+
+def get_chroma_results(state):
+    check_interval = 0.5
+    # search_history = state.get("search_history", [])
+    # if search_history:
+    #     return {"result": search_history, "status": "main"}
+    status_search = state.get("status_search", 1)
+    print("status_search>>>",status_search)
+    # if status_search == 0:
+    #     while True:
+    #         search_history = state.get("search_history", [])
+    #         if search_history:
+    #             return {"result": search_history, "status": "main"}
+    #         time.sleep(check_interval)
+    # else:
+    features = clean_features(state.get("user_feature", {}))
+    result = ask_chroma_question(
+            db_name="services",
+            query=features,
+            state=state
+        )
+    state["search_history"] = result["result"]
+    return result
+
+async def handle_help(state: ChatState):
+    print("handle help")
+    user_input = state.get("input")
+
+    if user_input == "درخواست جست و جو":
+        chroma_results = get_chroma_results(state)
+        plans = chroma_results.get("result")
+        print(chroma_results.get("result"))
+        if plans:
+            if chroma_results.get("status") == "main":
+                text = "محصولات مشابه درخواست شما یافت شد که عبارتند از:"
+            else:
+                text = (
+                    "متأسفانه در حال حاضر محصولی دقیقاً مطابق با نیاز شما موجود نیست.\n"
+                    "با این حال، چند گزینه‌ی جایگزین برای شما در نظر گرفته‌ایم:"
+                )
+        else:
+            plans = None
+            text = (
+                "متأسفانه هیچ محصولی مطابق با جستجوی شما پیدا نشد 😔\n"
+                "می‌خواید ویژگی‌های جدیدی اضافه کنید تا دوباره جستجو کنیم؟"
+            )
+
+        emit_message(state,1, text, plans=plans)
+
+    elif user_input == "شروع پرسش":
+        response = await get_assistant_help(state)
+        response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
+        state["messages"].append(create_message("assistant", response))
+
+    elif user_input == "نمایش همه محصولات":
+        emit_message(
+            state,1,
+            "«لیست تمامی محصولات: »",
+            plans=products
+        )
+
+    else:
+        features = call_model(state)
+        state["user_feature"] = features
+        save_state(state)
+
+        miss_fields = missing_fields(features)
+
+        if not miss_fields:
+            values = [str(v) for v in features.values() if v]
+            text = (
+                "عالی! این‌ها ویژگی‌هایی هست که انتخاب کردید: "
+                + "، ".join(values)
+                + ".\n"
+                ". اگه دوست دارید نتایج رو ببینید، روی دکمه «درخواست جست‌وجو» بزنید یا اگر مورد دیگه‌ای مدنظر دارید، بهم بگید."
+            )
+
+            emit_message(
+                state,1,
+                text,
+                buttons=["درخواست جست و جو"]
+            )
+        else:
+            response = await get_assistant_help(state)
+            response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
+            state["messages"].append(create_message("assistant", response))
+            state["search_history"]=[]
+            save_state(state)
+            if any(v not in (None, "-") for v in features.values()):
+                chroma_results = ask_chroma_question(
+                    db_name="services",
+                    query=clean_features(features),
+                    state=state
+                )
+                state["search_history"] = chroma_results["result"]
+
+    if state.get("intents"):
+        state["intents"].pop()
+
+    state["next_node"] = ""
+    save_state(state)
+    return state
+
+# ============================================= end new method =========================================
 
 async def analyze_message(state: ChatState) -> ChatState:
     # user_input = state["input"]
@@ -352,87 +460,7 @@ async def handle_follow_up_buy(state: ChatState):
     save_state(state)
     return state
 
-#============================================= start new method =========================================
 
-async def handle_help(state: ChatState):
-    print("handle help")
-    input=state.get("input")
-    if(input=="درخواست جست و جو"):
-        feature = state.get("user_feature", {})
-        search_history=state.get("search_history",[])
-        if(len(search_history)>0):
-            chroma_results=search_history
-        else:
-            cleaned_data = {k: v for k, v in feature.items() if v is not None and v != '-'}
-            print('query is>>>',cleaned_data)
-
-            chroma_results = ask_chroma_question(
-                db_name="services",
-                query=cleaned_data
-            )
-            state["search_history"]=chroma_results
-        message = create_message('assistant', "«محصولات مشابه درخواست شما یافت شد که عبارتند از:»", None,chroma_results)
-        state["messages"].append(message)
-        unique_id = str(uuid.uuid4())
-        message_dict = {
-            "uuid": unique_id,
-            "counter": 1,
-            "role": "assistant",
-            "content": "«محصولات مشابه درخواست شما یافت شد که عبارتند از:»",
-            "buttons": None,
-            "plans": chroma_results,
-        }
-        room=state["token"]
-        asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
-        print("chroma_results is>>", chroma_results)
-
-    elif(input=="شروع پرسش"):
-        response = await get_assistant_help(state)
-        response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
-        message = create_message('assistant', response)
-        state["messages"].append(message)
-    elif(input=="نمایش همه محصولات"):
-        print("produstssss>>",products)
-        message = create_message('assistant', "«لیست تمامی محصولات: »", None,products)
-        state["messages"].append(message)
-        unique_id = str(uuid.uuid4())
-        message_dict = {
-            "uuid": unique_id,
-            "counter": 1,
-            "role": "assistant",
-            "content": "«لیست تمامی محصولات: »",
-            "buttons": None,
-            "plans": products,
-        }
-        room = state["token"]
-        asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room))
-
-    else:
-        features = call_model(state)
-        state["user_feature"] = features
-        save_state(state)
-        response = await get_assistant_help(state)
-        response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
-        message = create_message('assistant', response)
-        state["messages"].append(message)
-        if state["user_feature"] and any(v not in (None, "-") for v in state["user_feature"].values()):
-            cleaned_data = {k: v for k, v in state["user_feature"].items() if v is not None and v != '-'}
-
-            print('query is>>>',cleaned_data)
-            chroma_results = ask_chroma_question(
-                db_name="services",
-                query=cleaned_data
-            )
-            state["search_history"] = chroma_results
-            save_state(state)
-
-        if (state['intents'] != []):
-            state['intents'].pop()
-        state['next_node'] = ""
-    save_state(state)
-
-    return state
-#============================================= end new method =========================================
 
 
 async def handle_support(state: ChatState):
