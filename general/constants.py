@@ -13,3 +13,4 @@ FIELDS_EXAMPLE = askable if askable != [] else sorted(set().union(*keys_list))
 description_data = data.get("description", "")
 unique_categories = list({item["category_type"] for item in data["products"]})
 products = data["products"]
+Personality="clothing"

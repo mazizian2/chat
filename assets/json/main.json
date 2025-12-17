@@ -739,10 +739,6 @@
     ],
      "askable": [
       {
-       "field": "category_type",
-        "example": "کت ، تونیک، سویشرت، شومیز، دامن و.."
-      },
-      {
          "field": "gender",
         "example": "زنانه، مردانه، بچگانه"
       }

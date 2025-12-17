@@ -58,21 +58,21 @@ def get_chroma_results(state):
     #     return {"result": search_history, "status": "main"}
     status_search = state.get("status_search", 1)
     print("status_search>>>",status_search)
-    # if status_search == 0:
-    #     while True:
-    #         search_history = state.get("search_history", [])
-    #         if search_history:
-    #             return {"result": search_history, "status": "main"}
-    #         time.sleep(check_interval)
-    # else:
-    features = clean_features(state.get("user_feature", {}))
-    result = ask_chroma_question(
-            db_name="services",
-            query=features,
-            state=state
-        )
-    state["search_history"] = result["result"]
-    return result
+    if status_search == 0:
+        while True:
+            search_history = state.get("search_history", [])
+            if search_history:
+                return {"result": search_history, "status": "main"}
+            time.sleep(check_interval)
+    else:
+        features = clean_features(state.get("user_feature", {}))
+        result = ask_chroma_question(
+                db_name="services",
+                query=features,
+                state=state
+            )
+        state["search_history"] = result["result"]
+        return result
 
 async def handle_help(state: ChatState):
     print("handle help")

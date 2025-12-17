@@ -1,10 +1,11 @@
 from crewai import Task
 import json
+from general.constants import Personality
 from agent.SHAgent import payment_assistant, user_info_json_assistant, register_order_json_assistant, \
     create_json_need_buy_assistant, set_service_support_assistant, question_service_support_assistant, help, \
     unknown_assistant, user_info_collector_assistant, register_order_assistant, answer_assistant, suggest_assistant, \
     express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, extra_rules
-from general.tools import extract_unique_values, chat_create, chat_stream, client,missing_fields
+from general.tools import extract_unique_values, chat_create, chat_stream, client, missing_fields
 
 with open("assets/json/data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -50,7 +51,7 @@ async def get_assistant_help(state: dict) -> str:
         if msg.get("role") == "assistant":
             last_ai_message = msg.get("content")
             break
-    fields =missing_fields(user_feature)
+    fields = missing_fields(user_feature)
     print("askable", {', '.join(str(x) for x in fields)})
 
     context_message = (
@@ -95,7 +96,7 @@ def call_model(state=None):
     current_json = state.get("user_feature", {})
     extra_feature = current_json.get("extra_feature", {})
     user_message = state.get("input", "")
-    print("user_message is>>",user_message)
+    print("user_message is>>", user_message)
     last_ai_message = None
     for msg in reversed(state.get("messages", [])):
         if msg.get("role") == "assistant":
@@ -113,7 +114,7 @@ def call_model(state=None):
             f"""
                 "You are a precise data extraction assistant.\n"
                 
-       "RULES FOR FIELDS:\n"
+       "RULES FOR All FIELDS:\n"
                 "1. ALWAYS return ALL fields from FIELDS in extract_plan function.\n"
                 "2. Any field NOT mentioned by user MUST be included and MUST be null.\n"
                 "3. NEVER omit any field.\n"
@@ -124,46 +125,46 @@ def call_model(state=None):
                 "6. If user expresses uncertainty (examples: 'I don’t know', 'doesn’t matter', "
                 "'anything', 'فرقی نداره', 'نمیدونم', 'هرچی', 'مهم نیست'), "
                 "then value of that field MUST be '-'.\n"
-            "\nRULES FOR extra_feature:\n"
+                7. REMOVE an attribute  if the user explicitly rejects it.
+                8. Detect implicit contradictions: if the user message suggests that a previous attribute is unsuitable, replace it even if not explicitly rejected .
+            "\nextra_feature:\n"
                 "- extra_feature is OPTIONAL.\n"
                 "- Any attribute NOT in {', '.join(FIELDS)} must go in extra_feature.\n"
-                "- KEEP previous attributes unless user explicitly rejects them.\n"
-                "- REPLACE attributes if clearly updated.\n"
-                "- Never duplicate attributes.\n"
-                "- Combine all remaining attributes into ONE concise string, separated by ' | '.\n"
-                "- If no extra attributes exist, return null.\n"
-
-            Inputs:\n
-            - previous 'extra_feature' : {extra_feature}\n
-            - 'user message'\n
-
-            Rules:\n
-            1. Extract new extra attributes from the user message.\n
-            2. KEEP previous attributes if the user does NOT contradict them.\n
-            3. REPLACE attributes that are clearly updated (e.g. price, budget).\n
-            4. REMOVE an attribute ONLY if the user explicitly rejects it.\n
-            5. NEVER duplicate the same attribute.\n
-            6. Summarize all remaining attributes into ONE concise string.\n
-            7. If no extra attributes exist at all, return null.\n
-
-            Formatting:\n
-            - Use plain text.\n
-            - Separate multiple attributes with " | ".\n
-
-            Behavior priority:\n
-            REJECT > REPLACE > KEEP\n
-
-            Examples:\n
-            - previous: null\n
-              user: "قیمت زیر 500"\n
-              → extra_feature: "قیمت زیر 500"\n\n
-            - previous: "قیمت زیر  500 | Zara برند  "\n
-              user: "قیمت زیر 700"\n
-            - previous: "قیمت زیر  700 | Zara برند  "\n
-            - previous: "Zara برند "\n
-              user: "دیگه زارا نمی‌خوام"\n
-              → extra_feature: null\n
-              {extra_rules}
+                Inputs:
+                - previous 'extra_feature' : {extra_feature}
+                - 'user message'
+            
+                Rules:
+                Just consider the features related to the {Personality} store.
+                1. Extract new extra attributes from the user message.
+                2. KEEP previous attributes if the user does NOT contradict them.
+                3. REPLACE attributes that are clearly updated (e.g. price, budget).
+                4. REMOVE an attribute  if the user explicitly rejects it.
+                5. Detect implicit contradictions: if the user message suggests that a previous attribute is unsuitable, replace it even if not explicitly rejected .
+                6. NEVER duplicate the same attribute.
+                7. Summarize all remaining attributes into ONE concise string.
+                8. If no extra attributes exist at all, return null.
+            
+                Formatting:
+                - Use plain text.
+                - Separate multiple attributes with " | ".
+            
+                Behavior priority:
+                REJECT > REPLACE (explicit) > REPLACE (implicit) > KEEP
+    
+                Examples:\n
+                - previous: null\n
+                  user: "قیمت زیر 500"\n
+                  → extra_feature: "قیمت زیر 500"\n\n
+                - previous: "قیمت زیر  500 | Zara برند  "\n
+                  user: "قیمت زیر 700"\n
+                - previous: "قیمت زیر  700 | Zara برند  "\n
+                - previous: "Zara برند "\n
+                  user: "دیگه زارا نمی‌خوام"\n
+                  → extra_feature: null\n\n
+                  
+                  
+            {extra_rules}
 
 
     """
@@ -204,7 +205,7 @@ def call_model(state=None):
         tool_choice="auto"
     )
     msg = response.choices[0].message
-    print("result for call method>>",msg)
+    print("result for call method>>", msg)
     # ---------------------- TOOL CALL ----------------------
     if msg.tool_calls:
         args = json.loads(msg.tool_calls[0].function.arguments)
