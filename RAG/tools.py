@@ -7,7 +7,7 @@ from langchain_openai import OpenAIEmbeddings
 from openai import OpenAI
 from langchain_huggingface import HuggingFaceEmbeddings
 import chromadb
-from chromadb.config import Settings
+from typing import Any
 from general.state_manager import save_state
 import uuid
 
@@ -17,7 +17,8 @@ def normalize_value(value):
         return ", ".join(map(str, value))
 
     if isinstance(value, dict):
-        return " | ".join(f"{k}: {v}" for k, v in value.items())
+        return value['title'].strip()
+        # return " | ".join(f"{k}: {v}" for k, v in value.items())
 
     if isinstance(value, bool):
         return "بله" if value else "خیر"
@@ -56,16 +57,9 @@ def json_to_docs_universal(json_data: dict) -> list:
             # --- خلاصه‌ی معنایی برای embedding ---
             summary = (
                 f"نام محصول: {plan.get('title', 'نامشخص')} | "
-                f"جنسیت: {plan.get('gender', 'نامشخص')} | "
-                f"دسته‌بندی: {plan.get('category_type', 'نامشخص')} | "
-                f"سایز: {', '.join(plan.get('size', ['نامشخص']))} | "
-                f"رنگ: {', '.join(plan.get('color', ['نامشخص']))} | "
-                f"جنس لباس: {plan.get('material', 'نامشخص')} | "
-                f"فصل: {plan.get('season', 'نامشخص')} | "
-                f"سبک: {plan.get('style', 'نامشخص')} | "
-                f"برند: {plan.get('brand', 'نامشخص')} | "
-                f"تخفیف: {'دارد' if plan.get('discount') else 'ندارد'} | "
-                f"موجودی: {'دارد' if plan.get('available') else 'ندارد'} | "
+                f"توضیحات محصول: {plan.get('description', 'نامشخص')} | "
+                f"دسته‌بندی: {(plan.get('category') or {}).get('title', 'نامشخص').strip()} | "
+                f"ویژگی محصول: {plan.get('extra_feature', 'نامشخص')} | "
                 f"قیمت: {plan.get('price', 'نامشخص')} تومان"
             )
 
@@ -111,6 +105,70 @@ def json_to_docs_universal(json_data: dict) -> list:
                 )
             )
     return docs
+def json_to_docs_question_answer(json_data: list) -> list:
+    docs = []
+
+    for service in json_data:
+        # --- خلاصه‌ی معنایی برای embedding ---
+        summary = f"{service['question']}\n{service['answer']}"
+
+        # summary = (
+        #     f"پرسش: {service.get('question', 'نامشخص')} | "
+        #     f"پاسخ: {service.get('answer', 'نامشخص')}"
+        # )
+
+        # --- متادیتا ---
+        metadata = {}
+        for key, value in service.items():
+            if isinstance(value, (int, float)):
+                metadata[key] = value
+            else:
+                metadata[key] = normalize_value(value)  # یا همان value اگر نیازی به تغییر نیست
+
+        # --- ایجاد Document ---
+        docs.append(
+            Document(
+                page_content=summary,
+                metadata=metadata
+            )
+        )
+
+    return docs# def json_to_docs_qestion_answer(json_data: dict) -> list:
+#     docs = []
+#
+#     services = json_data
+#     for service in services:
+#             # --- خلاصه‌ی معنایی برای embedding ---
+#             summary = (
+#                 f"پرسش: {service.get('question', 'نامشخص')} | "
+#                 f"پاسخ {service.get('answer', 'نامشخص')} | "
+#
+#             )
+#
+#             lines = [
+#                 summary,
+#                 "",
+#             ]
+#
+#             metadata = {}
+#
+#             for key, value in service.items():
+#                 lines.append(f"- {humanize_key(key)}: {normalize_value(value)}")
+#
+#                 # --- متادیتا عددی واقعی ---
+#                 if isinstance(value, (int, float)):
+#                     metadata[key] = value
+#                 else:
+#                     metadata[key] = normalize_value(value)
+#
+#             # یک Document کامل برای هر محصول
+#             docs.append(
+#                 Document(
+#                     page_content="\n".join(lines),
+#                     metadata=metadata
+#                 )
+#             )
+#     return docs
 
 
 def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "overwrite"):
@@ -138,9 +196,9 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
             # for doc in docs:
             #     embedding_vector = embeddings.embed_query(doc.page_content)
             for doc in docs:
-                embedding_vector = embeddings.embed_query(
-                    f"passage: {doc.page_content}"
-                )
+                embedding_vector = embeddings.embed_documents(
+                    [f"passage: {doc.page_content}"]
+                )[0]
                 collection.add(
                     ids=[doc.metadata.get("id", str(uuid.uuid4()))],
                     documents=[doc.page_content],
@@ -154,8 +212,9 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
             client.delete_collection(db_name)
             collection = client.create_collection(db_name)
             for doc in docs:
-                embedding_vector = embeddings.embed_query(doc.page_content)
-
+                embedding_vector = embeddings.embed_documents(
+                    [f"passage: {doc.page_content}"]
+                )[0]
                 collection.add(
                     ids=[doc.metadata.get("id", str(uuid.uuid4()))],
                     documents=[doc.page_content],
@@ -169,8 +228,9 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
         print(f"🔹 دیتابیس '{db_name}' وجود ندارد — در حال ساخت جدید...")
         collection = client.create_collection(db_name)
         for doc in docs:
-            embedding_vector = embeddings.embed_query(doc.page_content)
-            # embedding_vector = embeddings.embed_documents([f"passage: {doc.page_content}"])[0]
+            embedding_vector = embeddings.embed_documents(
+                [f"passage: {doc.page_content}"]
+            )[0]            # embedding_vector = embeddings.embed_documents([f"passage: {doc.page_content}"])[0]
 
             collection.add(
                 ids=[doc.metadata.get("id", str(uuid.uuid4()))],
@@ -182,14 +242,27 @@ def set_chroma_db_from_json(db_name: str, docs: list[Document], mode: str = "ove
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models", "multilingual-e5-base")
-def ask_chroma_question(db_name: str, query: dict,state=None, k: int = 10,)->dict:
-    print("query is>>", query)
+def build_extra_query(optional_data):
+    parts = []
+    for k, v in optional_data.items():
+        parts.append(f"{k} {v}")
+
+    return ", ".join(parts)
+
+def ask_chroma_question(db_name: str, query: dict, orQuery: Any,state=None, k: int = 10,)->dict:
+    print("query is>> tools", query)
+    print("or query is>> tools", orQuery)
     state['status_search']=0
     save_state(state)
     # embeddings = HuggingFaceEmbeddings(model_name="intfloat/e5-large")
     embeddings = HuggingFaceEmbeddings(model_name=r"C:\models\multilingual-e5-base\models--intfloat--multilingual-e5-base\snapshots\835193815a3936a24a0ee7dc9e3d48c1fbb19c55",model_kwargs={"local_files_only": True})
     feature = query.get("extra_feature", "")
-    query_vector = embeddings.embed_query(f"query: {feature}")
+    feature2 = build_extra_query(orQuery) if isinstance(orQuery, dict) else orQuery
+    parts = [p for p in [feature, feature2] if p]
+    final_query = " ".join(parts)
+    query_vector = embeddings.embed_query(f"query: {final_query}")
+    print('query_vector is>>>',final_query)
+
     persist_directory = f"chroma_dbs/{db_name}"
     client = chromadb.PersistentClient(path=persist_directory)
 
@@ -207,6 +280,7 @@ def ask_chroma_question(db_name: str, query: dict,state=None, k: int = 10,)->dic
             where_clause = {
                 "$and": [{k: v} for k, v in query.items()]
             }
+            print("where_clause",where_clause)
 
     results = collection.query(
         query_embeddings=[query_vector],
@@ -215,6 +289,7 @@ def ask_chroma_question(db_name: str, query: dict,state=None, k: int = 10,)->dic
     )
     docs = results["documents"][0]
     distances = results["distances"][0]
+    print("docs & distances>>",docs,distances)
     if(len(docs)>0):
       avg_dist = sum(distances) / len(distances)
       res=[doc for doc, dist in zip(docs, distances) if dist <= avg_dist]
@@ -235,7 +310,7 @@ def ask_chroma_question(db_name: str, query: dict,state=None, k: int = 10,)->dic
             where=where_clause
         )
         final_docs = {"result": results["documents"][0], "status": "alternative"}
-    print("final_docs is>>>",final_docs['status'])
+    print("final_docs is>>>",final_docs['result'])
     state['status_search'] = 1
     save_state(state)
     return final_docs

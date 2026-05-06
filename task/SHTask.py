@@ -4,7 +4,8 @@ from general.constants import Personality
 from agent.SHAgent import payment_assistant, user_info_json_assistant, register_order_json_assistant, \
     create_json_need_buy_assistant, set_service_support_assistant, question_service_support_assistant, help, \
     unknown_assistant, user_info_collector_assistant, register_order_assistant, answer_assistant, suggest_assistant, \
-    express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, extra_rules
+    express_need_buy_assistant, greeting_assistant, conversation_assistant, FIELDS, extra_rules, userInfoAgent, \
+    questionAnswer
 from general.tools import extract_unique_values, chat_create, chat_stream, client, missing_fields
 
 with open("assets/json/data.json", "r", encoding="utf-8") as f:
@@ -46,6 +47,8 @@ INTENTS = [
 async def get_assistant_help(state: dict) -> str:
     user_message = state["input"]
     user_feature = state.get("user_feature", {})
+    user_info = state.get("user_info", {})
+    name = user_info.get("name", None)
     last_ai_message = None
     for msg in reversed(state.get("messages", [])):
         if msg.get("role") == "assistant":
@@ -53,10 +56,14 @@ async def get_assistant_help(state: dict) -> str:
             break
     fields = missing_fields(user_feature)
     print("askable", {', '.join(str(x) for x in fields)})
-
+    fields_user_info = [key for key, value in user_info.items() if value is None]
+    print("askable user info>>", fields_user_info)
     context_message = (
         f"User message: {user_message}\n"
         f"user_feature: {user_feature}\n"
+        f"user_info: {user_info}\n"
+        f"user name: {name}\n"
+        f"user_info_fields: {fields_user_info}\n"
         f"last_ai_message: {last_ai_message}\n"
         f"FIELDS is: {', '.join(str(x) for x in fields)}"
     )
@@ -68,12 +75,31 @@ async def get_assistant_help(state: dict) -> str:
     {context_message}
 
    ### ASSISTANT INSTRUCTIONS
+    Avoid repeating or paraphrasing the previous message({last_ai_message}). Produce a new and distinct sentence.
+   if 'User message' include 'مرحله بعد' or contains user information (name,mobile,address) and 'user_info' json not compeleted use promt :You are a polite, professional, and intelligent assistant whose task is to complete the user's information.
+    Important Rules:
+    1. Only ask about 'user_info_fields'({fields_user_info}).
+    2. If the 'name' ({name}) field has a value, address the user by their first name.
+       Example: "Dear Ali," or "Dear Sara,"
+    3. Maintain a polite, respectful, and professional tone.
+    4. Ask all required questions in a single, well-structured message.
+    5. 5. If 'user_info_fields'->{fields_user_info} is empty or '', send a thank you message confirming that the information was successfully received and do not ask any further questions and end the conversation.
+    3. Keep questions clear, short, and direct.
+    8. Politely ask the user to provide accurate information.
+     Tone & Style:
+     - Only greet if the user greets first.
+    - Warm, friendly, and conversational.
+    - Write like a thoughtful human assistant, not a system.
+    - Keep it short, smooth, and easy to read.
+    - Sound supportive and appreciative.
+    Your output must contain only the final message to the user and no additional explanations. 
+   else:
     {help}
     🟦 Completion:
 - When 'FIELDS' ({fields}) is empty:
   - Do NOT ask any further questions.
-  - First, summarize the selected features from "user_feature", for example:
-    "ویژگی‌های انتخاب‌شده شما: ...."
+  - First, summarize the selected features from "last_ai_message", for example:
+    "ویژگی‌های مورد نظر شما بررسی شد، "
   - Then, inform the user: 
     "می‌توانید جستجو را شروع کنید و یا دیگر ویژگی‌های مورد نیاز خود را بیان کنید."
 
@@ -87,15 +113,109 @@ async def get_assistant_help(state: dict) -> str:
     ]
     search = []
     if user_feature and any(value is not None for value in user_feature.values()):
-        search = ["درخواست جست و جو"]
+        if state.get("changed_part", '') == "user_feature":
+            search = ["درخواست جست و جو"]
     final_text = await chat_stream(messages, state, search)
     return final_text
 
 
+async def get_assistant_question_answer(state: dict, answer: str) -> str:
+    user_message = state["input"]
+    question = state.get("question", {})
+    user_info = state.get("user_info", {})
+    name = user_info.get("name", None)
+    print('answer>>>',answer)
+    last_ai_message = None
+    for msg in reversed(state.get("messages", [])):
+        if msg.get("role") == "assistant":
+            last_ai_message = msg.get("content")
+            break
+
+    context_message = (
+        f"user's question: {question}\n"
+        f"retrieved answer: {answer}\n"
+    )
+    messages = [
+        {
+            "role": "system",
+            "content": f"""
+    ### CONTEXT INFORMATION
+    {context_message}
+
+   ### ASSISTANT INSTRUCTIONS
+
+You must always speak in a very friendly, warm, polite, and conversational tone.
+
+You will receive two inputs:
+1) The user's question ({question})
+2) The retrieved answer ({answer})
+   {questionAnswer}
+(Use all the data above for a better answer.)
+"""
+        },
+        {
+            "role": "user",
+            "content": user_message
+        }
+    ]
+
+    final_text = await chat_stream(messages, state, )
+    return final_text
+
+
+async def get_assistant_user_info(state: dict) -> str:
+    user_message = state["input"]
+    user_info = state.get("user_info", {})
+    name = state.get("user_info", {}).get('name', '')
+    last_ai_message = None
+    for msg in reversed(state.get("messages", [])):
+        if msg.get("role") == "assistant":
+            last_ai_message = msg.get("content")
+            break
+    fields = [key for key, value in user_info.items() if value is None]
+
+    print("askable", {', '.join(str(x) for x in fields)})
+
+    context_message = (
+        f"User message: {user_message}\n"
+        f"User name is:{name}"
+        f"user_info_fields is: {', '.join(str(x) for x in fields)}"
+    )
+    messages = [
+        {
+            "role": "system",
+            "content": f"""
+    ### CONTEXT INFORMATION
+    {context_message}
+
+   ### ASSISTANT INSTRUCTIONS
+    {userInfoAgent}
+    🟦 Completion:
+- When 'FIELDS' ({fields}) is empty:
+  - Do NOT ask any questions just send a thank-you message confirming that the information has been successfully received
+
+(Use all the data above for a better answer.)
+"""
+        },
+        {
+            "role": "user",
+            "content": user_message
+        }
+    ]
+    # search = []
+    # if user_feature and any(value is not None for value in user_feature.values()):
+    #     search = ["درخواست جست و جو"]
+    final_text = await chat_stream(messages, state, )
+    return final_text
+
+
 def call_model(state=None):
+    user_info = state.get("user_info", {})
     current_json = state.get("user_feature", {})
     extra_feature = current_json.get("extra_feature", {})
     user_message = state.get("input", "")
+    old_question = state.get("question")
+
     print("user_message is>>", user_message)
     last_ai_message = None
     for msg in reversed(state.get("messages", [])):
@@ -107,12 +227,39 @@ def call_model(state=None):
             " ### CONTEXT INFORMATION (JSON):\n"
             f" user message :{user_message}"
             f"current JSON = {current_json}\n"
+            f"user_info JSON = {user_info}\n"
             f"FIELDS =  {', '.join(FIELDS)}\n"
             "### MAIN ASSISTANT INSTRUCTIONS:"
 
             # f"{prompt_functionTools}"
             f"""
                 "You are a precise data extraction assistant.\n"
+                You MUST return both:
+                - user_feature
+                - user_info
+                - question
+                
+    
+            RULE FOR user_info:
+            1. ALWAYS return all fields: "name", "mobile", "address".
+            2. If the user did not provide a value for a field, keep its current value if exists; otherwise set it to null.
+            3. NEVER return an empty object {{}}.
+            4. Do NOT overwrite existing values with null unless explicitly rejected by the user.  
+            
+            
+           RULE FOR question:
+            Check whether the user message meets any of the following conditions:
+            1. It is a question (direct or indirect).
+            2. It is consultation-related (seeking advice, decision-making help, confusion, choosing between options, etc.).
+            3. Do NOT categorize as question if the user message is about products, product features, or specific product attributes; such messages should be classified under user_feature instead.
+        
+            If it matches any of the above:
+            * Extract the main subject of the message .
+            * Put the extracted subject in the "question" field.
+        
+            If none of the above apply:
+            * Set "question" to null.
+
                 
        "RULES FOR All FIELDS:\n"
                 "1. ALWAYS return ALL fields from FIELDS in extract_plan function.\n"
@@ -164,8 +311,7 @@ def call_model(state=None):
                   → extra_feature: null\n\n
                   
                   
-            {extra_rules}
-
+ {extra_rules}
 
     """
         )}
@@ -187,17 +333,49 @@ def call_model(state=None):
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            **{
-                                field: {"type": ["string", "number", "null"]}
-                                for field in FIELDS
+                            "user_feature": {
+                                "type": "object",
+                                "properties": {
+                                    **{
+                                        field: {"type": ["string", "number", "null"]}
+                                        for field in FIELDS
+                                    },
+                                    "extra_feature": {
+                                        "type": ["string", "null"]
+                                    }
+                                },
+                                "required": FIELDS
                             },
-                            "extra_feature": {
-                                "type": ["string", "null"],
-                                "description": "Other product constraints not covered by predefined 'FIELDS'"
+                            "user_info": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {"type": ["string", "null"]},
+                                    "mobile": {"type": ["number", "null"]},
+                                    "address": {"type": ["string", "null"]},
+                                },
+                                "required": []
+                            },
+                            "question": {
+                                "type": ["string", "null"]
                             }
                         },
-                        "required": FIELDS
+                        "required": ["user_feature", "user_info", "question"]
                     }
+
+                    # "parameters": {
+                    #     "type": "object",
+                    #     "properties": {
+                    #         **{
+                    #             field: {"type": ["string", "number", "null"]}
+                    #             for field in FIELDS
+                    #         },
+                    #         "extra_feature": {
+                    #             "type": ["string", "null"],
+                    #             "description": "Other product constraints not covered by predefined 'FIELDS'"
+                    #         }
+                    #     },
+                    #     "required": FIELDS
+                    # }
 
                 }
             }
@@ -210,19 +388,64 @@ def call_model(state=None):
     if msg.tool_calls:
         args = json.loads(msg.tool_calls[0].function.arguments)
 
-        result = {}
-        for field in FIELDS:
-            value = args.get(field)
-            if value is None:
-                if field in current_json:
-                    value = current_json[field]
-                else:
-                    value = None
+        user_feature = args.get("user_feature", {})
+        user_info = args.get("user_info", {})
+        question = args.get("question", {})
 
-            result[field] = value
-        result["extra_feature"] = args.get("extra_feature")
-        print("feat>>>", result)
-        return result
+        # ------------------ MERGE USER_FEATURE ------------------
+        result_feature = {}
+        feature_changed = False
+
+        for field in FIELDS:
+            old_value = current_json.get(field)  # ← مقدار قبلی
+            new_value = user_feature.get(field)  # ← مقدار جدید
+
+            if new_value is None:
+                new_value = old_value
+
+            if new_value != old_value:
+                feature_changed = True
+
+            result_feature[field] = new_value
+
+        # extra_feature
+        old_extra = current_json.get("extra_feature")
+        new_extra = user_feature.get("extra_feature")
+
+        if new_extra != old_extra:
+            feature_changed = True
+
+        result_feature["extra_feature"] = new_extra
+
+        # ------------------ CHECK USER_INFO CHANGE ------------------
+        info_changed = False
+        for key in ["name", "mobile", "address"]:
+            old_val = state.get("user_info", {}).get(key)  # ← مقدار قبلی
+            new_val = args.get("user_info", {}).get(key)  # ← مقدار جدید
+
+            if new_val != old_val:
+                info_changed = True
+
+        question_changed = old_question != question
+
+        # ------------------ DETERMINE CHANGE TYPE ------------------
+        if feature_changed and info_changed:
+            changed_part = "both"
+        elif feature_changed:
+            changed_part = "user_feature"
+        elif info_changed:
+            changed_part = "user_info"
+        elif question_changed:
+            changed_part = "question"
+        else:
+            changed_part = "none"
+
+        return {
+            "user_feature": result_feature,
+            "user_info": user_info,
+            "question": question,
+            "changed_part": changed_part
+        }
 
     return current_json
 

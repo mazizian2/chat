@@ -1,0 +1,2 @@
+[[{"field": "category_type", "example": "کت ، شلوار", "required": true}], {"personality": "فروشگاه لباس"}, {"product_file_name": "964405e267814074a0d6203d9fa2844e_main.json"}, {"QA_file_name": "bafeea0e1fcd4a8ab5ba2089d414c746_question_answer.json"}]
+[[{"field": "", "example": "", "required": false}], {"personality": "coffee shop"}, {"product_file_name": "ade6c9fb104c4e18ae0ec1b2b5e240b6_main.json"}, {"QA_file_name": "f20696d134ee49379fd1180918efecc0_question.json"}]

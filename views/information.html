@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم رسمی</title>
+
+    <style>
+        body {
+            font-family: Vazirmatn, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #1e2a38;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e2a38;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #d0d5dd;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #1e3a8a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .file-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: pointer;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        .tooltip-text {
+            display: none;
+            position: absolute;
+            top: 25px;
+            right: 0;
+            background: #1e2a38;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            width: 250px;
+            z-index: 10;
+        }
+
+        .tooltip:hover .tooltip-text {
+            display: block;
+        }
+
+        .questions-section {
+            margin-top: 30px;
+        }
+
+        .question-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .question-row input {
+            flex: 1;
+        }
+
+        .question-row label {
+            flex: 1; /* هر label فضای مساوی می‌گیرد */
+            text-align: center; /* متن وسط چین شود (اختیاری) */
+            padding: 10px; /* فاصله داخلی (اختیاری) */
+            box-sizing: border-box; /* برای اطمینان از رعایت padding داخل عرض */
+        }
+
+        .add-btn, .remove-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover, .remove-btn:hover {
+            background: #162d6b;
+        }
+
+        .submit-btn {
+            margin-top: 30px;
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #1e293b;
+        }
+        .downloadBtn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    user-select: none;
+    margin: 5px;
+    text-align: center;
+}
+.downloadBtn:hover {
+    background-color: #45a049;
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>فرم ثبت اطلاعات</h2>
+    <form action="/saveInfo" enctype="multipart/form-data" method="post">
+        <!-- Personality -->
+        <div class="form-group">
+            <label>Personality *</label>
+            <input type="text" name="personality" required placeholder="لطفاً شخصیت را وارد کنید">
+        </div>
+
+        <!-- File Upload -->
+        <div class="form-group">
+            <div class="file-label">
+                                    <div class="downloadBtn" data-url="assets/json/raw-products.json"  data-name="products.json">دانلود فایل</div>
+
+                <label>جیسون محصولات</label>
+                <div class="tooltip">؟
+
+                    <div class="tooltip-text">
+                        ساختار فایل باید حتما شامل type و description و products باشد.
+                        ساختار لیست products باید حتما شامل id و title باشد.
+
+                    </div>
+                </div>
+            </div>
+            <input type="file" name="products" accept=".json">
+        </div>
+        <div class="form-group">
+            <div class="file-label">                    <div class="downloadBtn" data-url="assets/json/raw-question-answer.json" data-name="question-answer.json">دانلود فایل</div>
+
+
+                <label>جیسون سوالات متداول</label>
+                <div class="tooltip">؟
+
+                    <div class="tooltip-text">
+                        ساختار فایل باید حتما شامل question و answer باشد.
+
+                    </div>
+                </div>
+            </div>
+            <input type="file" name="QA" accept=".json">
+        </div>
+        <!-- Questions Section -->
+        <div class="questions-section">
+            <label>موارد پرسشی</label>
+
+            <div id="questions-container">
+                <div class="question-row">
+                    <label>field</label>
+                    <label>example</label>
+                    <label>required</label>
+                </div>
+                <div class="question-row">
+
+                    <input type="text" name="questions[0][]" placeholder="مورد اول">
+                    <input type="text" name="questions[0][]" placeholder="مورد دوم">
+                    <input type="text" name="questions[0][]" placeholder="مورد سوم">
+                    <button type="button" class="remove-btn" onclick="removeRow(this)">-</button>
+                </div>
+            </div>
+
+            <button type="button" class="add-btn" onclick="addRow()">+</button>
+
+        </div>
+
+        <button class="submit-btn">ثبت اطلاعات</button>
+    </form>
+</div>
+
+<script>
+    function addRow() {
+        const container = document.getElementById("questions-container");
+        const rowCount = container.children.length;
+
+        const row = document.createElement("div");
+        row.className = "question-row";
+
+        row.innerHTML = `
+        <input type="text" name="questions[${rowCount}][]" placeholder="مورد اول">
+        <input type="text" name="questions[${rowCount}][]" placeholder="مورد دوم">
+        <input type="text" name="questions[${rowCount}][]" placeholder="مورد سوم">
+        <button type="button" class="remove-btn" onclick="removeRow(this)">-</button>
+    `;
+
+        container.appendChild(row);
+    }
+
+    function removeRow(btn) {
+        btn.parentElement.remove();
+        updateRowNames();
+    }
+
+    function updateRowNames() {
+        const container = document.getElementById("questions-container");
+        Array.from(container.children).forEach((row, index) => {
+            const inputs = row.querySelectorAll("input");
+            inputs.forEach((input) => {
+                input.name = `questions[${index}][]`;
+            });
+        });
+    }
+const downloadDivs = document.querySelectorAll(".downloadBtn");
+
+downloadDivs.forEach(div => {
+    div.addEventListener("click", function() {
+        debugger
+        const filePath = this.getAttribute("data-url"); // مسیر فایل
+        const fileName = this.getAttribute("data-name"); // نام فایل هنگام دانلود
+
+        const link = document.createElement("a");
+        link.href = filePath;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+});
+</script>
+
+</body>
+</html>

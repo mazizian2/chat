@@ -219,8 +219,9 @@ function addAIMessage(data, instant = false) {
 
     const hasButtons = data.buttons.length > 0;
     const hasPlans = !!data.plans;
+    const hasCarts = !!data.carts;
 
-    if (hasButtons || hasPlans) {
+    if (hasButtons || hasPlans || hasCarts) {
         const buttonBox = $('<div class="de_element paddingChat ai_inline_button_box"></div>');
 
         if (hasPlans) {
@@ -232,6 +233,17 @@ function addAIMessage(data, instant = false) {
                 </div>
             `);
             moreButton.data("plansData", data.plans);
+            buttonBox.append(moreButton);
+        }
+        if (hasCarts) {
+            const moreButton = $(`
+                <div class="de_element chat_suggest ai_inline_button ask_ai"
+                     data-carts="true"
+                     data-target="${data.uuid}">
+                    <span class="de_element ai_inline_button_text"><span>مشاهده سبد خرید</span></span>
+                </div>
+            `);
+            moreButton.data("cartsData", data.carts);
             buttonBox.append(moreButton);
         }
 
@@ -359,16 +371,40 @@ $(document).on('keydown', '#message_input', function (e) {
         showChatBox();
     }
 });
+$(document).on("click", ".add_bascket", function () {
+    const id = $(this).data("id");
+    const apiUrl = `http://127.0.0.1:8000/addToCart/?id=${id}&token=${roomId}`;
+        fetch(apiUrl)
+            .then(res => res.json())
+            .then(data => {
+                console.log("✅ نتیجه:", data);
+                // addAIMessage(`✅ طرح "${askText}" با موفقیت ثبت شد.`);
+            })
+            .catch(err => {
+                console.error("❌ خطا:", err);
+                // addAIMessage(`❌ خطا در ثبت طرح "${askText}"`);
+            })
+         .catch(err => {
+            console.error("❌ خطا:", err);
+        });
+});
 $(document).on("click", ".ask_ai", function () {
     const isPlansButton = $(this).data("plans");
+    const isCartButton = $(this).data("carts");
     const targetId = $(this).data("target");
     const askText = $(this).data("ask");
     const planType = $(this).data("planType"); // اضافه برای تشخیص طرح‌ها
 
-    // ۱️⃣ دکمه بیشتر (نمایش طرح‌ها)
+    //  دکمه بیشتر (نمایش طرح‌ها)
     if (isPlansButton) {
         const plansData = $(this).data("plansData");
         showPlans(plansData, targetId);
+        return;
+    }
+    //  دکمه بیشتر (نمایش سبد خرید)
+    if (isCartButton) {
+        const cartsData = $(this).data("cartsData");
+        showCarts(cartsData, targetId);
         return;
     }
 
@@ -418,6 +454,7 @@ $(document).on('click', '.internet_test', function () {
         }
     );
 });
+
 // function showPlans(plans, targetId) {
 //     const plansBox = $('<div class="de_element plans_box"></div>');
 //
@@ -497,22 +534,27 @@ console.log(">>>plans>>>",data);
         const title = data['title'] || '';
         if (!title) return;
 
-        const category = data['category type'] || '—';
+        const category = data['category'] || '—';
+        const id = data['id'] || '—';
         const price = data['price'] ? data['price'] + ' تومان' : '—';
-        const gender = data['gender'] || '—';
+        const gender = data['description'] || '—';
         const size = data['size'] || '—';
         const color = data['color'] || '—';
         const season = data['season'] || '—';
+        const url = data['url'] || '—';
+        const img = data['image'] || '—';
 
         const card = $(`
-            <div class="plan_card ask_ai" data-ask="${title}" data-plan-type="register">
+            <div class="plan_card ask_ai add_bascket" data-id="${id}" data-ask="${title}" data-plan-type="register">
                 <div class="plan_line title"><strong>${title}</strong></div>
+                <div class="plan_line"><strong>id:</strong> ${id}</div>
                 <div class="plan_line"><strong>دسته‌بندی:</strong> ${category}</div>
-                <div class="plan_line"><strong>جنسیت:</strong> ${gender}</div>
-                <div class="plan_line"><strong>فصل:</strong> ${season}</div>
-                <div class="plan_line"><strong>سایز:</strong> ${size}</div>
-                <div class="plan_line"><strong>رنگ:</strong> ${color}</div>
+                <div class="plan_line"><strong>توضیحات:</strong> ${gender}</div>
                 <div class="plan_line"><strong>قیمت:</strong> ${price}</div>
+                <div class="plan_line"><strong>نشانی محصول:</strong> <a href="${url}">آدرس</a></div>
+                <div class="plan_line"><strong>تصویر محصول:</strong>
+                 <img src="${img}" width="100" height="100">
+                </div>
             </div>
         `);
 
@@ -520,6 +562,64 @@ console.log(">>>plans>>>",data);
     });
 
     $("#" + targetId).find(".ai_message").append(plansBox);
+    scrollToBottom();
+}
+
+function showCarts(plans, targetId) {
+    const cartBox = $('<div class="de_element carts_box"></div>');
+
+    plans.forEach(planText => {
+        const lines = String(planText).split('\n').map(l => l.trim()).filter(l => l.startsWith('-'));
+        console.log("lines",lines)
+
+        const data = {};
+        if(lines.length>0){
+                  lines.forEach(line => {
+            const cleanLine = line.replace('- ', '');
+            const parts = cleanLine.split(':');
+
+            if (parts.length >= 2) {
+                const key = parts.shift().trim();
+                const value = parts.join(':').trim();
+                data[key] = value;
+            }
+        });
+        }
+
+
+console.log(">>>plans>>>",data);
+
+        // عنوان پلن
+        const title = data['title'] || '';
+        if (!title) return;
+
+        const category = data['category type'] || '—';
+        const id = data['id'] || '—';
+        const price = data['price'] ? data['price'] + ' تومان' : '—';
+        const gender = data['gender'] || '—';
+        const size = data['size'] || '—';
+        const color = data['color'] || '—';
+        const season = data['season'] || '—';
+        const url = data['url'] || '—';
+
+        const card = $(`
+            <div class="plan_card ask_ai add_bascket" data-id="${id}" data-ask="${title}" data-plan-type="register">
+                <div class="plan_line title"><strong>${title}</strong></div>
+                <div class="plan_line"><strong>id:</strong> ${id}</div>
+                <div class="plan_line"><strong>دسته‌بندی:</strong> ${category}</div>
+                <div class="plan_line"><strong>جنسیت:</strong> ${gender}</div>
+                <div class="plan_line"><strong>فصل:</strong> ${season}</div>
+                <div class="plan_line"><strong>سایز:</strong> ${size}</div>
+                <div class="plan_line"><strong>رنگ:</strong> ${color}</div>
+                <div class="plan_line"><strong>قیمت:</strong> ${price}</div>
+                <div class="plan_line"><strong>نشانی محصول:</strong> <a href="${url}">آدرس</a></div>
+            </div>
+        `);
+
+        cartBox.append(card);
+    });
+
+    $("#" + targetId).find(".ai_message").append(cartBox);
     scrollToBottom();
 }
 

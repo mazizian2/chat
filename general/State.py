@@ -10,8 +10,12 @@ class ChatState(TypedDict):
     # thread_id: str
     input: Optional[str]  # آخرین پیام کاربر
     user_feature:Dict[str,Any]
+    question:str
+    cart:List[Any]
+    total_amount:int
     status_search:str
-    # userInfo: Optional[Any]  # ایمیل کاربر
+    user_info: Optional[Any]
+    changed_part:str
     search_history: List[Dict[str, str]] # تاریخچه جست و جو
     messages: List[Dict[str, str]] # تاریخچه پیام‌ها
     # history_suggestion:List[Dict[Any, Any]]  #تاریخچه سرویس های پیشنهادی

@@ -1,14 +1,13 @@
 import asyncio
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, UploadFile, File, Form
+
 import socketio
 from general.constants import description_data
 from pydantic import BaseModel
-from general.tools import (extract_min_max, filter_by_date, clean_and_load_json, execute_stored_procedure,
-                           create_message, load_latest_state)
 from general.tools import (read_json_file, extract_min_max, filter_by_date, clean_and_load_json,
-                           execute_stored_procedure,add_item_to_json,
+                           execute_stored_procedure,add_item_to_json,emit_message,
                            create_message, load_latest_state)
-from apis.apis import customer_search, customer_info, ask_rag,execute_stored_procedure_support
+from apis.apis import customer_info, ask_rag,execute_stored_procedure_support
 from graph.SHGraph import build_graph, handle_follow_up_buy, handle_service_suggestion_buy, handle_user_info_collector
 from socket_instance import sio
 from general.State import ChatState
@@ -19,9 +18,8 @@ from fastapi.staticfiles import StaticFiles
 import sys
 import os
 import json
-from langchain_core.documents import Document
-from RAG.tools import json_to_docs_internet, answer_with_ai, ask_faiss_question, set_faiss_db_from_json, \
-    flatten_plans_dynamic, flatten_services_dynamic,set_chroma_db_from_json,json_to_docs_universal,ask_chroma_question
+from RAG.tools import  set_faiss_db_from_json, \
+    flatten_plans_dynamic, flatten_services_dynamic,set_chroma_db_from_json,json_to_docs_universal,ask_chroma_question,json_to_docs_question_answer
 import uuid
 import shutil
 import requests
@@ -47,6 +45,7 @@ sio_app = socketio.ASGIApp(sio, other_asgi_app=app)
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
+
 @app.get("/", response_class=HTMLResponse)
 def read_root():
     # تولید UUID و تبدیل به رشته
@@ -79,9 +78,9 @@ def read_root():
         # اضافه یا جایگزین کردن token
         data["token"] = user_uuid
 
-        thread = client.beta.threads.create()
-
-        data["thread_id"] = thread.id
+        # thread = client.beta.threads.create()
+        #
+        # data["thread_id"] = thread.id
 
 
         # بازنویسی فایل
@@ -92,6 +91,66 @@ def read_root():
     # ریدایرکت به مسیر بعدی
     return RedirectResponse(url=f"/user/{user_uuid}")
 
+@app.get("/informationForm", response_class=HTMLResponse)
+def informationForm():
+    with open("views/information.html", "r", encoding="utf-8") as f:
+        html_content = f.read()
+    return HTMLResponse(content=html_content)
+
+UPLOAD_FOLDER = "uploads_products"
+UPLOAD_Q_FOLDER = "uploads_qa"
+
+@app.post("/saveInfo")
+async def save_info(
+    request: Request,
+    products: UploadFile | None = File(None),  # فایل اختیاری
+    QA: UploadFile | None = File(None),  # فایل اختیاری
+    personality: str = Form(...)
+):
+    # دریافت فایل
+    if products:
+        unique_filename1 = f"{uuid.uuid4().hex}_{products.filename}"
+        file_path = os.path.join(UPLOAD_FOLDER, unique_filename1)
+        with open(file_path, "wb") as f:
+            f.write(await products.read())
+    else:
+        return "هیچ فایلی آپلود نشد."
+        # دریافت فایل
+    if QA:
+        unique_filename2 = f"{uuid.uuid4().hex}_{QA.filename}"
+        file_path = os.path.join(UPLOAD_Q_FOLDER, unique_filename2)
+        with open(file_path, "wb") as f:
+            f.write(await QA.read())
+    else:
+        return "هیچ فایلی آپلود نشد."
+
+    # دریافت داده‌های فرم (لیست questions)
+    form = await request.form()
+    all_questions = []
+    for key in form:
+        if key.startswith("questions"):
+            all_questions.append(form.getlist(key))
+    # تبدیل به دیکشنری مورد نظر
+    formatted_questions = []
+    for q in all_questions:
+        if len(q) >= 3:
+            field, example, required_str = q[:3]
+            formatted_questions.append({
+                "field": field,
+                "example": example,
+                "required": required_str.lower() == "true"
+            })
+    final=[]
+    final.append(formatted_questions)
+    final.append({'personality': personality})
+    final.append({'product_file_name': unique_filename1})
+    final.append({'QA_file_name': unique_filename2})
+    # ذخیره در یک فایل تکست (JSON)
+    file_path = os.path.join('information', "information-user.txt")
+    with open(file_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(final, ensure_ascii=False) + "\n")
+    print(final)
+    return "داده های شما ذخیره شد"
 
 @app.get("/user/{user_uuid}", response_class=HTMLResponse)
 def user_page(request: Request, user_uuid: str):
@@ -175,6 +234,19 @@ async def set_rag():
     # ساخت یا افزودن داده‌ها به chroma
     set_chroma_db_from_json(
         db_name="services",
+        docs=docs,
+        mode="append"  # 'append' اگر بخواهی به دیتابیس موجود اضافه شود
+    )
+    return {"response": docs}
+
+@app.get("/set_rag_question")
+async def set_rag_question():
+    with open("assets/json/question_answer.json", "r", encoding="utf-8") as f:
+        json_data = json.load(f)
+    docs = json_to_docs_question_answer(json_data)
+    # ساخت یا افزودن داده‌ها به chroma
+    set_chroma_db_from_json(
+        db_name="question_answer",
         docs=docs,
         mode="append"  # 'append' اگر بخواهی به دیتابیس موجود اضافه شود
     )
@@ -317,6 +389,37 @@ async def getUser():
     result = await  customer_info('989559001349')
     return result
 
+@app.get("/addToCart", response_class=HTMLResponse)
+async def addToCart(id:str,token:str):
+    data = read_json_file(f"{token}.json")
+    state: ChatState = dict(data)
+    with open("assets/json/main.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    data_by_id = {}
+    for category in data:
+        for product in category.get("products", []):
+            data_by_id[product["_id"]] = product
+    item = data_by_id.get(id)
+    if not item:
+        return  {"success": False}
+    if "cart" not in state:
+        state["cart"] = []
+
+
+    if any(i['id'] == item['id'] for i in state["cart"] ):
+        text = f"این محصول قبلا در سبد خرید شما اضافه شده است، سبد خرید شما شامل:\n{state['cart']}  میخوای محصول دیگه‌ای اضافه کنی یا به مرحله ثبت نهایی برویم؟"
+    else:
+        state["cart"].append(item)
+        total_amount = sum(item['price'] for item in state["cart"])
+        if "total_amount" not in state:
+            state["total_amount"] =0
+        state['total_amount']=total_amount
+        text = f"الان سبد خرید شما شامل:\n{state['cart']}\n\nمبلغ کل {total_amount}\n\nمیخوای محصول دیگه‌ای اضافه کنی یا به مرحله ثبت نهایی برویم؟"
+
+    emit_message(state, 1, text,None, buttons=["مرحله بعد"],carts=state['cart'])
+    state["messages"].append(create_message("assistant", text))
+    save_state(state)
+    return  {"success": True}
 
 # @app.get("/sendMessage")
 # async def sendMessage(state: ChatState):

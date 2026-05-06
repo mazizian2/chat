@@ -1,11 +1,11 @@
 from typing import TypedDict, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
-from general.constants import products
+from general.constants import products,split_query_by_required
 from task.SHTask import get_assistant_suggest, register_order_json_task, get_assistant_express_need_buy, \
     get_assistant_user_info_collector, get_assistant_register_order, get_assistant_answer, \
     user_info_json_task, get_assistant_unknown, create_json_need_buy_response_task, \
-    payment_task, get_assistant_intent, get_assistant_greeting, get_assistant_help, call_model, \
-    get_assistant_question_service_support, get_assistant_set_service_support
+    payment_task, get_assistant_intent, get_assistant_greeting, get_assistant_help,get_assistant_user_info, call_model, \
+    get_assistant_question_service_support, get_assistant_set_service_support,get_assistant_question_answer
 from LTE.graph.LTEGraph import handle_problem_list, handle_get_account_user, handle_json_account, \
     handle_ask_witch_account, handle_extract_select_account, handle_ask_problem, handle_LTE_detect, \
     handle_update_json_support_task
@@ -59,16 +59,23 @@ def get_chroma_results(state):
     status_search = state.get("status_search", 1)
     print("status_search>>>",status_search)
     if status_search == 0:
-        while True:
+        max_attempts = 50  # تعداد حداکثر تلاش
+        attempts = 0
+        while attempts < max_attempts:
             search_history = state.get("search_history", [])
             if search_history:
                 return {"result": search_history, "status": "main"}
             time.sleep(check_interval)
+            attempts += 1
+        return {"result": [], "status": "timeout"}
     else:
-        features = clean_features(state.get("user_feature", {}))
+        query,orQuery = split_query_by_required(clean_features(state.get("user_feature", {})))
+        print('query items is>>>>',query)
+        print('orQuery items is>>>>',orQuery)
         result = ask_chroma_question(
                 db_name="services",
-                query=features,
+                query=query,
+                orQuery=orQuery,
                 state=state
             )
         state["search_history"] = result["result"]
@@ -78,13 +85,13 @@ async def handle_help(state: ChatState):
     print("handle help")
     user_input = state.get("input")
 
-    if user_input == "درخواست جست و جو":
+    if 'درخواست جست و جو' in user_input:
         chroma_results = get_chroma_results(state)
         plans = chroma_results.get("result")
         print(chroma_results.get("result"))
         if plans:
             if chroma_results.get("status") == "main":
-                text = "محصولات مشابه درخواست شما یافت شد که عبارتند از:"
+                text = "تمامی محصولات مشابه درخواست شما یافت شد که عبارتند از:"
             else:
                 text = (
                     "متأسفانه در حال حاضر محصولی دقیقاً مطابق با نیاز شما موجود نیست.\n"
@@ -99,51 +106,102 @@ async def handle_help(state: ChatState):
 
         emit_message(state,1, text, plans=plans)
 
-    elif user_input == "شروع پرسش":
+
+    elif 'شروع پرسش' in user_input:
+
         response = await get_assistant_help(state)
         response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
         state["messages"].append(create_message("assistant", response))
+        save_state(state)
 
-    elif user_input == "نمایش همه محصولات":
+
+    elif 'نمایش همه محصولات' in user_input:
+
         emit_message(
             state,1,
             "«لیست تمامی محصولات: »",
             plans=products
         )
 
+
+    elif 'مرحله بعد' in user_input:
+        user_info=state["user_info"]
+        all_not_null = all(value is not None and value != "" for value in user_info.values())
+        if all_not_null :
+            text = (
+                "سبد خرید شما با موفقیت تکمیل و ذخیره شد 🎉\n"
+                "از انتخاب و اعتماد شما سپاسگزاریم 💙\n"
+                " اگر ویژگی جدیدی مدنظر دارید بفرمایید."
+
+            )
+            btn = ["پرداخت"]
+            emit_message(
+                state, 1,
+                text,
+                buttons=btn)
+        else:
+            response = await get_assistant_user_info(state)
+            response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
+            state["messages"].append(create_message("assistant", response))
+            save_state(state)
+
+
     else:
+
         features = call_model(state)
-        state["user_feature"] = features
+        state["user_feature"] = features['user_feature']
+        state["user_info"] = features['user_info']
+        state["question"] = features['question']
+        state["changed_part"] = features['changed_part']
         save_state(state)
 
-        miss_fields = missing_fields(features)
+        miss_fields = missing_fields(features['user_feature'])
 
-        if not miss_fields:
-            values = [str(v) for v in features.values() if v]
+        if not miss_fields and state["changed_part"]=='user_feature':
+            values = [str(v) for v in features['user_feature'].values() if v]
             text = (
-                "عالی! این‌ها ویژگی‌هایی هست که انتخاب کردید: "
-                + "، ".join(values)
+                "عالی! درخواست های شما دریافت شد، "
+                # + "، ".join(values)
                 + ".\n"
                 ". اگه دوست دارید نتایج رو ببینید، روی دکمه «درخواست جست‌وجو» بزنید یا اگر مورد دیگه‌ای مدنظر دارید، بهم بگید."
             )
-
+            btn = ["درخواست جست و جو"] if state["changed_part"] == "user_feature" else None
             emit_message(
                 state,1,
                 text,
-                buttons=["درخواست جست و جو"]
+                buttons=btn
             )
+        elif  all(value is not None and value != "" for value in state["user_info"].values()) and state["changed_part"]=='user_info':
+            text = (
+                "سبد خرید شما با موفقیت تکمیل و ذخیره شد 🎉\n"
+                 "از انتخاب و اعتماد شما سپاسگزاریم 💙\n"
+                 "برای نهایی کردن خرید لطفا روی دکمه پرداخت کلیک کنید \n"
+                " ویا اگر ویژگی جدیدی مدنظر دارید بفرمایید."
+            )
+            btn = ["پرداخت"]
+            emit_message(
+                state, 1,
+                text,
+                buttons=btn
+            )
+        elif  state["changed_part"]=='question':
+                chroma_results = ask_chroma_question(db_name="question_answer", query={}, orQuery=state.get("question",''), state=state,k=1)
+                response = await get_assistant_question_answer(state, chroma_results['result'][0])
+                response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
+                state["messages"].append(create_message("assistant", response))
+                save_state(state)
         else:
             response = await get_assistant_help(state)
             response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
             state["messages"].append(create_message("assistant", response))
             state["search_history"]=[]
             save_state(state)
-            if any(v not in (None, "-") for v in features.values()):
-                chroma_results = ask_chroma_question(
-                    db_name="services",
-                    query=clean_features(features),
-                    state=state
-                )
+            print("clean_features>>>",clean_features(features['user_feature']))
+            if any(v not in (None, "-") for v in features['user_feature'].values()):
+                query, orQuery = split_query_by_required(clean_features(state.get("user_feature", {})))
+                print('query items is>>>>', query)
+                print('orQuery items is>>>>', orQuery)
+                chroma_results = ask_chroma_question(db_name="services",query=query, orQuery=orQuery,state=state)
                 state["search_history"] = chroma_results["result"]
 
     if state.get("intents"):

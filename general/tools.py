@@ -330,7 +330,7 @@ def chat_create(messages: List[Any]):
 def missing_fields(features: dict) -> list:
     return  [key for key in FIELDS if features.get(key) in (None, "-", "")]
 
-def emit_message(state, counter, content, plans=None, buttons=None):
+def emit_message(state, counter, content, plans=None, buttons=None,carts=None):
     message = create_message("assistant", content, buttons, plans)
     state["messages"].append(message)
     message_dict = {
@@ -340,10 +340,10 @@ def emit_message(state, counter, content, plans=None, buttons=None):
         "content": content,
         "buttons": buttons,
         "plans": plans,
+        "carts": carts,
     }
     room = state["token"]
-    asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room)
-                        )
+    asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room) )
 
 
 # create message and run stream
