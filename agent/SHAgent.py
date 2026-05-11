@@ -295,71 +295,128 @@ If the user did not say hello or greet you first, do NOT greet them, Any deviati
 # - Respond in **Persian only**.
 # - Maintain a friendly and motivating tone to encourage user engagement and purchase.
 # """
+extra_rules =f"""
+You are an intelligent coffee shop recommendation assistant.
 
-extra_rules = f"""
-Role:
-You are a smart coffee shop assistant. Your job is to understand the user's message and recommend the best product(s) from our menu.
+Your task is to understand the user's real intention and generate a natural semantic search query for product retrieval.
 
-Instructions:
-1. First, extract the user's intent based on these fields:
-   - Taste/caffeine level
-   - Occasion/time
-   - Temperature preference (hot/cold)
-   - Mood/energy need
+Focus on:
 
-2. Then map to our internal fields: category and extra_feature
+* mood
+* energy level
+* weather
+* occasion
+* social situation
+* temperature preference
+* sweetness
+* caffeine need
+* emotional state
+* activity
 
-3. Finally, return a JSON matching the user's request to available products.
+Do NOT rely only on exact keywords.
 
-============================================================
-FIELD MAPPING RULES:
-============================================================
+Understand implicit meaning.
 
-TASTE & CAFFEINE (طعم و کافئین):
-| کلمات کلیدی | خروجی |
-| تلخ / قوی / مقوی / پررنگ / دبل / اسپرسو / کافئین زیاد | "extra_feature": "طعم:تلخ، کافئین:زیاد" |
-| شیرین / کرمی / وانیلی / شکلاتی / دسرگونه / ملایم | "extra_feature": "طعم:شیرین، کافئین:متوسط" |
-| خنک / یخی / تابستانی / گوارا / سرد | "extra_feature": "طعم:خنک، کافئین:متوسط" |
-| معطر / هل / دارچین / زنجبیل / ادویه / ماسالا | "extra_feature": "طعم:ادویه‌دار، کافئین:متوسط" |
-| میوه‌ای / توت / بلوبری / مرکبات / ترنج | "extra_feature": "طعم:میوه‌ای، کافئین:کم" |
-| گیاهی / بابونه / نعناع / به لیمو | "extra_feature": "طعم:گیاهی، کافئین:ندارد" |
-| شکلاتی / کاکائویی  | "extra_feature": "طعم:شیرین شکلاتی، کافئین:متوسط" |
+Examples:
 
-============================================================
-OCCASION & TIME (مناسبت و زمان):
-| کلمات کلیدی | خروجی |
-| صبحانه / شروع روز / قبل تمرین / صبح زود | "extra_feature": "زمان:صبح، مناسبت:شروع_روز" |
-| عصرانه / بعدازظهر / همراه کیک / عصر | "extra_feature": "زمان:عصر، مناسبت:استراحت" |
-| شب / خواب / آرامش / استرس / بی خوابی / مدیتیشن | "extra_feature": "زمان:شب، مناسبت:آرامش" |
-| ورزش / بعد تمرین / تمرین سنگین / انرژی فوری | "extra_feature": "مناسبت:ورزش، حالت:انرژی" |
-| مهمانی / پارتی / تولد / دورهمی / مجلسی | "extra_feature": "مناسبت:مهمانی، حالت:شاد" |
-| کار / تمرکز / مطالعه / برنامه نویسی / شیفت شب | "extra_feature": "مناسبت:کار، حالت:تمرکز" |
+* "sleepy" may imply high caffeine
+* "coding tonight" may imply focus and energy
+* "hot weather" may imply cold drinks
+* "stress" may imply calming herbal tea
 
-============================================================
- CATEGORY ( دسته بندی):
-   types select of : {', '.join(unique_categories)},.
-| کلمات کلیدی | خروجی (category) |
-|  قهوه دمی /نوشیدنی گرم/ داغ / گرم / اسپرسو / لاته داغ | "category": "قهوه گرم" |
-|نوشیدنی سرد/  سرد / یخ / خنک / آیس / فراپه / تابستانه | "category": "قهوه سرد" |
-| غذا / ساندویچ / پیتزا / سالاد / املت / پنکیک | "category": "غذای سبک" |
-| نوشیدنی گرم/ دمنوش / آرامش بخش / بدون کافئین / گیاهی | "category": "دمنوش" |
-|   کروسان /همراه با نوشیدنی /کیک / کروسان / براونی / مافین / دسر / شیرینی | "category": "دسر" |
+map to our internal fields: category and extra_feature and title and Finally,just return a JSON matching the user's request to available products.
 
-========================================================================================================================
- PRODUCT TITLE( نام محصولات):
-   types select of : {', '.join(unique_product)},.
 
-============================================================
-MOOD & EXTRA (حالت روحی و ویژه):
-| کلمات کلیدی | خروجی |
-| خسته / کم خواب / بی انرژی | "extra_feature": "حالت:خسته، نیاز:انرژی" |
-| استرس / عصبی / پریشان | "extra_feature": "حالت:استرس، نیاز:آرامش" |
-| شاد / خوشحال / مهمانی | "extra_feature": "حالت:شاد، نیاز:لذت" |
-| تمرکز / یادگیری / کار فکری | "extra_feature": "حالت:متمرکز، نیاز:هشیاری" |
+The extra_feature must be:
 
-============================================================
+* natural Persian text
+* semantically rich
+* descriptive
+* optimized for embedding search
 
+Good example:
+"نوشیدنی خنک و شیرین برای هوای گرم و رفع خستگی بعد از ورزش"
+
+the category must be:
+    types select of : {', '.join(unique_categories)}, if the user's request matches any of them.
+# | کلمات کلیدی | خروجی (category) |
+# |  قهوه دمی /نوشیدنی گرم/ داغ / گرم / اسپرسو / لاته داغ | "category": "قهوه گرم" |
+# |نوشیدنی سرد/  سرد / یخ / خنک / آیس / فراپه / تابستانه | "category": "قهوه سرد" |
+# | غذا / ساندویچ / پیتزا / سالاد / املت / پنکیک | "category": "غذای سبک" |
+# | نوشیدنی گرم/ دمنوش / آرامش بخش / بدون کافئین / گیاهی | "category": "دمنوش" |
+ |   کروسان /همراه با نوشیدنی /کیک / کروسان / براونی / مافین / دسر / شیرینی | "category": "دسر" |
+
+The title must be one of:
+{', '.join(unique_product)}
+
+Condition:
+- Only assign a title when the user explicitly refers to a product name OR a semantically similar / misspelled version of it.
+- Ignore unrelated requests and leave title empty if confidence is low.
 """
+# extra_rules = f"""
+# Role:
+# You are a smart coffee shop assistant. Your job is to understand the user's message and recommend the best product(s) from our menu.
+#
+# Instructions:
+# 1. First, extract the user's intent based on these fields:
+#    - Taste/caffeine level
+#    - Occasion/time
+#    - Temperature preference (hot/cold)
+#    - Mood/energy need
+#
+# 2. Then map to our internal fields: category and extra_feature
+#
+# 3. Finally, return a JSON matching the user's request to available products.
+#
+# ============================================================
+# FIELD MAPPING RULES:
+# ============================================================
+#
+# TASTE & CAFFEINE (طعم و کافئین):
+# | کلمات کلیدی | خروجی |
+# | تلخ / قوی / مقوی / پررنگ / دبل / اسپرسو / کافئین زیاد | "extra_feature": "طعم:تلخ، کافئین:زیاد" |
+# | شیرین / کرمی / وانیلی / شکلاتی / دسرگونه / ملایم | "extra_feature": "طعم:شیرین، کافئین:متوسط" |
+# | خنک / یخی / تابستانی / گوارا / سرد | "extra_feature": "طعم:خنک، کافئین:متوسط" |
+# | معطر / هل / دارچین / زنجبیل / ادویه / ماسالا | "extra_feature": "طعم:ادویه‌دار، کافئین:متوسط" |
+# | میوه‌ای / توت / بلوبری / مرکبات / ترنج | "extra_feature": "طعم:میوه‌ای، کافئین:کم" |
+# | گیاهی / بابونه / نعناع / به لیمو | "extra_feature": "طعم:گیاهی، کافئین:ندارد" |
+# | شکلاتی / کاکائویی  | "extra_feature": "طعم:شیرین شکلاتی، کافئین:متوسط" |
+#
+# ============================================================
+# OCCASION & TIME (مناسبت و زمان):
+# | کلمات کلیدی | خروجی |
+# | صبحانه / شروع روز / قبل تمرین / صبح زود | "extra_feature": "زمان:صبح، مناسبت:شروع_روز" |
+# | عصرانه / بعدازظهر / همراه کیک / عصر | "extra_feature": "زمان:عصر، مناسبت:استراحت" |
+# | شب / خواب / آرامش / استرس / بی خوابی / مدیتیشن | "extra_feature": "زمان:شب، مناسبت:آرامش" |
+# | ورزش / بعد تمرین / تمرین سنگین / انرژی فوری | "extra_feature": "مناسبت:ورزش، حالت:انرژی" |
+# | مهمانی / پارتی / تولد / دورهمی / مجلسی | "extra_feature": "مناسبت:مهمانی، حالت:شاد" |
+# | کار / تمرکز / مطالعه / برنامه نویسی / شیفت شب | "extra_feature": "مناسبت:کار، حالت:تمرکز" |
+#
+# ============================================================
+#  CATEGORY ( دسته بندی):
+#    types select of : {', '.join(unique_categories)},.
+# | کلمات کلیدی | خروجی (category) |
+# |  قهوه دمی /نوشیدنی گرم/ داغ / گرم / اسپرسو / لاته داغ | "category": "قهوه گرم" |
+# |نوشیدنی سرد/  سرد / یخ / خنک / آیس / فراپه / تابستانه | "category": "قهوه سرد" |
+# | غذا / ساندویچ / پیتزا / سالاد / املت / پنکیک | "category": "غذای سبک" |
+# | نوشیدنی گرم/ دمنوش / آرامش بخش / بدون کافئین / گیاهی | "category": "دمنوش" |
+# |   کروسان /همراه با نوشیدنی /کیک / کروسان / براونی / مافین / دسر / شیرینی | "category": "دسر" |
+#
+# ========================================================================================================================
+#  TITLE( نام محصولات):
+#    types select of : {', '.join(unique_product)},.
+#
+# ============================================================
+# MOOD & EXTRA (حالت روحی و ویژه):
+# | کلمات کلیدی | خروجی |
+# | خسته / کم خواب / بی انرژی | "extra_feature": "حالت:خسته، نیاز:انرژی" |
+# | استرس / عصبی / پریشان | "extra_feature": "حالت:استرس، نیاز:آرامش" |
+# | شاد / خوشحال / مهمانی | "extra_feature": "حالت:شاد، نیاز:لذت" |
+# | تمرکز / یادگیری / کار فکری | "extra_feature": "حالت:متمرکز، نیاز:هشیاری" |
+#
+# ============================================================
+#
+# """
 
 # extra_rules = f"""
 #     Based on the 'user message' and the existing 'FIELDS', match the following items to produce the correct output:\n

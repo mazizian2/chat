@@ -6,7 +6,7 @@ from general.constants import description_data
 from pydantic import BaseModel
 from general.tools import (read_json_file, extract_min_max, filter_by_date, clean_and_load_json,
                            execute_stored_procedure,add_item_to_json,emit_message,
-                           create_message, load_latest_state)
+                           create_message, load_latest_state,load_state)
 from apis.apis import customer_info, ask_rag,execute_stored_procedure_support
 from graph.SHGraph import build_graph, handle_follow_up_buy, handle_service_suggestion_buy, handle_user_info_collector
 from socket_instance import sio
@@ -287,7 +287,28 @@ async def supportadsl():
 
     return {"response": result}
 
-
+@app.get("/pay/order",response_class=HTMLResponse)
+async def payOrder( token: str):
+    stateUser=load_state(token)
+    state: ChatState = dict(stateUser)
+    status_order= state['status_order']
+    if(status_order=='confirmed' and all(value is not None and value != "" for value in state["user_info"].values())):
+        state['status_order']='compeleted'
+        save_state(state)
+        return """
+            <html>
+                <body>
+                    <h2>پرداخت موفق!.</h2>
+                </body>
+            </html>
+        """
+    return """
+             <html>
+                 <body>
+                     <h2>پرداخت ناموفق!.</h2>
+                 </body>
+             </html>
+         """
 @app.get("/pay", response_class=HTMLResponse)
 async def pay():
     latest_state = load_latest_state()
@@ -406,7 +427,7 @@ async def addToCart(id:str,token:str):
         state["cart"] = []
 
 
-    if any(i['id'] == item['id'] for i in state["cart"] ):
+    if any(i['_id'] == item['_id'] for i in state["cart"] ):
         text = f"این محصول قبلا در سبد خرید شما اضافه شده است، سبد خرید شما شامل:\n{state['cart']}  میخوای محصول دیگه‌ای اضافه کنی یا به مرحله ثبت نهایی برویم؟"
     else:
         state["cart"].append(item)
@@ -424,13 +445,6 @@ async def addToCart(id:str,token:str):
 # @app.get("/sendMessage")
 # async def sendMessage(state: ChatState):
 #     return  state
-
-@ app.get("/showMessage")
-async def showMessage(message: str):
-    s={"message": message}
-    with open("assets/json/messagetest.json", "w", encoding="utf-8") as f:
-        json.dump(s, f, ensure_ascii=False, indent=2)
-    return {"message": message}
 
 @ app.get("/showMessage")
 async def showMessage(message: str):

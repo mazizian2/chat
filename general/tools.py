@@ -341,6 +341,7 @@ def emit_message(state, counter, content, plans=None, buttons=None,carts=None):
         "buttons": buttons,
         "plans": plans,
         "carts": carts,
+        "status_order": state["status_order"],
     }
     room = state["token"]
     asyncio.create_task(sio.emit(f"room_{room}", message_dict, room=room) )
@@ -453,6 +454,24 @@ def load_latest_state(folder: str = "mehdi"):
         state = json.load(f)
 
     print(f"📂 آخرین ChatState از {latest_path} خوانده شد.")
+    return state
+
+def load_state(uuid: str ):
+    """
+    خواندن آخرین ChatState از latest.json
+    """
+    base_dir = "data"
+    user_dir = os.path.join(base_dir, "users")
+    file_path = os.path.join(user_dir, f"{uuid}.json")
+
+    if not os.path.exists(file_path):
+        print("⚠️ فایل latest.json پیدا نشد.")
+        return None
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        state = json.load(f)
+
+    print(f"📂 آخرین ChatState از {file_path} خوانده شد.")
     return state
 
 

@@ -68,6 +68,7 @@ function addUserMessage(messageText) {
     $("#" + targetId).append(messageElement);
     addAILoading();
 }
+
 const typingQueues = {};
 const isTyping = {};
 let activeSendMessage = false; // وضعیت ارسال پیام
@@ -135,6 +136,7 @@ function processNode(node, parent, callback, instant = false) {
         }
 
         let i = 0;
+
         function typeChar() {
             if (i < text.length) {
                 parent.append(text[i]);
@@ -145,6 +147,7 @@ function processNode(node, parent, callback, instant = false) {
                 callback();
             }
         }
+
         typeChar();
 
     } else if (node.nodeType === Node.ELEMENT_NODE) {
@@ -182,16 +185,19 @@ function processNode(node, parent, callback, instant = false) {
 // ------------------------------------------------------
 function addAIMessage(data, instant = false) {
 
+    console.log('dataaa is >>>', data)
+    console.log('dataaa is >>>', data.status_order)
     $(".ai_loading_box").remove();
     if (typeof data === "string") {
-        data = { content: data };
+        data = {content: data};
     }
 
     data.content = data.content || "";
     data.buttons = data.buttons || [];
-    data.plans   = data.plans || null;
+    data.plans = data.plans || null;
     data.counter = data.counter || 0;
-    data.uuid    = data.uuid || ("msg_" + crypto.randomUUID());
+    data.uuid = data.uuid || ("msg_" + crypto.randomUUID());
+    data.status_order = data.status_order || "";
 
     const targetId = "de_b4f3b2f3-fa7d-444f-04f5-ff0b2d0dc658";
 
@@ -220,8 +226,9 @@ function addAIMessage(data, instant = false) {
     const hasButtons = data.buttons.length > 0;
     const hasPlans = !!data.plans;
     const hasCarts = !!data.carts;
-
-    if (hasButtons || hasPlans || hasCarts) {
+    const statusConfirmed = data.status_order === "confirmed";
+    console.log('statusConfirmed>>', statusConfirmed)
+    if (hasButtons || hasPlans || hasCarts || statusConfirmed) {
         const buttonBox = $('<div class="de_element paddingChat ai_inline_button_box"></div>');
 
         if (hasPlans) {
@@ -244,6 +251,18 @@ function addAIMessage(data, instant = false) {
                 </div>
             `);
             moreButton.data("cartsData", data.carts);
+            buttonBox.append(moreButton);
+        }
+        if (statusConfirmed) {
+            debugger
+            const moreButton = $(`
+                <div class="de_element chat_suggest ai_inline_button ask_ai"
+                     data-pay="true"
+                     data-target="${data.uuid}">
+                    <span class="de_element ai_inline_button_text"><span>پرداخت</span></span>
+                </div>
+            `);
+            moreButton.data("payData", data.status_order);
             buttonBox.append(moreButton);
         }
 
@@ -374,22 +393,24 @@ $(document).on('keydown', '#message_input', function (e) {
 $(document).on("click", ".add_bascket", function () {
     const id = $(this).data("id");
     const apiUrl = `http://127.0.0.1:8000/addToCart/?id=${id}&token=${roomId}`;
-        fetch(apiUrl)
-            .then(res => res.json())
-            .then(data => {
-                console.log("✅ نتیجه:", data);
-                // addAIMessage(`✅ طرح "${askText}" با موفقیت ثبت شد.`);
-            })
-            .catch(err => {
-                console.error("❌ خطا:", err);
-                // addAIMessage(`❌ خطا در ثبت طرح "${askText}"`);
-            })
-         .catch(err => {
+    fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+            console.log("✅ نتیجه:", data);
+            // addAIMessage(`✅ طرح "${askText}" با موفقیت ثبت شد.`);
+        })
+        .catch(err => {
+            console.error("❌ خطا:", err);
+            // addAIMessage(`❌ خطا در ثبت طرح "${askText}"`);
+        })
+        .catch(err => {
             console.error("❌ خطا:", err);
         });
 });
+
 $(document).on("click", ".ask_ai", function () {
     const isPlansButton = $(this).data("plans");
+    const isPayButton = $(this).data("pay");
     const isCartButton = $(this).data("carts");
     const targetId = $(this).data("target");
     const askText = $(this).data("ask");
@@ -401,11 +422,50 @@ $(document).on("click", ".ask_ai", function () {
         showPlans(plansData, targetId);
         return;
     }
-    //  دکمه بیشتر (نمایش سبد خرید)
+    //  دکمه مشاهده سبد خرید
     if (isCartButton) {
         const cartsData = $(this).data("cartsData");
-        showCarts(cartsData, targetId);
+        const uuid = $(this).data("target");
+        const idsList = cartsData.map(item => item._id);
+        // اول توکن رو بگیر
+// $.get('http://coffee.coffeedream.ir/get-csrf-token', function(response) {
+        // بعد درخواست اصلی رو بزن
+        // $.ajax({
+        const baseURL = "http://coffee.coffeedream.ir/goCart/";
+        const query = new URLSearchParams({cart: idsList, uuid: uuid}).toString();
+
+        const fullURL = `${baseURL}?${query}`;
+        window.open(fullURL,'_blank')
+        // method: 'GET',
+        //
+        // success: function (data) {
+
+        // }
+        // });
+// });
+        // showCarts(cartsData, targetId);
         return;
+    }
+    //  دکمه پرداخت
+    if (isPayButton) {
+        const apiUrl = `http://127.0.0.1:8000/pay/order/?token=${roomId}`;
+        const newTab = window.open(apiUrl, '_blank');
+        if (newTab) {
+            newTab.opener = null;
+        }
+        // // نمایش لودینگ یا پیام موقت
+        // console.log("در حال ارسال به:", apiUrl);
+        // fetch(apiUrl)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log("✅ نتیجه:", data);
+        //         // addAIMessage(`✅ طرح "${askText}" با موفقیت ثبت شد.`);
+        //     })
+        //     .catch(err => {
+        //         console.error("❌ خطا:", err);
+        //         // addAIMessage(`❌ خطا در ثبت طرح "${askText}"`);
+        //     });
+        // return;
     }
 
     // ۲️⃣ اگر مربوط به یک plan بود → ارسال به API ثبت‌نام
@@ -511,24 +571,24 @@ function showPlans(plans, targetId) {
 
     plans.forEach(planText => {
         const lines = String(planText).split('\n').map(l => l.trim()).filter(l => l.startsWith('-'));
-        console.log("lines",lines)
+        console.log("lines", lines)
 
         const data = {};
-        if(lines.length>0){
-                  lines.forEach(line => {
-            const cleanLine = line.replace('- ', '');
-            const parts = cleanLine.split(':');
+        if (lines.length > 0) {
+            lines.forEach(line => {
+                const cleanLine = line.replace('- ', '');
+                const parts = cleanLine.split(':');
 
-            if (parts.length >= 2) {
-                const key = parts.shift().trim();
-                const value = parts.join(':').trim();
-                data[key] = value;
-            }
-        });
+                if (parts.length >= 2) {
+                    const key = parts.shift().trim();
+                    const value = parts.join(':').trim();
+                    data[key] = value;
+                }
+            });
         }
 
 
-console.log(">>>plans>>>",data);
+        console.log(">>>plans>>>", data);
 
         // عنوان پلن
         const title = data['title'] || '';
@@ -570,24 +630,24 @@ function showCarts(plans, targetId) {
 
     plans.forEach(planText => {
         const lines = String(planText).split('\n').map(l => l.trim()).filter(l => l.startsWith('-'));
-        console.log("lines",lines)
+        console.log("lines", lines)
 
         const data = {};
-        if(lines.length>0){
-                  lines.forEach(line => {
-            const cleanLine = line.replace('- ', '');
-            const parts = cleanLine.split(':');
+        if (lines.length > 0) {
+            lines.forEach(line => {
+                const cleanLine = line.replace('- ', '');
+                const parts = cleanLine.split(':');
 
-            if (parts.length >= 2) {
-                const key = parts.shift().trim();
-                const value = parts.join(':').trim();
-                data[key] = value;
-            }
-        });
+                if (parts.length >= 2) {
+                    const key = parts.shift().trim();
+                    const value = parts.join(':').trim();
+                    data[key] = value;
+                }
+            });
         }
 
 
-console.log(">>>plans>>>",data);
+        console.log(">>>plans>>>", data);
 
         // عنوان پلن
         const title = data['title'] || '';

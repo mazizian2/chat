@@ -83,9 +83,12 @@ def get_chroma_results(state):
 
 async def handle_help(state: ChatState):
     print("handle help")
+    print('changed_part is>>', state["changed_part"])
     user_input = state.get("input")
 
     if 'درخواست جست و جو' in user_input:
+        state['status_order'] = 'pending'
+        save_state(state)
         chroma_results = get_chroma_results(state)
         plans = chroma_results.get("result")
         print(chroma_results.get("result"))
@@ -108,7 +111,8 @@ async def handle_help(state: ChatState):
 
 
     elif 'شروع پرسش' in user_input:
-
+        state['status_order'] = ''
+        save_state(state)
         response = await get_assistant_help(state)
         response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
         state["messages"].append(create_message("assistant", response))
@@ -126,6 +130,8 @@ async def handle_help(state: ChatState):
 
     elif 'مرحله بعد' in user_input:
         user_info=state["user_info"]
+        state['status_order'] = 'confirmed'
+        save_state(state)
         all_not_null = all(value is not None and value != "" for value in user_info.values())
         if all_not_null :
             text = (
@@ -134,12 +140,13 @@ async def handle_help(state: ChatState):
                 " اگر ویژگی جدیدی مدنظر دارید بفرمایید."
 
             )
-            btn = ["پرداخت"]
+
             emit_message(
                 state, 1,
                 text,
-                buttons=btn)
+               )
         else:
+            state['status_order'] = 'pending'
             response = await get_assistant_user_info(state)
             response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
             state["messages"].append(create_message("assistant", response))
@@ -153,11 +160,13 @@ async def handle_help(state: ChatState):
         state["user_info"] = features['user_info']
         state["question"] = features['question']
         state["changed_part"] = features['changed_part']
+        state['status_order'] = 'pending'
         save_state(state)
 
         miss_fields = missing_fields(features['user_feature'])
 
-        if not miss_fields and state["changed_part"]=='user_feature':
+        if not miss_fields and state["changed_part"] in ("user_feature", "none"):
+
             values = [str(v) for v in features['user_feature'].values() if v]
             text = (
                 "عالی! درخواست های شما دریافت شد، "
@@ -165,43 +174,49 @@ async def handle_help(state: ChatState):
                 + ".\n"
                 ". اگه دوست دارید نتایج رو ببینید، روی دکمه «درخواست جست‌وجو» بزنید یا اگر مورد دیگه‌ای مدنظر دارید، بهم بگید."
             )
-            btn = ["درخواست جست و جو"] if state["changed_part"] == "user_feature" else None
+            btn = ["درخواست جست و جو"] if state["changed_part"] in ("user_feature", "none") else None
             emit_message(
                 state,1,
                 text,
                 buttons=btn
             )
         elif  all(value is not None and value != "" for value in state["user_info"].values()) and state["changed_part"]=='user_info':
+            state["status_order"] = "confirmed"
+            save_state(state)
             text = (
                 "سبد خرید شما با موفقیت تکمیل و ذخیره شد 🎉\n"
                  "از انتخاب و اعتماد شما سپاسگزاریم 💙\n"
                  "برای نهایی کردن خرید لطفا روی دکمه پرداخت کلیک کنید \n"
                 " ویا اگر ویژگی جدیدی مدنظر دارید بفرمایید."
             )
-            btn = ["پرداخت"]
+
+
             emit_message(
-                state, 1,
+                state,
+                1,
                 text,
-                buttons=btn
+
             )
         elif  state["changed_part"]=='question':
                 chroma_results = ask_chroma_question(db_name="question_answer", query={}, orQuery=state.get("question",''), state=state,k=1)
                 response = await get_assistant_question_answer(state, chroma_results['result'][0])
                 response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
                 state["messages"].append(create_message("assistant", response))
+                state['status_order'] = 'pending'
                 save_state(state)
         else:
             response = await get_assistant_help(state)
             response = re.sub(r"^```html\s*|\s*```$", "", response).strip()
             state["messages"].append(create_message("assistant", response))
             state["search_history"]=[]
+            state['status_order'] = 'pending'
             save_state(state)
             print("clean_features>>>",clean_features(features['user_feature']))
             if any(v not in (None, "-") for v in features['user_feature'].values()):
                 query, orQuery = split_query_by_required(clean_features(state.get("user_feature", {})))
                 print('query items is>>>>', query)
                 print('orQuery items is>>>>', orQuery)
-                chroma_results = ask_chroma_question(db_name="services",query=query, orQuery=orQuery,state=state)
+                chroma_results = ask_chroma_question(db_name="services",query=query, orQuery=orQuery,state=state,k=7)
                 state["search_history"] = chroma_results["result"]
 
     if state.get("intents"):

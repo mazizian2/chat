@@ -265,15 +265,12 @@ def call_model(state=None):
                 "1. ALWAYS return ALL fields from FIELDS in extract_plan function.\n"
                 "2. Any field NOT mentioned by user MUST be included and MUST be null.\n"
                 "3. NEVER omit any field.\n"
-                "4. If `current JSON` is provided: merge it.\n"
-                "   - User-mentioned fields override old values.\n"
-                "   - Unmentioned fields keep current JSON value.\n"
-                "5. Output MUST always be a complete JSON object.\n"
-                "6. If user expresses uncertainty (examples: 'I don’t know', 'doesn’t matter', "
+                "4. Output MUST always be a complete JSON object.\n"
+                "5. If user expresses uncertainty (examples: 'I don’t know', 'doesn’t matter', "
                 "'anything', 'فرقی نداره', 'نمیدونم', 'هرچی', 'مهم نیست'), "
                 "then value of that field MUST be '-'.\n"
-                7. REMOVE an attribute  if the user explicitly rejects it.
-                8. Detect implicit contradictions: if the user message suggests that a previous attribute is unsuitable, replace it even if not explicitly rejected .
+                6. REMOVE an attribute  if the user explicitly rejects it.
+                7. Detect implicit contradictions: if the user message suggests that a previous attribute is unsuitable, replace it even if not explicitly rejected .
             "\nextra_feature:\n"
                 "- extra_feature is OPTIONAL.\n"
                 "- Any attribute NOT in {', '.join(FIELDS)} must go in extra_feature.\n"
@@ -284,33 +281,15 @@ def call_model(state=None):
                 Rules:
                 Just consider the features related to the {Personality} store.
                 1. Extract new extra attributes from the user message.
-                2. KEEP previous attributes if the user does NOT contradict them.
-                3. REPLACE attributes that are clearly updated (e.g. price, budget).
-                4. REMOVE an attribute  if the user explicitly rejects it.
-                5. Detect implicit contradictions: if the user message suggests that a previous attribute is unsuitable, replace it even if not explicitly rejected .
-                6. NEVER duplicate the same attribute.
-                7. Summarize all remaining attributes into ONE concise string.
-                8. If no extra attributes exist at all, return null.
-            
+                2. REPLACE attributes that are clearly updated (e.g. price, budget).
+                3. Detect implicit contradictions: if the user message suggests that a previous attribute is unsuitable, replace it even if not explicitly rejected .
+                4. NEVER duplicate the same attribute.
+                5. Summarize all remaining attributes into ONE concise string.
+                6. If no extra attributes exist at all, return null.
+                7. Never merge with previous values.
                 Formatting:
                 - Use plain text.
                 - Separate multiple attributes with " | ".
-            
-                Behavior priority:
-                REJECT > REPLACE (explicit) > REPLACE (implicit) > KEEP
-    
-                Examples:\n
-                - previous: null\n
-                  user: "قیمت زیر 500"\n
-                  → extra_feature: "قیمت زیر 500"\n\n
-                - previous: "قیمت زیر  500 | Zara برند  "\n
-                  user: "قیمت زیر 700"\n
-                - previous: "قیمت زیر  700 | Zara برند  "\n
-                - previous: "Zara برند "\n
-                  user: "دیگه زارا نمی‌خوام"\n
-                  → extra_feature: null\n\n
-                  
-                  
  {extra_rules}
 
     """
@@ -393,32 +372,56 @@ def call_model(state=None):
         question = args.get("question", {})
 
         # ------------------ MERGE USER_FEATURE ------------------
-        result_feature = {}
+        # result_feature = {}
+        # feature_changed = False
+        print('old value is>>',current_json)
+        print('new value is>>',user_feature)
+        # for field in FIELDS:
+        #     old_value = current_json.get(field)  # ← مقدار قبلی
+        #     new_value = user_feature.get(field)  # ← مقدار جدید
+        #
+        #     # if new_value is None:
+        #     #     new_value = old_value
+        #
+        #     if new_value != old_value:
+        #         feature_changed = True
+        #
+        #     result_feature[field] = new_value
+
+        # extra_feature
+        # old_extra = current_json.get("extra_feature")
+        # new_extra = user_feature.get("extra_feature")
+        #
+        # if new_extra != old_extra:
+        #     feature_changed = True
+        #
+        # result_feature["extra_feature"] = new_extra
+
+        result_feature = current_json.copy()
         feature_changed = False
 
         for field in FIELDS:
-            old_value = current_json.get(field)  # ← مقدار قبلی
-            new_value = user_feature.get(field)  # ← مقدار جدید
+            if field in user_feature:
+                old_value = current_json.get(field)
+                new_value = user_feature.get(field)
 
-            if new_value is None:
-                new_value = old_value
-
-            if new_value != old_value:
-                feature_changed = True
-
-            result_feature[field] = new_value
+                if new_value != old_value:
+                    feature_changed = True
+                    result_feature[field] = new_value
 
         # extra_feature
-        old_extra = current_json.get("extra_feature")
-        new_extra = user_feature.get("extra_feature")
+        if "extra_feature" in user_feature:
+            old_extra = current_json.get("extra_feature")
+            new_extra = user_feature.get("extra_feature")
 
-        if new_extra != old_extra:
-            feature_changed = True
-
-        result_feature["extra_feature"] = new_extra
+            if new_extra != old_extra:
+                feature_changed = True
+                result_feature["extra_feature"] = new_extra
 
         # ------------------ CHECK USER_INFO CHANGE ------------------
         info_changed = False
+        print('old user info val>>',state.get("user_info", {}))
+        print('new user info val>>',args.get("user_info", {}))
         for key in ["name", "mobile", "address"]:
             old_val = state.get("user_info", {}).get(key)  # ← مقدار قبلی
             new_val = args.get("user_info", {}).get(key)  # ← مقدار جدید
@@ -439,7 +442,7 @@ def call_model(state=None):
             changed_part = "question"
         else:
             changed_part = "none"
-
+        print('changed_part in call method>>',changed_part)
         return {
             "user_feature": result_feature,
             "user_info": user_info,

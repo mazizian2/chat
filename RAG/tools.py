@@ -271,7 +271,9 @@ def ask_chroma_question(db_name: str, query: dict, orQuery: Any,state=None, k: i
 
     collection = client.get_collection(db_name)
     where_clause = None
+    print('query befor pop>>',query)
     query.pop("extra_feature", None)
+    print('query after pop>>',query)
     if query:
         if len(query) == 1:
             k_, v_ = next(iter(query.items()))
@@ -289,7 +291,8 @@ def ask_chroma_question(db_name: str, query: dict, orQuery: Any,state=None, k: i
     )
     docs = results["documents"][0]
     distances = results["distances"][0]
-    print("docs & distances>>",docs,distances)
+    print("docs >>",docs)
+    print("distances>>",distances)
     if(len(docs)>0):
       avg_dist = sum(distances) / len(distances)
       res=[doc for doc, dist in zip(docs, distances) if dist <= avg_dist]

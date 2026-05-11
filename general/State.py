@@ -14,6 +14,7 @@ class ChatState(TypedDict):
     cart:List[Any]
     total_amount:int
     status_search:str
+    status_order:str
     user_info: Optional[Any]
     changed_part:str
     search_history: List[Dict[str, str]] # تاریخچه جست و جو
